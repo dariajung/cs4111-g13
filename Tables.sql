@@ -61,6 +61,7 @@ CREATE TABLE rep_state (
 	major_party varchar(50),
 	median_income real,
 	poverty_level real,
+	population real,
 	sr_senator_name varchar(50) NOTNULL,
 	sr_senator_DOB date NOTNULL,
 	jr_senator_name varchar(50) NOTNULL,
@@ -80,6 +81,7 @@ CREATE TABLE rep_district (
 	major_party varchar(50),
 	median_income real,
 	poverty_level real,
+	population real,
 	representative_name varchar(50) NOTNULL,
 	representative_DOB date NOTNULL,
 	FOREIGN KEY(name, DOB) REFERENCES Representatives(name, DOB)
