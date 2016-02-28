@@ -56,12 +56,12 @@ CREATE TABLE PACs (
 
 CREATE TABLE rep_state (
 	state_name varchar(15),
+	population real,
 	major_ethnicity varchar(50),
 	median_age real,
 	major_party varchar(50),
 	median_income real,
 	poverty_level real,
-	population real,
 	sr_senator_name varchar(50) NOTNULL,
 	sr_senator_DOB date NOTNULL,
 	jr_senator_name varchar(50) NOTNULL,
@@ -75,13 +75,13 @@ CREATE TABLE rep_state (
 
 CREATE TABLE rep_district (
 	state_name varchar(15),
+	population real,
 	district_number integer,
 	major_ethnicity varchar(50),
 	median_age real,
 	major_party varchar(50),
 	median_income real,
 	poverty_level real,
-	population real,
 	representative_name varchar(50) NOTNULL,
 	representative_DOB date NOTNULL,
 	FOREIGN KEY(name, DOB) REFERENCES Representatives(name, DOB)
