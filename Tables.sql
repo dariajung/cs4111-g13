@@ -27,12 +27,12 @@ CREATE TABLE representatives (
 
 CREATE TABLE rep_state (
 	state_name varchar(15),
-	population real,
+	population real, -- Attribute constraint > 0
 	major_ethnicity varchar(50), -- talk to sania about changing this to % minorities
-	median_age real,
+	median_age real, -- Attribute constraint > 0
 	major_party varchar(50),
-	median_income real,
-	poverty_level real,
+	median_income real, -- Attribute constraint > 0
+	poverty_level real,  -- Attribute constraint >= 0
 	sr_senator_name varchar(50) NOT NULL,
 	sr_senator_DOB date NOT NULL,
 	jr_senator_name varchar(50) NOT NULL,
@@ -46,13 +46,13 @@ CREATE TABLE rep_state (
 
 CREATE TABLE rep_district (
 	state_name varchar(15),
-	population real,
-	district_number integer,
+	population real,  -- Attribute constraint > 0
+	district_number integer,  -- Attribute constraint > 0
 	major_ethnicity varchar(50), -- talk to sania about changing this to % minorities
-	median_age real,
+	median_age real,  -- Attribute constraint > 0
 	major_party varchar(50),
-	median_income real,
-	poverty_level real,
+	median_income real,  -- Attribute constraint > 0
+	poverty_level real,  -- Attribute constraint >= 0
 	representative_name varchar(50) NOT NULL,
 	representative_DOB date NOT NULL,
 	FOREIGN KEY(representative_name, representative_DOB) REFERENCES Representatives(name, DOB)
@@ -92,8 +92,8 @@ CREATE TABLE super_PACs (
 	committee_id char(9),
 	name varchar(50),
 	viewpoint varchar(30),
-	budget real,
-	cash_spent real,
+	budget real, -- Attribute constraint, >= 0
+	cash_spent real,  -- Attribute constraint, make sure haven't spent more than budgeted?
 	PRIMARY KEY (committee_id),
 	UNIQUE (name)
 );
@@ -105,8 +105,8 @@ CREATE TABLE super_PACs (
 CREATE TABLE PACs (
 	committee_id char(9),
 	name varchar(50),
-	budget real,
-	cash_spent real,
+	budget real, -- Attribute constraint, >= 0
+	cash_spent real,  -- Attribute constraint, make sure haven't spent more than budgeted?
 	cash_on_hand real,
 	registrant boolean,
 	PRIMARY KEY (committee_id),
@@ -145,7 +145,7 @@ CREATE TABLE SPAC_against(
 	committee_id char(11),
 	name varchar(100),
 	DOB date,
-	amount real,
+	amount real, -- Attribute constraint >= 0
 	FOREIGN KEY (committee_id) REFERENCES Super_PACs(committee_id) ON DELETE CASCADE,
 	FOREIGN KEY (name, DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
 	PRIMARY KEY (committee_id, name, DOB)
@@ -164,7 +164,7 @@ CREATE TABLE PAC_supports (
 	committee_id char(11),
 	politician_name varchar(50),
 	politician_DOB date,
-	amount real,
+	amount real, -- Attribute constraint >= 0
 	FOREIGN KEY (politician_name, politician_DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
 	FOREIGN KEY (committee_id) references PACs(committee_id) ON DELETE CASCADE,
 	PRIMARY KEY (committee_id, politician_name, politician_DOB)
