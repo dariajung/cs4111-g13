@@ -95,6 +95,10 @@ CREATE TABLE super_PACs (
 	UNIQUE (name)
 );
 
+
+-- Removed  participation constraint between PACS and Interested_In: 
+-- PACs covers Leadership PACs, which directly support a politician, 
+-- and Lobbyist PACs, which are funded by companies and industries in the private sector
 CREATE TABLE PACs (
 	committee_id char(9),
 	name varchar(50),
@@ -134,6 +138,15 @@ CREATE TABLE SPAC_supports(
 );
 
 -- CREATE TABLE SPAC_against?
+CREATE TABLE SPAC_against(
+	committee_id char(11),
+	name varchar(100),
+	DOB date,
+	amount real,
+	FOREIGN KEY (committee_id) REFERENCES Super_PACs(committee_id) ON DELETE CASCADE,
+	FOREIGN KEY (name, DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
+	PRIMARY KEY (committee_id, name, DOB)
+);
 
 CREATE TABLE PAC_donate (
 	from_committee_id char(11),
@@ -142,6 +155,7 @@ CREATE TABLE PAC_donate (
 	FOREIGN KEY (to_committee_id) REFERENCES PACs(committee_id) ON DELETE CASCADE,
 	PRIMARY KEY (from_committee_id, to_committee_id)
 );
+
 
 CREATE TABLE PAC_supports (
 	committee_id char(11),
