@@ -22,8 +22,47 @@ CREATE TABLE representatives (
 	FOREIGN KEY(name, DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE
 ); 
 
---- finished --- 
+CREATE TABLE rep_state (
+	state_name varchar(15),
+	population real,
+	major_ethnicity varchar(50), -- talk to sania about changing this to % minorities
+	median_age real,
+	major_party varchar(50),
+	median_income real,
+	poverty_level real,
+	sr_senator_name varchar(50) NOT NULL,
+	sr_senator_DOB date NOT NULL,
+	jr_senator_name varchar(50) NOT NULL,
+	jr_senator_DOB date NOT NULL,
+	FOREIGN KEY (sr_senator_name, sr_senator_DOB) REFERENCES Senators(name, DOB) ON DELETE NO ACTION,
+	FOREIGN KEY (jr_senator_name, jr_senator_DOB) REFERENCES Senators(name, DOB) ON DELETE NO ACTION,
+	UNIQUE (sr_senator_name, sr_senator_DOB),
+	UNIQUE (jr_senator_name, jr_senator_DOB),
+	PRIMARY KEY (state_name)
+);
 
+CREATE TABLE rep_district (
+	state_name varchar(15),
+	population real,
+	district_number integer,
+	major_ethnicity varchar(50), -- talk to sania about changing this to % minorities
+	median_age real,
+	major_party varchar(50),
+	median_income real,
+	poverty_level real,
+	representative_name varchar(50) NOT NULL,
+	representative_DOB date NOT NULL,
+	FOREIGN KEY(representative_name, representative_DOB) REFERENCES Representatives(name, DOB)
+	ON DELETE NO ACTION,
+	UNIQUE (representative_name, representative_DOB),
+	PRIMARY KEY (state_name, district_number)
+);	
+
+--- finished to here --- 
+
+
+-- Not every industry advocates for legislation, but each legislation should relate somehow to industries
+-- get rid of participation constraint between industries and advocates
 CREATE TABLE industries (
 	summary varchar(300),
 	PRIMARY KEY (summary)
@@ -36,7 +75,7 @@ CREATE TABLE legislation (
 );
 
 CREATE TABLE super_PACs (
-	committee_id char(11),
+	committee_id char(9),
 	name varchar(50),
 	viewpoint varchar(30),
 	budget real,
@@ -46,7 +85,7 @@ CREATE TABLE super_PACs (
 );
 
 CREATE TABLE PACs (
-	committee_id char(11),
+	committee_id char(9),
 	name varchar(50),
 	budget real,
 	cash_spent real,
@@ -55,42 +94,6 @@ CREATE TABLE PACs (
 	PRIMARY KEY (committee_id),
 	UNIQUE (name)
 );
-
-CREATE TABLE rep_state (
-	state_name varchar(15),
-	population real,
-	major_ethnicity varchar(50),
-	median_age real,
-	major_party varchar(50),
-	median_income real,
-	poverty_level real,
-	sr_senator_name varchar(50) NOTNULL,
-	sr_senator_DOB date NOTNULL,
-	jr_senator_name varchar(50) NOTNULL,
-	jr_senator_DOB date NOTNULL,
-	FOREIGN KEY (sr_senator_name, sr_senator_DOB) REFERENCES Senators(name, DOB) ON DELETE NO ACTION,
-	FOREIGN KEY (jr_senator_name, jr_senator_DOB) REFERENCES Senators(name, DOB) ON DELETE NO ACTION,
-	UNIQUE (sr_senator_name, sr_senator_DOB),
-	UNIQUE (jr_sentor_name, jr_senator_DOB),
-	PRIMARY KEY (state_name)
-);
-
-CREATE TABLE rep_district (
-	state_name varchar(15),
-	population real,
-	district_number integer,
-	major_ethnicity varchar(50),
-	median_age real,
-	major_party varchar(50),
-	median_income real,
-	poverty_level real,
-	representative_name varchar(50) NOTNULL,
-	representative_DOB date NOTNULL,
-	FOREIGN KEY(name, DOB) REFERENCES Representatives(name, DOB)
-	ON DELETE NO ACTION,
-	UNIQUE (representative_name, representative_DOB),
-	PRIMARY KEY (state_name, district_number)
-);	
 
 CREATE TABLE advocates (
 	summary varchar(300), -- summary of a cause/industry
@@ -128,6 +131,8 @@ CREATE TABLE SPAC_supports(
 	PRIMARY KEY (committee_id, name, DOB)
 );
 
+-- CREATE TABL SPAC_against?
+
 CREATE TABLE PAC_donate (
 	from_committee_id char(11),
 	to_committee_id char(11),
@@ -146,3 +151,15 @@ CREATE TABLE PAC_supports (
 	PRIMARY KEY (committee_id, politician_name, politician_DOB)
 );
 
+-- get rid of participation constraint between politician and vote
+-- Real world constraint - not all  bills get to the floor for a vote, but instead get dropped after being introduced.  
+-- Representatives might vote, but if the bill is defeated in the House, Senators will never vote on the bill.
+Create TABLE Vote(
+	politician_name varchar(50),
+	politician_DOB DATE,
+	legislation_name varchar(100),
+	voted_for BOOLEAN,
+	FOREIGN KEY (politican_name, politician_DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
+	FOREIGN KEY (legislation_name) REFERENCES Legislation(name) ON DELETE CASCADE,
+	PRIMARY KEY(politician_name, politician_DOB, legislation_name)
+);
