@@ -8,6 +8,9 @@ CREATE TABLE politicians (
 	PRIMARY KEY (name, DOB)
 );
 
+-- is there a way to have a constraint on making sure senators don't appear in
+-- representatives, and vise versa?
+
 CREATE TABLE senators (
 	name varchar(50),
 	DOB date CHECK (DATE_PART('year', '1983-01-03'::date) - DATE_PART('year', DOB::date) >=0), -- must be aged 30 to serve in Senate

@@ -45,6 +45,8 @@ INSERT INTO senators VALUES ('Kay Hagan', '1953-05-26');
 INSERT INTO politicians VALUES ('Richard Burr', '1955-11-30', 2636270, TRUE, 'Republican', 9);
 INSERT INTO senators VALUES ('Richard Burr', '1955-11-30');
 
+-- ADD LOUISIANA senators
+
 -- representatives 
 INSERT INTO politicians VALUES ('John Boehner', '1949-11-17', 4092054, TRUE, 'Republican', 23);
 INSERT INTO politicians VALUES ('Nancy Pelosi', '1940-03-26', 101272023, TRUE, 'Democrat', 27);
