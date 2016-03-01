@@ -63,6 +63,7 @@ CREATE TABLE rep_district (
 
 -- Not every industry advocates for legislation, but each legislation should relate somehow to industries
 -- get rid of participation constraint between industries and advocates
+-- should we be more specific from the beginning? 
 CREATE TABLE industries (
 	summary varchar(300),
 	PRIMARY KEY (summary)

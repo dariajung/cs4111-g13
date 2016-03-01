@@ -92,3 +92,18 @@ INSERT INTO rep_district VALUES ('South Carolina', 6, 673637, 'Black or African 
 INSERT INTO rep_district VALUES ('Louisiana', 1, 796858, 'White', 37.3, 'Republican', 54764, 10.2, 'Steve Scalise', '1965-10-06');
 INSERT INTO rep_district VALUES ('Washington', 5, 690518, 'White', 37.4, 'Democrat', 47973, 11.5, 'Cathy McMorris Rodgers', '1969-05-22');
 
+-- industries
+
+INSERT INTO industries VALUES ('Agribusiness');
+INSERT INTO industries VALUES ('Communications');
+INSERT INTO industries VALUES ('Construction');
+INSERT INTO industries VALUES ('Defense');
+INSERT INTO industries VALUES ('Energy');
+INSERT INTO industries VALUES ('Finance');
+INSERT INTO industries VALUES ('Health');
+INSERT INTO industries VALUES ('Democratic/Liberal');
+INSERT INTO industries VALUES ('Labor');
+INSERT INTO industries VALUES ('Lobbyists');
+INSERT INTO industries VALUES ('Transportation');
+INSERT INTO industries VALUES ('Alcohol');
+INSERT INTO industries VALUES ('Casinos');
