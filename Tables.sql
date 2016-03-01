@@ -58,9 +58,6 @@ CREATE TABLE rep_district (
 	PRIMARY KEY (state_name, district_number)
 );	
 
---- finished to here --- 
-
-
 -- Not every industry advocates for legislation, but each legislation should relate somehow to industries
 -- get rid of participation constraint between industries and advocates
 -- should we be more specific from the beginning? 
@@ -71,9 +68,22 @@ CREATE TABLE industries (
 
 CREATE TABLE legislation (
 	name varchar(100),
-	passed boolean NOTNULL, -- A Legislation must have either passed or failed 
+	passed boolean NOT NULL, -- A Legislation must have either passed or failed 
 	PRIMARY KEY (name)
 );
+
+CREATE TABLE p_sponsors (
+	legislation_name varchar(100),
+	p_sponsor_name varchar(50),
+	p_sponsor_DOB date,
+	FOREIGN KEY (p_sponsor_name, p_sponsor_DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
+	FOREIGN KEY (legislation_name) REFERENCES Legislation(name) ON DELETE CASCADE,
+	PRIMARY KEY (legislation_name, p_sponsor_name, p_sponsor_DOB)
+);
+
+
+--- finished to here ---
+
 
 CREATE TABLE super_PACs (
 	committee_id char(9),
@@ -105,15 +115,6 @@ CREATE TABLE advocates (
 	PRIMARY KEY (name, summary)
 );
 
-CREATE TABLE p_sponsors (
-	legislation_name varchar(100),
-	p_sponsor_name varchar(50),
-	p_sponsor_DOB date,
-	FOREIGN KEY (p_sponsor_name, p_sponsor_DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
-	FOREIGN KEY (legislation_name) REFERENCES Legislation(name) ON DELETE CASCADE,
-	PRIMARY KEY (legislation_name, p_sponsor_name, p_sponsor_DOB),
-);
-
 CREATE TABLE interested_in (
 	committee_id char(11),
 	industry_summary varchar(300),
@@ -132,7 +133,7 @@ CREATE TABLE SPAC_supports(
 	PRIMARY KEY (committee_id, name, DOB)
 );
 
--- CREATE TABL SPAC_against?
+-- CREATE TABLE SPAC_against?
 
 CREATE TABLE PAC_donate (
 	from_committee_id char(11),

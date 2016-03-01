@@ -101,9 +101,71 @@ INSERT INTO industries VALUES ('Defense');
 INSERT INTO industries VALUES ('Energy');
 INSERT INTO industries VALUES ('Finance');
 INSERT INTO industries VALUES ('Health');
-INSERT INTO industries VALUES ('Democratic/Liberal');
+INSERT INTO industries VALUES ('Liberal');
+INSERT INTO industries VALUES ('Conservative');
 INSERT INTO industries VALUES ('Labor');
 INSERT INTO industries VALUES ('Lobbyists');
 INSERT INTO industries VALUES ('Transportation');
 INSERT INTO industries VALUES ('Alcohol');
 INSERT INTO industries VALUES ('Casinos');
+INSERT INTO industries VALUES ('Pro-gun');
+INSERT INTO industries VALUES ('Anti-gun');
+INSERT INTO industries VALUES ('Immigration');
+INSERT INTO industries VALUES ('Veteran Affairs');
+INSERT INTO industries VALUES ('Economics and Public Finance');
+INSERT INTO industries VALUES ('Human Rights');
+INSERT INTO industries VALUES ('Renewable Energy');
+INSERT INTO industries VALUES ('Pro-Israel');
+INSERT INTO industries VALUES ('Education');
+INSERT INTO industries VALUES ('Pharmaceuticals');
+
+-- legislation 
+
+INSERT INTO legislation VALUES ('S.9 - Clean And Fair Elections Act', FALSE); -- introduced, no roll call
+INSERT INTO legislation VALUES ('S.2 - Sandy Hook Elementary School Violence Reduction Act', FALSE); -- introduced, no roll call
+INSERT INTO legislation VALUES ('S. 1569 - Default Prevention Act of 2013', FALSE); -- Failed Cloture in the Senate
+INSERT INTO legislation VALUES ('S. 260 - Immigration Enforcement Transparency Act', FALSE); -- introduced, no roll call
+INSERT INTO legislation VALUES ('S. 2145 - Veteran Voting Support Act', FALSE); -- introduced, no roll call
+INSERT INTO legislation VALUES ('S. 47 - Violence Against Women Reauthorization Act of 2013', TRUE); -- ENACTED
+INSERT INTO legislation VALUES ('S. 1846 - Homeowner Flood Insurance Affordability Act of 2013', FALSE); -- no roll call
+INSERT INTO legislation VALUES ('S. 2142 - Venezuela Defense of Human Rights and Civil Society Act of 2014', TRUE); -- ENACTED
+INSERT INTO legislation VALUES ('S. 517 - Unlocking Consumer Choice and Wireless Competition Act', TRUE); -- ENACTED
+INSERT INTO legislation VALUES ('H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', TRUE); -- ENACTED
+INSERT INTO legislation VALUES ('S. 177 - ObamaCare Repeal Act', FALSE); -- no roll call
+INSERT INTO legislation VALUES ('S. 2415 - SuperPAC Elimination Act of 2014', FALSE); -- no roll call
+INSERT INTO legislation VALUES ('S. 1837 -  Equal Employment for All Act of 2013', FALSE); -- introduced
+INSERT INTO legislation VALUES ('S.Res. 28 - A resolution to provide sufficient time for legislation to be read.', FALSE); -- introduced
+INSERT INTO legislation VALUES ('S. 2766 - Palestinian and United Nations Anti-Terrorism Act of 2014', FALSE); -- introduced
+INSERT INTO legislation VALUES ('S. 2948 - Medicaid Generic Drug Price Fairness Act', FALSE); -- introduced
+INSERT INTO legislation VALUES ('S. 2832 - Employ Young Americans Now Act', FALSE);
+INSERT INTO legislation VALUES ('S.  2956 - Phone Scam Prevention Act of 2014', FALSE);
+INSERT INTO legislation VALUES ('S. 2673 - United States-Israel Strategic Partnership Act of 2014', TRUE); -- ENACTED
+INSERT INTO legislation VALUES ('S. 2340 - Simplifying Financial Aid for Students Act of 2014', FALSE);
+INSERT INTO legislation VALUES ('S. 2733 - ObamaCare Opt Out Act of 2014', FALSE);
+INSERT INTO legislation VALUES ('S. 150 - Assault Weapons Ban of 2013', FALSE); -- DEFEATED IN SENATE
+
+INSERT INTO p_sponsors VALUES ('S.9 - Clean And Fair Elections Act', 'Harry Reid', '1939-12-02');
+INSERT INTO p_sponsors VALUES ('S.2 - Sandy Hook Elementary School Violence Reduction Act', 'Harry Reid', '1939-12-02');
+INSERT INTO p_sponsors VALUES ('S. 1569 - Default Prevention Act of 2013', 'Harry Reid', '1939-12-02');
+INSERT INTO p_sponsors VALUES ('S. 260 - Immigration Enforcement Transparency Act', 'Kirsten Gillibrand', '1966-12-09');
+INSERT INTO p_sponsors VALUES ('S. 2145 - Veteran Voting Support Act', 'Dianne Feinstein', '1933-06-22');
+INSERT INTO p_sponsors VALUES ('S. 47 - Violence Against Women Reauthorization Act of 2013', 'Patrick Leahy', '1940-03-31');
+INSERT INTO p_sponsors VALUES ('S. 1846 - Homeowner Flood Insurance Affordability Act of 2013', 'Bob Menendez', '1954-01-01');
+INSERT INTO p_sponsors VALUES ('S. 2142 - Venezuela Defense of Human Rights and Civil Society Act of 2014', 'Bob Menendez', '1954-01-01');
+INSERT INTO p_sponsors VALUES ('S. 517 - Unlocking Consumer Choice and Wireless Competition Act', 'Patrick Leahy', '1940-03-31');
+INSERT INTO p_sponsors VALUES ('H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Cathy McMorris Rodgers', '1969-05-22');
+INSERT INTO p_sponsors VALUES ('S. 177 - ObamaCare Repeal Act', 'Ted Cruz', '1970-12-22');
+INSERT INTO p_sponsors VALUES ('S. 2415 - SuperPAC Elimination Act of 2014', 'Ted Cruz', '1970-12-22');
+INSERT INTO p_sponsors VALUES ('S. 1837 -  Equal Employment for All Act of 2013', 'Elizabeth Warren', '1949-06-22');
+INSERT INTO p_sponsors VALUES ('S.Res. 28 - A resolution to provide sufficient time for legislation to be read.', 'Rand Paul', '1963-01-07');
+INSERT INTO p_sponsors VALUES ('S. 2766 - Palestinian and United Nations Anti-Terrorism Act of 2014', 'Marco Rubio', '1971-05-28');
+INSERT INTO p_sponsors VALUES ('S. 2948 - Medicaid Generic Drug Price Fairness Act', 'Bernie Sanders', '1941-09-08');
+INSERT INTO p_sponsors VALUES ('S. 2832 - Employ Young Americans Now Act', 'Bernie Sanders', '1941-09-08');
+INSERT INTO p_sponsors VALUES ('S.  2956 - Phone Scam Prevention Act of 2014', 'Bill Nelson', '1942-09-29');
+INSERT INTO p_sponsors VALUES ('S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Barbara Boxer', '1940-11-11');
+INSERT INTO p_sponsors VALUES ('S. 2340 - Simplifying Financial Aid for Students Act of 2014', 'Cory Booker', '1969-04-27');
+INSERT INTO p_sponsors VALUES ('S. 2733 - ObamaCare Opt Out Act of 2014', 'John McCain', '1936-08-29');
+INSERT INTO p_sponsors VALUES ('S. 150 - Assault Weapons Ban of 2013', 'Dianne Feinstein', '1933-06-22');
+
+-- all inserted up to here
+
