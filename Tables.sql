@@ -1,6 +1,6 @@
 CREATE TABLE politicians (
 	name varchar(50),
-	DOB date,
+	DOB date CHECK (DATE_PART('year', '1995-01-01'::date) - DATE_PART('year', DOB::date) >=0),-- must be 18 to run for office generally
 	net_worth real,
 	incumbent_status boolean,
 	party_affiliation varchar(30),
@@ -10,17 +10,19 @@ CREATE TABLE politicians (
 
 CREATE TABLE senators (
 	name varchar(50),
-	DOB date,
+	DOB date CHECK (DATE_PART('year', '1983-01-03'::date) - DATE_PART('year', DOB::date) >=0), -- must be aged 30 to serve in Senate
 	PRIMARY KEY(name, DOB),
 	FOREIGN KEY(name, DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE
 );
 
 CREATE TABLE representatives (
 	name varchar(50),
-	DOB date,
+	DOB date CHECK (DATE_PART('year', '1988-01-03'::date) - DATE_PART('year', DOB::date) >=0), -- must be aged 25 to serve in HoR
 	PRIMARY KEY(name, DOB),
 	FOREIGN KEY(name, DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE
 ); 
+
+--- finished --- 
 
 CREATE TABLE industries (
 	summary varchar(300),
