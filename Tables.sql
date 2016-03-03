@@ -47,7 +47,7 @@ CREATE TABLE rep_state (
 
 CREATE TABLE rep_district (
 	state_name varchar(15),
-	district_number integer CHECK (district_number > 0),
+	district_number integer CHECK (district_number >= 0),
 	population real CHECK (population > 0),
 	major_ethnicity varchar(50),
 	median_age real CHECK (median_age > 0),
