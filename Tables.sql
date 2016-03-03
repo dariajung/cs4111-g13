@@ -86,6 +86,46 @@ CREATE TABLE p_sponsors (
 	PRIMARY KEY (legislation_name, p_sponsor_name, p_sponsor_DOB)
 );
 
+-- Removed  participation constraint between PACS and Interested_In: 
+-- PACs covers Leadership PACs, which directly support a politician, 
+-- and Lobbyist PACs, which are funded by companies and industries in the private sector
+CREATE TABLE PACs (
+	committee_id char(9),
+	name varchar(50),
+	budget real CHECK (budget >= 0),
+	cash_spent real CHECK (cash_spent >= 0),
+	cash_on_hand real CHECK (cash_on_hand >= 0),
+	registrant boolean,
+	PRIMARY KEY (committee_id),
+	UNIQUE (name)
+);
+
+CREATE TABLE PAC_supports (
+	committee_id char(11),
+	politician_name varchar(50),
+	politician_DOB date,
+	amount real CHECK (amount >= 0), -- Attribute constraint >= 0
+	FOREIGN KEY (politician_name, politician_DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
+	FOREIGN KEY (committee_id) references PACs(committee_id) ON DELETE CASCADE,
+	PRIMARY KEY (committee_id, politician_name, politician_DOB)
+);
+
+CREATE TABLE PAC_donate (
+	from_committee_id char(9),
+	to_committee_id char(9),
+	FOREIGN KEY (from_committee_id) REFERENCES PACs(committee_id) ON DELETE CASCADE,
+	FOREIGN KEY (to_committee_id) REFERENCES PACs(committee_id) ON DELETE CASCADE,
+	PRIMARY KEY (from_committee_id, to_committee_id)
+);
+
+CREATE TABLE interested_in (
+	committee_id char(9),
+	industry_summary varchar(300),
+	PRIMARY KEY(committee_id, industry_summary),
+	FOREIGN KEY (committee_id) references PACs(committee_id) ON DELETE CASCADE,
+	FOREIGN KEY (industry_summary) references Industries(summary) ON DELETE CASCADE
+); 
+	
 --- inserted up to here ---
 
 CREATE TABLE super_PACs (
@@ -94,20 +134,6 @@ CREATE TABLE super_PACs (
 	viewpoint varchar(30),
 	budget real CHECK (budget >= 0),
 	cash_spent real CHECK ((cash_spent <= budget) AND (cash_spent >= 0)),
-	PRIMARY KEY (committee_id),
-	UNIQUE (name)
-);
-
--- Removed  participation constraint between PACS and Interested_In: 
--- PACs covers Leadership PACs, which directly support a politician, 
--- and Lobbyist PACs, which are funded by companies and industries in the private sector
-CREATE TABLE PACs (
-	committee_id char(9),
-	name varchar(50),
-	budget real CHECK (budget >= 0),
-	cash_spent real CHECK ((cash_spent <= budget) AND (cash_spent >= 0)),
-	cash_on_hand real CHECK ((cash_on_hand <= (budget - cash_spent)) AND (cash_on_hand >= 0)),
-	registrant boolean,
 	PRIMARY KEY (committee_id),
 	UNIQUE (name)
 );
@@ -121,16 +147,9 @@ CREATE TABLE advocates (
 	PRIMARY KEY (name, summary)
 );
 
-CREATE TABLE interested_in (
-	committee_id char(11),
-	industry_summary varchar(300),
-	PRIMARY KEY(committee_id, industry_summary),
-	FOREIGN KEY (committee_id) references PACs(committee_id) ON DELETE CASCADE,
-	FOREIGN KEY (industry_summary) references Industries(summary) ON DELETE CASCADE
-); 
 
 CREATE TABLE SPAC_supports(
-	committee_id char(11),
+	committee_id char(9),
 	name varchar(100),
 	DOB date,
 	amount real CHECK (amount >= 0),
@@ -140,32 +159,13 @@ CREATE TABLE SPAC_supports(
 );
 
 CREATE TABLE SPAC_against(
-	committee_id char(11),
+	committee_id char(9),
 	name varchar(100),
 	DOB date,
 	amount real CHECK (amount >= 0),
 	FOREIGN KEY (committee_id) REFERENCES Super_PACs(committee_id) ON DELETE CASCADE,
 	FOREIGN KEY (name, DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
 	PRIMARY KEY (committee_id, name, DOB)
-);
-
-CREATE TABLE PAC_donate (
-	from_committee_id char(11),
-	to_committee_id char(11),
-	FOREIGN KEY (from_committee_id) REFERENCES PACs(committee_id) ON DELETE CASCADE,
-	FOREIGN KEY (to_committee_id) REFERENCES PACs(committee_id) ON DELETE CASCADE,
-	PRIMARY KEY (from_committee_id, to_committee_id)
-);
-
-
-CREATE TABLE PAC_supports (
-	committee_id char(11),
-	politician_name varchar(50),
-	politician_DOB date,
-	amount real CHECK (amount >= 0), -- Attribute constraint >= 0
-	FOREIGN KEY (politician_name, politician_DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
-	FOREIGN KEY (committee_id) references PACs(committee_id) ON DELETE CASCADE,
-	PRIMARY KEY (committee_id, politician_name, politician_DOB)
 );
 
 -- get rid of participation constraint between politician and vote
