@@ -416,7 +416,15 @@ INSERT INTO super_pacs VALUES ('C00540443', 'Americans for Responsible Solutions
 
 -- spac_supports
 -- INSERT INTO spac_supports VALUE(committeeID, politician_name, politician_DOB, amount);
+INSERT INTO spac_supports VALUE('C00488742', 'Mitch McConnell', '1942-02-20', 1887550);
+INSERT INTO spac_supports VALUE('C00486845', 'Kay Hagan', '1953-05-26', 2620499);
+INSERT INTO spac_supports VALUE('C00540443', 'Kay Hagan', '1953-05-26', 1315246);
 
 -- spac_against
 -- INSERT INTO spac_against VALUE(committeeID, politician_name, politician_DOB, amount);
+INSERT INTO spac_against VALUE('C00484642', 'Mitch McConnell', '1942-02-20', 5590110);
+INSERT INTO spac_against VALUE('C00564765', 'Kay Hagan', '1953-05-26', 1889082);
+INSERT INTO spac_against VALUE('C00564765', 'Mary Landrieu', '1955-11-23', 1617192);
+INSERT INTO spac_against VALUE('C00489856', 'Mary Landrieu', '1955-11-23', 1221319);
+
 
