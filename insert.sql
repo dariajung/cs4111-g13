@@ -472,6 +472,103 @@ INSERT INTO votes VALUES ('Richard Burr', '1955-11-30', 'S. 1569 - Default Preve
 INSERT INTO votes VALUES ('Mary Landrieu', '1955-11-23', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
 INSERT INTO votes VALUES ('David Vitter', '1961-05-03', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
 
+-- Hydropower Improvements
+INSERT INTO votes VALUES ('John Boehner', '1949-11-17', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'House of Representatives', NULL);
+INSERT INTO votes VALUES ('Nancy Pelosi', '1940-03-26', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Eric Cantor', '1963-06-06', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Paul Ryan', '1970-01-29', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Kevin McCarthy', '1965-01-26', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Tulsi Gabbard', '1981-04-12', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Steny Hoyer', '1939-06-14', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('James Clyburn', '1940-07-21', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Steve Scalise', '1965-10-06', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Cathy McMorris Rodgers', '1969-05-22', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'House of Representatives', TRUE);
+
+INSERT INTO votes VALUES ('Harry Reid', '1939-12-02', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Marco Rubio', '1971-05-28', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Ted Cruz', '1970-12-22', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Chuck Schumer', '1950-11-23', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Bernie Sanders', '1941-09-08', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Rand Paul', '1963-01-07', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Mitch McConnell', '1942-02-20', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Barbara Boxer', '1940-11-11', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Elizabeth Warren', '1949-06-22', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('John McCain', '1936-08-29', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Dean Heller', '1960-05-10', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Dianne Feinstein', '1933-06-22', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Patrick Leahy', '1940-03-31', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Bill Nelson', '1942-09-29', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('John Cornyn', '1952-02-02', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Kirsten Gillibrand', '1966-12-09', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Ed Markey', '1946-07-11', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Jeff Flake', '1962-12-31', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Bob Menendez', '1954-01-01', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Kay Hagan', '1953-05-26', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Richard Burr', '1955-11-30', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Mary Landrieu', '1955-11-23', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('David Vitter', '1961-05-03', 'H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Senate', TRUE);
+
+-- Israel Ally
+INSERT INTO votes VALUES ('John Boehner', '1949-11-17', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'House of Representatives', NULL);
+INSERT INTO votes VALUES ('Nancy Pelosi', '1940-03-26', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Eric Cantor', '1963-06-06', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Paul Ryan', '1970-01-29', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Kevin McCarthy', '1965-01-26', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Tulsi Gabbard', '1981-04-12', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Steny Hoyer', '1939-06-14', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('James Clyburn', '1940-07-21', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Steve Scalise', '1965-10-06', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Cathy McMorris Rodgers', '1969-05-22', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'House of Representatives', TRUE);
+
+INSERT INTO votes VALUES ('Harry Reid', '1939-12-02', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Marco Rubio', '1971-05-28', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Ted Cruz', '1970-12-22', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Chuck Schumer', '1950-11-23', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Bernie Sanders', '1941-09-08', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Rand Paul', '1963-01-07', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Mitch McConnell', '1942-02-20', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Barbara Boxer', '1940-11-11', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Elizabeth Warren', '1949-06-22', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('John McCain', '1936-08-29', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Dean Heller', '1960-05-10', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Dianne Feinstein', '1933-06-22', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Patrick Leahy', '1940-03-31', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Bill Nelson', '1942-09-29', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('John Cornyn', '1952-02-02', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Kirsten Gillibrand', '1966-12-09', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Ed Markey', '1946-07-11', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Jeff Flake', '1962-12-31', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Bob Menendez', '1954-01-01', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Kay Hagan', '1953-05-26', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Richard Burr', '1955-11-30', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Mary Landrieu', '1955-11-23', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+INSERT INTO votes VALUES ('David Vitter', '1961-05-03', 'S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Senate', TRUE);
+
+-- Assault Weapons Ban
+INSERT INTO votes VALUES ('Harry Reid', '1939-12-02', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Marco Rubio', '1971-05-28', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Ted Cruz', '1970-12-22', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Chuck Schumer', '1950-11-23', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Bernie Sanders', '1941-09-08', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Rand Paul', '1963-01-07', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Mitch McConnell', '1942-02-20', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Barbara Boxer', '1940-11-11', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Elizabeth Warren', '1949-06-22', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('John McCain', '1936-08-29', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Dean Heller', '1960-05-10', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Dianne Feinstein', '1933-06-22', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Patrick Leahy', '1940-03-31', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Bill Nelson', '1942-09-29', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('John Cornyn', '1952-02-02', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Kirsten Gillibrand', '1966-12-09', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Jeff Flake', '1962-12-31', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Bob Menendez', '1954-01-01', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Kay Hagan', '1953-05-26', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Richard Burr', '1955-11-30', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Mary Landrieu', '1955-11-23', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('David Vitter', '1961-05-03', 'S. 150 - Assault Weapons Ban of 2013', 'Senate', FALSE);
+
+
 -- ‘S. 47 - Violence Against Women Reauthorization Act of 2013 (ENACTED)
 
 -- house votes
