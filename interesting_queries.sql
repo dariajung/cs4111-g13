@@ -19,3 +19,10 @@ SELECT p.party_affiliation, AVG(ps.amount)
 FROM politicians p, pacs, pac_supports ps 
 WHERE p.name = ps.politician_name AND pacs.committee_id = ps.committee_id
 GROUP BY p.party_affiliation;
+
+
+-- Show average median income of states grouped by their senior senators' party affiliation where percentage minority > 10
+SELECT p.party_affiliation, AVG(rep_state.median_income)
+FROM politicians p, rep_state
+WHERE rep_state.percentage_minorities > 10 AND (p.name = rep_state.sr_senator_name)
+GROUP BY p.party_affiliation
