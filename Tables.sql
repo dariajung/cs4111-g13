@@ -134,10 +134,6 @@ CREATE TABLE advocates (
 	FOREIGN KEY (name) REFERENCES Legislation(name) ON DELETE CASCADE,
 	PRIMARY KEY (name, summary)
 );
-
-	
---- inserted up to here ---
-
 CREATE TABLE super_PACs (
 	committee_id char(9),
 	name varchar(50),
@@ -167,6 +163,9 @@ CREATE TABLE SPAC_against(
 	FOREIGN KEY (name, DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
 	PRIMARY KEY (committee_id, name, DOB)
 );
+	
+--- inserted up to here ---
+
 
 -- get rid of participation constraint between politician and vote
 -- Real world constraint - not all  bills get to the floor for a vote, but instead get dropped after being introduced.  
