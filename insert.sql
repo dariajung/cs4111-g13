@@ -1,5 +1,8 @@
--- senators
+-- politicians
+-- INSERT INTO politicians(name, DOB, net_worth, incumbent_status, party_affiliation, years_in_office)
 
+-- senators
+-- INSERT INTO senators(name, DOB)
 INSERT INTO politicians VALUES ('Harry Reid', '1939-12-02', 4638027., TRUE, 'Democrat', 27); 
 INSERT INTO senators VALUES('Harry Reid', '1939-12-02');
 INSERT INTO politicians VALUES ('Marco Rubio', ' 1971-05-28', 371006, TRUE, 'Republican', 3);
@@ -50,6 +53,7 @@ INSERT INTO politicians VALUES ('David Vitter', '1961-05-03', 1570522, TRUE, 'Re
 INSERT INTO senators VALUES ('David Vitter', '1961-05-03');
 
 -- representatives 
+-- INSERT INTO representatives(name, DOB)
 INSERT INTO politicians VALUES ('John Boehner', '1949-11-17', 4092054, TRUE, 'Republican', 23);
 INSERT INTO politicians VALUES ('Nancy Pelosi', '1940-03-26', 101272023, TRUE, 'Democrat', 27);
 INSERT INTO politicians VALUES ('Eric Cantor', '1963-06-06', 13073557, TRUE, 'Republican', 11);
@@ -73,7 +77,7 @@ INSERT INTO representatives VALUES('Steve Scalise', '1965-10-06');
 INSERT INTO representatives VALUES ('Cathy McMorris Rodgers', '1969-05-22');
 
 -- rep_state
-
+-- INSERT INTO rep_state (state_name, population, major_ethnicity, median_age, major_party, median_income, poverty_level, sr_sen name, sr_sen dob, jr_sen name, jr_sen dob);
 INSERT INTO rep_state VALUES ('Kentucky', 4425092, 'White', 38.3, 'Republican', 43342, 19.1, 'Mitch McConnell','1942-02-20', 'Rand Paul', '1963-01-07'); 
 INSERT INTO rep_state VALUES ('Nevada', 2890845, 'White', 36.9, 'Democrat',52205, 15.2, 'Harry Reid', '1939-12-02', 'Dean Heller', '1960-05-10');
 INSERT INTO rep_state VALUES ('California', 39144818, 'White', 35.6, 'Democrat', 61489, 16.4, 'Dianne Feinstein', '1933-06-22', 'Barbara Boxer', '1940-11-11');
@@ -88,7 +92,7 @@ INSERT INTO rep_state VALUES ('North Carolina', 9943964, 'White', 37.4, 'Republi
 INSERT INTO rep_state VALUES ('Louisiana', 4649676, 'White', 35.9 , 'Democrat', 44874, 19.1, 'Mary Landrieu', '1955-11-23', 'David Vitter', '1961-05-03');
 
 -- rep_district
-
+-- INSERT INTO rep_dist VALUE(state_name, district_number, population, major_ethnicity, median_age, major_party, median_income, poverty_level, rep_name, rep_dob);
 INSERT INTO rep_district VALUES ('Ohio', 8, 722889, 'White', 38.8, 'Republican', 51699, 10.2, 'John Boehner', '1949-11-17');
 INSERT INTO rep_district VALUES ('California', 12, 736123,  'White', 38.6, 'Democrat', 85370, 6.9, 'Nancy Pelosi', '1940-03-26');
 INSERT INTO rep_district VALUES ('Virginia', 7,  769995, 'White', 40.0, 'Republican', 74172, 5.0, 'Eric Cantor', '1963-06-06');
@@ -101,7 +105,7 @@ INSERT INTO rep_district VALUES ('Louisiana', 1, 796858, 'White', 37.3, 'Republi
 INSERT INTO rep_district VALUES ('Washington', 5, 690518, 'White', 37.4, 'Democrat', 47973, 11.5, 'Cathy McMorris Rodgers', '1969-05-22');
 
 -- industries
-
+-- INSERT INTO industries VALUE(summary);
 INSERT INTO industries VALUES ('Agribusiness');
 INSERT INTO industries VALUES ('Communications');
 INSERT INTO industries VALUES ('Construction');
@@ -130,7 +134,7 @@ INSERT INTO industries VALUES ('Tobacco');
 INSERT INTO industries VALUES ('Law Firms');
 
 -- legislation 
-
+-- INSERT INTO legislation VALUE(name, passed);
 INSERT INTO legislation VALUES ('S.9 - Clean And Fair Elections Act', FALSE); -- introduced, no roll call
 INSERT INTO legislation VALUES ('S.2 - Sandy Hook Elementary School Violence Reduction Act', FALSE); -- introduced, no roll call
 INSERT INTO legislation VALUES ('S. 1569 - Default Prevention Act of 2013', FALSE); -- Failed Cloture in the Senate
@@ -154,6 +158,8 @@ INSERT INTO legislation VALUES ('S. 2340 - Simplifying Financial Aid for Student
 INSERT INTO legislation VALUES ('S. 2733 - ObamaCare Opt Out Act of 2014', FALSE);
 INSERT INTO legislation VALUES ('S. 150 - Assault Weapons Ban of 2013', FALSE); -- DEFEATED IN SENATE
 
+-- p_sponsors
+-- INSERT INTO p_sponsor VALUE(legislation_name, p_sponsor_name, p_sponsor_dob);
 INSERT INTO p_sponsors VALUES ('S.9 - Clean And Fair Elections Act', 'Harry Reid', '1939-12-02');
 INSERT INTO p_sponsors VALUES ('S.2 - Sandy Hook Elementary School Violence Reduction Act', 'Harry Reid', '1939-12-02');
 INSERT INTO p_sponsors VALUES ('S. 1569 - Default Prevention Act of 2013', 'Harry Reid', '1939-12-02');
@@ -177,5 +183,29 @@ INSERT INTO p_sponsors VALUES ('S. 2340 - Simplifying Financial Aid for Students
 INSERT INTO p_sponsors VALUES ('S. 2733 - ObamaCare Opt Out Act of 2014', 'John McCain', '1936-08-29');
 INSERT INTO p_sponsors VALUES ('S. 150 - Assault Weapons Ban of 2013', 'Dianne Feinstein', '1933-06-22');
 
--- all inserted up to here
+-- advocates
+-- INSERT INTO advocates VALUE(summary_of_industry, legislation_name);
+
+-- pac_supports
+-- INSERT INTO pac_supports VALUE(committeeID, politician_name, politician_DOB, amount);
+
+-- pacs
+-- INSERT INTO pacs VALUE(committee_id, name, budget, cash_spent, cash_on_hand, registrant);
+
+-- pac_donate
+-- INSERT INTO pac_donate VALUE(from_committeeID, to_committeeID);
+
+-- interested_in
+-- INSTERT INTO interested_in(PAC_committee_ID, industry_summary)
+
+--------------------------------------------------------- all inserted up to here
+
+-- super_pacs
+-- INSERT INTO super_pacs VALUE(committee_id, name, viewpoint, budget, cash_spent);
+
+-- spac_supports
+-- INSERT INTO spac_supports VALUE(committeeID, politician_name, politician_DOB, amount);
+
+-- spac_against
+-- INSERT INTO spac_against VALUE(committeeID, politician_name, politician_DOB, amount);
 
