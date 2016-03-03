@@ -1,9 +1,8 @@
 -- show all names and party affiliation of politicians who are also senators 
 -- and are worth at least $1 million USD
-SELECT p.name, p.party_affiliation
+SELECT p.name, p.party_affiliation, p.net_worth
 FROM senators s, politicians p
 WHERE p.net_worth >= 1000000 AND p.name = s.name
-GROUP BY p.name, p.party_affiliation;
 
 -- not sure what this is yet
 -- SELECT p.name, pacs.committee_id, pacs.name
@@ -12,7 +11,7 @@ GROUP BY p.name, p.party_affiliation;
 -- GROUP BY p.name, pacs.committee_id, pacs.name, ps.amount
 -- HAVING ps.amount > (SELECT AVG(pac_supports.amount) FROM pac_supports)
 
--- Show the average amount that PACs donate to leadership PACs by party affiliation
+-- Show the average amount that PACs donate to leadership PACs (PACs that support politicians) by party affiliation
 SELECT p.party_affiliation, AVG(ps.amount)
 FROM politicians p, pacs, pac_supports ps 
 WHERE p.name = ps.politician_name AND pacs.committee_id = ps.committee_id
