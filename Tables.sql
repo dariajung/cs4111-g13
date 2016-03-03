@@ -87,15 +87,14 @@ CREATE TABLE p_sponsors (
 );
 
 
---- finished to here ---
-
+--- inserted up to here ---
 
 CREATE TABLE super_PACs (
 	committee_id char(9),
 	name varchar(50),
 	viewpoint varchar(30),
-	budget real, -- Attribute constraint, >= 0
-	cash_spent real,  -- Attribute constraint, make sure haven't spent more than budgeted?
+	budget real CHECK (budget >= 0), -- Attribute constraint, >= 0
+	cash_spent real CHECK ((cash_spent <= budget) AND (cash_spent >= 0)),  -- Attribute constraint, make sure haven't spent more than budgeted?
 	PRIMARY KEY (committee_id),
 	UNIQUE (name)
 );
@@ -107,9 +106,9 @@ CREATE TABLE super_PACs (
 CREATE TABLE PACs (
 	committee_id char(9),
 	name varchar(50),
-	budget real, -- Attribute constraint, >= 0
-	cash_spent real,  -- Attribute constraint, make sure haven't spent more than budgeted?
-	cash_on_hand real,
+	budget real CHECK (budget >= 0),
+	cash_spent real CHECK ((cash_spent <= budget) AND (cash_spent >= 0)),
+	cash_on_hand real CHECK ((cash_on_hand <= (budget - cash_spent)) AND (cash_on_hand >= 0)),
 	registrant boolean,
 	PRIMARY KEY (committee_id),
 	UNIQUE (name)
@@ -136,18 +135,17 @@ CREATE TABLE SPAC_supports(
 	committee_id char(11),
 	name varchar(100),
 	DOB date,
-	amount real,
+	amount real CHECK (amount >= 0),
 	FOREIGN KEY (committee_id) REFERENCES Super_PACs(committee_id) ON DELETE CASCADE,
 	FOREIGN KEY (name, DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
 	PRIMARY KEY (committee_id, name, DOB)
 );
 
--- CREATE TABLE SPAC_against?
 CREATE TABLE SPAC_against(
 	committee_id char(11),
 	name varchar(100),
 	DOB date,
-	amount real, -- Attribute constraint >= 0
+	amount real CHECK (amount >= 0),
 	FOREIGN KEY (committee_id) REFERENCES Super_PACs(committee_id) ON DELETE CASCADE,
 	FOREIGN KEY (name, DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
 	PRIMARY KEY (committee_id, name, DOB)
@@ -166,7 +164,7 @@ CREATE TABLE PAC_supports (
 	committee_id char(11),
 	politician_name varchar(50),
 	politician_DOB date,
-	amount real, -- Attribute constraint >= 0
+	amount real CHECK (amount >= 0), -- Attribute constraint >= 0
 	FOREIGN KEY (politician_name, politician_DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
 	FOREIGN KEY (committee_id) references PACs(committee_id) ON DELETE CASCADE,
 	PRIMARY KEY (committee_id, politician_name, politician_DOB)
