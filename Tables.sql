@@ -125,6 +125,16 @@ CREATE TABLE interested_in (
 	FOREIGN KEY (committee_id) references PACs(committee_id) ON DELETE CASCADE,
 	FOREIGN KEY (industry_summary) references Industries(summary) ON DELETE CASCADE
 ); 
+
+CREATE TABLE advocates (
+	name varchar(100), -- name of legislation
+	summary varchar(300), -- summary of a cause/industry
+	FOREIGN KEY (summary) REFERENCES Industries(summary)
+	ON DELETE CASCADE,
+	FOREIGN KEY (name) REFERENCES Legislation(name) ON DELETE CASCADE,
+	PRIMARY KEY (name, summary)
+);
+
 	
 --- inserted up to here ---
 
@@ -137,16 +147,6 @@ CREATE TABLE super_PACs (
 	PRIMARY KEY (committee_id),
 	UNIQUE (name)
 );
-
-CREATE TABLE advocates (
-	summary varchar(300), -- summary of a cause/industry
-	name varchar(100), -- name of legislation
-	FOREIGN KEY (summary) REFERENCES Industries(summary)
-	ON DELETE CASCADE,
-	FOREIGN KEY (name) REFERENCES Legislation(name) ON DELETE CASCADE,
-	PRIMARY KEY (name, summary)
-);
-
 
 CREATE TABLE SPAC_supports(
 	committee_id char(9),

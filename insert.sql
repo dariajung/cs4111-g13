@@ -134,6 +134,9 @@ INSERT INTO industries VALUES ('Pharmaceuticals');
 INSERT INTO industries VALUES ('Tobacco');
 INSERT INTO industries VALUES ('Law Firms');
 INSERT INTO industries VALUES ('Food Industry');
+INSERT INTO industries VALUES ('Emergency Management');
+INSERT INTO industries VALUES ('Government Operations and Politics - Campaign Finance');
+INSERT INTO industries VALUES ('Government Operations and Politics');
 
 -- legislation 
 -- INSERT INTO legislation VALUE(name, passed);
@@ -187,6 +190,32 @@ INSERT INTO p_sponsors VALUES ('S. 150 - Assault Weapons Ban of 2013', 'Dianne F
 
 -- advocates
 -- INSERT INTO advocates VALUES (summary_of_industry, legislation_name);
+INSERT INTO advocates VALUES ('S.9 - Clean And Fair Elections Act', 'Liberal');
+INSERT INTO advocates VALUES ('S.2 - Sandy Hook Elementary School Violence Reduction Act', 'Anti-gun');
+INSERT INTO advocates VALUES ('S. 1569 - Default Prevention Act of 2013', 'Economics and Public Finance');
+INSERT INTO advocates VALUES ('S. 260 - Immigration Enforcement Transparency Act', 'Immigration');
+INSERT INTO advocates VALUES ('S. 2145 - Veteran Voting Support Act', 'Veteran Affairs');
+INSERT INTO advocates VALUES ('S. 47 - Violence Against Women Reauthorization Act of 2013', 'Liberal');
+INSERT INTO advocates VALUES ('S. 1846 - Homeowner Flood Insurance Affordability Act of 2013', 'Emergency Management');
+INSERT INTO advocates VALUES ('S. 2142 - Venezuela Defense of Human Rights and Civil Society Act of 2014', 'Human Rights');
+INSERT INTO advocates VALUES ('S. 517 - Unlocking Consumer Choice and Wireless Competition Act', 'Communications');
+INSERT INTO advocates VALUES ('H.R. 267 - Hydropower Regulatory Efficiency Act of 2013', 'Renewable Energy');
+INSERT INTO advocates VALUES ('S. 177 - ObamaCare Repeal Act', 'Conservative');
+INSERT INTO advocates VALUES ('S. 177 - ObamaCare Repeal Act', 'Healthcare');
+INSERT INTO advocates VALUES ('S. 2415 - SuperPAC Elimination Act of 2014', 'Government Operations and Politics - Campaign Finance'); -- “abolish limits on political cash”
+INSERT INTO advocates VALUES ('S. 1837 -  Equal Employment for All Act of 2013', 'Liberal');
+INSERT INTO advocates VALUES ('S. 1837 -  Equal Employment for All Act of 2013', 'Labor');
+INSERT INTO advocates VALUES ('S.Res. 28 - A resolution to provide sufficient time for legislation to be read.', 'Government Operations and Politics');
+INSERT INTO advocates VALUES ('S. 2766 - Palestinian and United Nations Anti-Terrorism Act of 2014', 'Pro-Israel'); -- anti palestine???
+INSERT INTO advocates VALUES ('S. 2948 - Medicaid Generic Drug Price Fairness Act', 'Healthcare');
+INSERT INTO advocates VALUES ('S. 2832 - Employ Young Americans Now Act', 'Liberal');
+INSERT INTO advocates VALUES ('S. 2832 - Employ Young Americans Now Act', 'Labor');
+INSERT INTO advocates VALUES ('S.  2956 - Phone Scam Prevention Act of 2014', 'Communications');
+INSERT INTO advocates VALUES ('S. 2673 - United States-Israel Strategic Partnership Act of 2014', 'Pro-Israel');
+INSERT INTO advocates VALUES ('S. 2340 - Simplifying Financial Aid for Students Act of 2014', 'Education');
+INSERT INTO advocates VALUES ('S. 2733 - ObamaCare Opt Out Act of 2014', 'Conservative');
+INSERT INTO advocates VALUES ('S. 2733 - ObamaCare Opt Out Act of 2014', 'Healthcare');
+INSERT INTO advocates VALUES ('S. 150 - Assault Weapons Ban of 2013', 'Anti-gun');
 
 -- pacs
 -- INSERT INTO interested_in VALUES (committee_id, name, budget, cash_spent, cash_on_hand, registrant);
@@ -377,6 +406,9 @@ INSERT INTO interested_in VALUES ('C00286922', 'Healthcare');
 
 -- super_pacs
 -- INSERT INTO super_pacs(committee_id, name, viewpoint, budget, cash_spent);
+INSERT INTO super_pacs VALUES (‘C00484642’, ‘Senate Majority PAC’, ‘Liberal’, 66914461, 66914067); -- attacking mitch mcconnell
+INSERT INTO super_pacs VALUES (‘C00564765’, ‘Freedom Partners Action Fund’, ‘Conservative’, 29111416, 25755878); -- attacking kay hagan
+INSERT INTO super_pacs VALUES (‘C00489856’, ‘Ending Spending Action Fund’, ‘Conservative’, 24451993, 24201752); -- attacking mary landrieu
 
 -- spac_supports
 -- INSERT INTO spac_supports VALUE(committeeID, politician_name, politician_DOB, amount);
