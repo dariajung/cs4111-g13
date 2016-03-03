@@ -29,7 +29,6 @@ CREATE TABLE representatives (
 CREATE TABLE rep_state (
 	state_name varchar(15),
 	population real CHECK (population >= 0),
-	percentage_minorities real CHECK (percentage_minorities >= 0),
 	major_ethnicity varchar(50),
 	median_age real CHECK (median_age >= 0),
 	major_party varchar(50),
@@ -39,6 +38,7 @@ CREATE TABLE rep_state (
 	sr_senator_DOB date NOT NULL,
 	jr_senator_name varchar(50) NOT NULL,
 	jr_senator_DOB date NOT NULL,
+	percentage_minorities real CHECK (percentage_minorities >= 0),
 	FOREIGN KEY (sr_senator_name, sr_senator_DOB) REFERENCES Senators(name, DOB) ON DELETE NO ACTION,
 	FOREIGN KEY (jr_senator_name, jr_senator_DOB) REFERENCES Senators(name, DOB) ON DELETE NO ACTION,
 	UNIQUE (sr_senator_name, sr_senator_DOB),
@@ -48,9 +48,8 @@ CREATE TABLE rep_state (
 
 CREATE TABLE rep_district (
 	state_name varchar(15),
-	population real CHECK (population >= 0),
 	district_number integer CHECK (district_number >= 0),
-	percentage_minorities real CHECK (percentage_minorities >= 0),
+	population real CHECK (population >= 0),
 	major_ethnicity varchar(50),
 	median_age real CHECK (median_age >= 0),
 	major_party varchar(50),
@@ -58,6 +57,7 @@ CREATE TABLE rep_district (
 	poverty_level real CHECK (poverty_level >= 0),
 	representative_name varchar(50) NOT NULL,
 	representative_DOB date NOT NULL,
+	percentage_minorities real CHECK (percentage_minorities >= 0),
 	FOREIGN KEY(representative_name, representative_DOB) REFERENCES Representatives(name, DOB)
 	ON DELETE NO ACTION,
 	UNIQUE (representative_name, representative_DOB),
@@ -86,15 +86,14 @@ CREATE TABLE p_sponsors (
 	PRIMARY KEY (legislation_name, p_sponsor_name, p_sponsor_DOB)
 );
 
-
 --- inserted up to here ---
 
 CREATE TABLE super_PACs (
 	committee_id char(9),
 	name varchar(50),
 	viewpoint varchar(30),
-	budget real CHECK (budget >= 0), -- Attribute constraint, >= 0
-	cash_spent real CHECK ((cash_spent <= budget) AND (cash_spent >= 0)),  -- Attribute constraint, make sure haven't spent more than budgeted?
+	budget real CHECK (budget >= 0),
+	cash_spent real CHECK ((cash_spent <= budget) AND (cash_spent >= 0)),
 	PRIMARY KEY (committee_id),
 	UNIQUE (name)
 );

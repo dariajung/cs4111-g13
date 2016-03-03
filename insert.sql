@@ -77,32 +77,32 @@ INSERT INTO representatives VALUES('Steve Scalise', '1965-10-06');
 INSERT INTO representatives VALUES ('Cathy McMorris Rodgers', '1969-05-22');
 
 -- rep_state
--- INSERT INTO rep_state (state_name, population, major_ethnicity, median_age, major_party, median_income, poverty_level, sr_sen name, sr_sen dob, jr_sen name, jr_sen dob);
-INSERT INTO rep_state VALUES ('Kentucky', 4425092, 'White', 38.3, 'Republican', 43342, 19.1, 'Mitch McConnell','1942-02-20', 'Rand Paul', '1963-01-07'); 
-INSERT INTO rep_state VALUES ('Nevada', 2890845, 'White', 36.9, 'Democrat',52205, 15.2, 'Harry Reid', '1939-12-02', 'Dean Heller', '1960-05-10');
-INSERT INTO rep_state VALUES ('California', 39144818, 'White', 35.6, 'Democrat', 61489, 16.4, 'Dianne Feinstein', '1933-06-22', 'Barbara Boxer', '1940-11-11');
-INSERT INTO rep_state VALUES ('Vermont', 626042, 'White', 37.7, 'Democrat', 54447, 12.2, 'Patrick Leahy', '1940-03-31', 'Bernie Sanders', '1941-09-08');
-INSERT INTO rep_state VALUES ('Florida', 20271272, 'White', 40.7, 'Democrat', 47212, 16.5, 'Bill Nelson', '1942-09-29', 'Marco Rubio', '1971-05-28');
-INSERT INTO rep_state VALUES ('Texas', 27469114, 'White', 33.6, 'Republican', 52576, 17.2, 'John Cornyn', '1952-02-02', 'Ted Cruz', '1970-12-22');
-INSERT INTO rep_state VALUES ('New York', 19795791, 'White', 38.0, 'Democrat', 58687, 15.9, 'Chuck Schumer', '1950-11-23', 'Kirsten Gillibrand', '1966-12-09');
-INSERT INTO rep_state VALUES ('Massachusetts', 6745408, 'White', 39.1, 'Democrat', 67846, 11.6, 'Elizabeth Warren', '1949-06-22', 'Ed Markey', '1946-07-11'); 
-INSERT INTO rep_state VALUES ('Arizona', 6731484, 'White', 35.9, 'Republican', 49928, 18.2, 'John McCain', '1936-08-29', 'Jeff Flake', '1962-12-31');
-INSERT INTO rep_state VALUES ('New Jersey', 8791894, 'White', 39.0, 'Democrat', 72062, 11.1, 'Bob Menendez', '1954-01-01', 'Cory Booker', '1969-04-27');
-INSERT INTO rep_state VALUES ('North Carolina', 9943964, 'White', 37.4, 'Republican', 46334	, 17.5, 'Richard Burr', '1955-11-30', 'Kay Hagan', '1953-05-26');
-INSERT INTO rep_state VALUES ('Louisiana', 4649676, 'White', 35.9 , 'Democrat', 44874, 19.1, 'Mary Landrieu', '1955-11-23', 'David Vitter', '1961-05-03');
+-- INSERT INTO rep_state (state_name, population, major_ethnicity, median_age, major_party, median_income, poverty_level, sr_sen name, sr_sen dob, jr_sen name, jr_sen dob, percentage_minorities);
+INSERT INTO rep_state VALUES ('Kentucky', 4425092, 'White', 38.3, 'Republican', 43342, 19.1, 'Mitch McConnell','1942-02-20', 'Rand Paul', '1963-01-07', 11.7); 
+INSERT INTO rep_state VALUES ('Nevada', 2890845, 'White', 36.9, 'Democrat',52205, 15.2, 'Harry Reid', '1939-12-02', 'Dean Heller', '1960-05-10', 23.8);
+INSERT INTO rep_state VALUES ('California', 39144818, 'White', 35.6, 'Democrat', 61489, 16.4, 'Dianne Feinstein', '1933-06-22', 'Barbara Boxer', '1940-11-11', 26.8);
+INSERT INTO rep_state VALUES ('Vermont', 626042, 'White', 37.7, 'Democrat', 54447, 12.2, 'Patrick Leahy', '1940-03-31', 'Bernie Sanders', '1941-09-08', 5);
+INSERT INTO rep_state VALUES ('Florida', 20271272, 'White', 40.7, 'Democrat', 47212, 16.5, 'Bill Nelson', '1942-09-29', 'Marco Rubio', '1971-05-28', 22.2);
+INSERT INTO rep_state VALUES ('Texas', 27469114, 'White', 33.6, 'Republican', 52576, 17.2, 'John Cornyn', '1952-02-02', 'Ted Cruz', '1970-12-22', 20);
+INSERT INTO rep_state VALUES ('New York', 19795791, 'White', 38.0, 'Democrat', 58687, 15.9, 'Chuck Schumer', '1950-11-23', 'Kirsten Gillibrand', '1966-12-09', 29.6);
+INSERT INTO rep_state VALUES ('Massachusetts', 6745408, 'White', 39.1, 'Democrat', 67846, 11.6, 'Elizabeth Warren', '1949-06-22', 'Ed Markey', '1946-07-11', 17.4); 
+INSERT INTO rep_state VALUES ('Arizona', 6731484, 'White', 35.9, 'Republican', 49928, 18.2, 'John McCain', '1936-08-29', 'Jeff Flake', '1962-12-31', 16.3);
+INSERT INTO rep_state VALUES ('New Jersey', 8791894, 'White', 39.0, 'Democrat', 72062, 11.1, 'Bob Menendez', '1954-01-01', 'Cory Booker', '1969-04-27', 17);
+INSERT INTO rep_state VALUES ('North Carolina', 9943964, 'White', 37.4, 'Republican', 46334	, 17.5, 'Richard Burr', '1955-11-30', 'Kay Hagan', '1953-05-26', 28.5);
+INSERT INTO rep_state VALUES ('Louisiana', 4649676, 'White', 35.9 , 'Democrat', 44874, 19.1, 'Mary Landrieu', '1955-11-23', 'David Vitter', '1961-05-03', 36.6);
 
 -- rep_district
 -- INSERT INTO rep_dist VALUE(state_name, district_number, population, major_ethnicity, median_age, major_party, median_income, poverty_level, rep_name, rep_dob);
-INSERT INTO rep_district VALUES ('Ohio', 8, 722889, 'White', 38.8, 'Republican', 51699, 10.2, 'John Boehner', '1949-11-17');
-INSERT INTO rep_district VALUES ('California', 12, 736123,  'White', 38.6, 'Democrat', 85370, 6.9, 'Nancy Pelosi', '1940-03-26');
-INSERT INTO rep_district VALUES ('Virginia', 7,  769995, 'White', 40.0, 'Republican', 74172, 5.0, 'Eric Cantor', '1963-06-06');
-INSERT INTO rep_district VALUES ('Wisconsin', 1, 712072, 'White', 40.3, 'Republican', 58345, 8.4, 'Paul Ryan', '1970-01-29');
-INSERT INTO rep_district VALUES ('California', 23,  747914, 'White', 32.9, 'Republican', 55195, 16.7, 'Kevin McCarthy', '1965-01-26');
-INSERT INTO rep_district VALUES ('Hawaii', 2, 712020, 'White', 37.5, 'Democrat', 66042, 9.0, 'Tulsi Gabbard', '1981-04-12');
-INSERT INTO rep_district VALUES ('Maryland', 5, 753079, 'White', 38.3, 'Democrat', 89671, 5.1, 'Steny Hoyer', '1939-06-14');
-INSERT INTO rep_district VALUES ('South Carolina', 6, 673637, 'Black or African American', 35.0, 'Democrat', 32935, 20.6, 'James Clyburn', '1940-07-21');
-INSERT INTO rep_district VALUES ('Louisiana', 1, 796858, 'White', 37.3, 'Republican', 54764, 10.2, 'Steve Scalise', '1965-10-06');
-INSERT INTO rep_district VALUES ('Washington', 5, 690518, 'White', 37.4, 'Democrat', 47973, 11.5, 'Cathy McMorris Rodgers', '1969-05-22');
+INSERT INTO rep_district VALUES ('Ohio', 8, 722889, 'White', 38.8, 'Republican', 51699, 10.2, 'John Boehner', '1949-11-17', 10.5);
+INSERT INTO rep_district VALUES ('California', 12, 736123,  'White', 38.6, 'Democrat', 85370, 6.9, 'Nancy Pelosi', '1940-03-26', 47.7);
+INSERT INTO rep_district VALUES ('Virginia', 7,  769995, 'White', 40.0, 'Republican', 74172, 5.0, 'Eric Cantor', '1963-06-06', 22.8);
+INSERT INTO rep_district VALUES ('Wisconsin', 1, 712072, 'White', 40.3, 'Republican', 58345, 8.4, 'Paul Ryan', '1970-01-29', 11.2);
+INSERT INTO rep_district VALUES ('California', 23,  747914, 'White', 32.9, 'Republican', 55195, 16.7, 'Kevin McCarthy', '1965-01-26', 24.2);
+INSERT INTO rep_district VALUES ('Hawaii', 2, 712020, 'White', 37.5, 'Democrat', 66042, 9.0, 'Tulsi Gabbard', '1981-04-12', 67.5);
+INSERT INTO rep_district VALUES ('Maryland', 5, 753079, 'White', 38.3, 'Democrat', 89671, 5.1, 'Steny Hoyer', '1939-06-14', 45.7);
+INSERT INTO rep_district VALUES ('South Carolina', 6, 673637, 'Black or African American', 35.0, 'Democrat', 32935, 20.6, 'James Clyburn', '1940-07-21', 61.6);
+INSERT INTO rep_district VALUES ('Louisiana', 1, 796858, 'White', 37.3, 'Republican', 54764, 10.2, 'Steve Scalise', '1965-10-06', 19.7);
+INSERT INTO rep_district VALUES ('Washington', 5, 690518, 'White', 37.4, 'Democrat', 47973, 11.5, 'Cathy McMorris Rodgers', '1969-05-22', 11.1);
 
 -- industries
 -- INSERT INTO industries VALUE(summary);
