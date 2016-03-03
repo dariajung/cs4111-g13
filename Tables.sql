@@ -8,9 +8,6 @@ CREATE TABLE politicians (
 	PRIMARY KEY (name, DOB)
 );
 
--- is there a way to have a constraint on making sure senators don't appear in
--- representatives, and vise versa?
--- there's no way to do this with good style
 
 CREATE TABLE senators (
 	name varchar(50),
@@ -64,7 +61,7 @@ CREATE TABLE rep_district (
 	PRIMARY KEY (state_name, district_number)
 );	
 
--- Not every industry advocates for legislation, but each legislation should relate somehow to industries
+-- not every industry advocates for legislation, but each legislation should relate somehow to industries
 -- get rid of participation constraint between industries and advocates
 CREATE TABLE industries (
 	summary varchar(300),
@@ -77,6 +74,7 @@ CREATE TABLE legislation (
 	PRIMARY KEY (name)
 );
 
+
 CREATE TABLE p_sponsors (
 	legislation_name varchar(100),
 	p_sponsor_name varchar(50),
@@ -86,7 +84,17 @@ CREATE TABLE p_sponsors (
 	PRIMARY KEY (legislation_name, p_sponsor_name, p_sponsor_DOB)
 );
 
--- Removed  participation constraint between PACS and Interested_In: 
+-- what industry legislation helps
+CREATE TABLE advocates (
+	name varchar(100), -- name of legislation
+	summary varchar(300), -- summary of a cause/industry
+	FOREIGN KEY (summary) REFERENCES Industries(summary)
+	ON DELETE CASCADE,
+	FOREIGN KEY (name) REFERENCES Legislation(name) ON DELETE CASCADE,
+	PRIMARY KEY (name, summary)
+);
+
+-- removed  participation constraint between PACS and Interested_In: 
 -- PACs covers Leadership PACs, which directly support a politician, 
 -- and Lobbyist PACs, which are funded by companies and industries in the private sector
 CREATE TABLE PACs (
@@ -100,6 +108,7 @@ CREATE TABLE PACs (
 	UNIQUE (name)
 );
 
+-- Leadership PACs supporting politician
 CREATE TABLE PAC_supports (
 	committee_id char(11),
 	politician_name varchar(50),
@@ -110,6 +119,7 @@ CREATE TABLE PAC_supports (
 	PRIMARY KEY (committee_id, politician_name, politician_DOB)
 );
 
+-- Lobbyist PACs donating to Leadership PACs
 CREATE TABLE PAC_donate (
 	from_committee_id char(9),
 	to_committee_id char(9),
@@ -118,6 +128,7 @@ CREATE TABLE PAC_donate (
 	PRIMARY KEY (from_committee_id, to_committee_id)
 );
 
+-- what industry PACs associate with
 CREATE TABLE interested_in (
 	committee_id char(9),
 	industry_summary varchar(300),
@@ -126,14 +137,7 @@ CREATE TABLE interested_in (
 	FOREIGN KEY (industry_summary) references Industries(summary) ON DELETE CASCADE
 ); 
 
-CREATE TABLE advocates (
-	name varchar(100), -- name of legislation
-	summary varchar(300), -- summary of a cause/industry
-	FOREIGN KEY (summary) REFERENCES Industries(summary)
-	ON DELETE CASCADE,
-	FOREIGN KEY (name) REFERENCES Legislation(name) ON DELETE CASCADE,
-	PRIMARY KEY (name, summary)
-);
+
 CREATE TABLE super_PACs (
 	committee_id char(9),
 	name varchar(50),
@@ -165,8 +169,8 @@ CREATE TABLE SPAC_against(
 );
 
 -- get rid of participation constraint between politician and vote
--- Real world constraint - not all  bills get to the floor for a vote, but instead get dropped after being introduced.  
--- Representatives might vote, but if the bill is defeated in the House, Senators will never vote on the bill.
+-- real world constraint - not all  bills get to the floor for a vote, but instead get dropped after being introduced.  
+-- representatives might vote, but if the bill is defeated in the House, Senators will never vote on the bill.
 Create TABLE Vote(
 	politician_name varchar(50),
 	politician_DOB DATE,
