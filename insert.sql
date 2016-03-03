@@ -443,4 +443,31 @@ INSERT INTO spac_against VALUES ('C00557595', 'Ed Markey', '1946-07-11', 200);
 --------------------------------------------------------- all inserted up to here
 
 
+-- votes
+-- INSERT INTO votes VALUES (politician_name, dob, legislation name, voting_stage, voted_for);
+
+INSERT INTO votes VALUES ('Harry Reid', '1939-12-02', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
+INSERT INTO votes VALUES ('Marco Rubio', '1971-05-28', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
+INSERT INTO votes VALUES ('Ted Cruz', '1970-12-22', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
+INSERT INTO votes VALUES ('Chuck Schumer', '1950-11-23', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
+INSERT INTO votes VALUES ('Bernie Sanders', '1941-09-08', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
+INSERT INTO votes VALUES ('Rand Paul', '1963-01-07', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
+INSERT INTO votes VALUES ('Mitch McConnell', '1942-02-20', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
+INSERT INTO votes VALUES ('Barbara Boxer', '1940-11-11', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
+INSERT INTO votes VALUES ('Elizabeth Warren', '1949-06-22', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
+INSERT INTO votes VALUES ('John McCain', '1936-08-29', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
+INSERT INTO votes VALUES ('Dean Heller', '1960-05-10', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
+
+INSERT INTO votes VALUES ('Dianne Feinstein', '1933-06-22', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
+INSERT INTO votes VALUES ('Patrick Leahy', '1940-03-31', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
+INSERT INTO votes VALUES ('Bill Nelson', '1942-09-29', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
+INSERT INTO votes VALUES ('John Cornyn', '1952-02-02', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
+INSERT INTO votes VALUES ('Kirsten Gillibrand', '1966-12-09', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
+INSERT INTO votes VALUES ('Ed Markey', '1946-07-11', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
+INSERT INTO votes VALUES ('Jeff Flake', '1962-12-31', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
+INSERT INTO votes VALUES ('Bob Menendez', '1954-01-01', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
+INSERT INTO votes VALUES ('Kay Hagan', '1953-05-26', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
+INSERT INTO votes VALUES ('Richard Burr', '1955-11-30', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
+INSERT INTO votes VALUES ('Mary Landrieu', '1955-11-23', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
+INSERT INTO votes VALUES ('David Vitter', '1961-05-03', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
 

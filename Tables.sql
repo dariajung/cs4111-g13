@@ -174,6 +174,7 @@ Create TABLE Vote(
 	politician_name varchar(50),
 	politician_DOB DATE,
 	legislation_name varchar(100),
+	voting_stage varchar (100), -- cloture, house, senate
 	voted_for BOOLEAN, -- NULL if abstain from voting
 	FOREIGN KEY (politican_name, politician_DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
 	FOREIGN KEY (legislation_name) REFERENCES Legislation(name) ON DELETE CASCADE,
