@@ -112,7 +112,7 @@ INSERT INTO industries VALUES ('Construction');
 INSERT INTO industries VALUES ('Defense');
 INSERT INTO industries VALUES ('Energy');
 INSERT INTO industries VALUES ('Finance');
-INSERT INTO industries VALUES ('Health');
+INSERT INTO industries VALUES ('Healthcare');
 INSERT INTO industries VALUES ('Liberal');
 INSERT INTO industries VALUES ('Conservative');
 INSERT INTO industries VALUES ('Labor');
@@ -127,11 +127,13 @@ INSERT INTO industries VALUES ('Veteran Affairs');
 INSERT INTO industries VALUES ('Economics and Public Finance');
 INSERT INTO industries VALUES ('Human Rights');
 INSERT INTO industries VALUES ('Renewable Energy');
+INSERT INTO industries VALUES ('Fossil Fuels');
 INSERT INTO industries VALUES ('Pro-Israel');
 INSERT INTO industries VALUES ('Education');
 INSERT INTO industries VALUES ('Pharmaceuticals');
 INSERT INTO industries VALUES ('Tobacco');
 INSERT INTO industries VALUES ('Law Firms');
+INSERT INTO industries VALUES ('Food Industry');
 
 -- legislation 
 -- INSERT INTO legislation VALUE(name, passed);
@@ -184,24 +186,195 @@ INSERT INTO p_sponsors VALUES ('S. 2733 - ObamaCare Opt Out Act of 2014', 'John 
 INSERT INTO p_sponsors VALUES ('S. 150 - Assault Weapons Ban of 2013', 'Dianne Feinstein', '1933-06-22');
 
 -- advocates
--- INSERT INTO advocates VALUE(summary_of_industry, legislation_name);
-
--- pac_supports
--- INSERT INTO pac_supports VALUE(committeeID, politician_name, politician_DOB, amount);
+-- INSERT INTO advocates VALUES (summary_of_industry, legislation_name);
 
 -- pacs
--- INSERT INTO pacs VALUE(committee_id, name, budget, cash_spent, cash_on_hand, registrant);
+-- INSERT INTO interested_in VALUES (committee_id, name, budget, cash_spent, cash_on_hand, registrant);
+INSERT INTO interested_in VALUES ('C00327395', 'Searchlight Leadership Fund', 1766119.10, 1830124.90, 115526.83, FALSE);
+INSERT INTO interested_in VALUES ('C00010082', 'National Cable and Telecommunications', 1549137, 1221381, 1420765, TRUE);
+INSERT INTO interested_in VALUES ('C00385120', '21st Century Oncology', 65540, 61547, 12174, TRUE);
+INSERT INTO interested_in VALUES ('C00500025', 'Reclaim America PAC', 3905826.00, 4035978.40, 31368.05, FALSE);
+INSERT INTO interested_in VALUES ('C00296624', 'Florida Crystals', 0, 1500, 4662, TRUE);
+INSERT INTO interested_in VALUES ('C00350744', 'Goldman Sachs', 911470, 920900, 436587, TRUE);
+INSERT INTO interested_in VALUES ('C00536540', 'Jobs Growth and Freedom Fund', 2196311.00, 2065201.40, 131109.65, FALSE);
+INSERT INTO interested_in VALUES ('C00236489', 'Koch Industries', 1961014, 1578819, 948449, TRUE);
+INSERT INTO interested_in VALUES ('C00303024', 'Lockheed Martin', 2624382, 2630503, 1571852, TRUE);
+INSERT INTO interested_in VALUES ('C00348607', 'Impact', 1056282.20, 1028380.40, 84754.44, FALSE);
+INSERT INTO interested_in VALUES ('C00030718', 'National Realtors Association', 5250475, 2895019, 4881515, TRUE);
+INSERT INTO interested_in VALUES ('C00144766', 'National Beer Wholesalers PAC', 2267002, 1939801, 254792, TRUE);
+INSERT INTO interested_in VALUES ('C00406553', 'Progressive Voters of America', 535198.60, 405283.50, 134048.52, FALSE);
+INSERT INTO interested_in VALUES ('C00411330', 'Friends of Bernie Sanders', 1196907, 1721802, 4440543, TRUE);
+INSERT INTO interested_in VALUES ('C00493924', 'Reinventing a New Direction Political Action Committee', 3,742,138.10, 4,007,196.50, 160,439.81, FALSE);
+INSERT INTO interested_in VALUES ('C00481200', 'National Association of Gun Rights', 81143, 57247, 195686, TRUE);
+INSERT INTO interested_in VALUES ('C00109017', 'AT&T', 2913918, 2234210, 579962, TRUE);
+INSERT INTO interested_in VALUES ('C00235655', 'Bluegrass Committee', 1128851.80, 1361659.60, 139152.02, FALSE);
+INSERT INTO interested_in VALUES ('C00089136', 'Altria PAC', 1196396, 1097784, 82889, TRUE);
+INSERT INTO interested_in VALUES ('C00359588', 'BGR PAC', 61569, 56365, 822, TRUE);
+INSERT INTO interested_in VALUES ('C00342048', 'PAC for a Change', 1129172.00, 1134652.50, 198572.95, FALSE);
+INSERT INTO interested_in VALUES ('C00493940', 'Masimo Corporation PAC', 31375, 10295, 2800, TRUE);
+INSERT INTO interested_in VALUES ('C00024521', 'American Association for Justice PAC', 3058061, 3236809, 441212, TRUE);
+INSERT INTO interested_in VALUES ('C00471607', 'HellerHighwater PAC', 686280.10, 664119.00, 42550.34, FALSE);
+INSERT INTO interested_in VALUES ('C00227744', 'Ernst & Young PAC', 2021529, 1233558, 540780, TRUE);
+INSERT INTO interested_in VALUES ('C00433219', 'Fund for the Majority PAC', 408960.60, 373373.40, 52046.39, FALSE);
+INSERT INTO interested_in VALUES ('C00004275', 'American Bankers Association', 1934540, 1500574, 1613682, TRUE);
+INSERT INTO interested_in VALUES ('C00251876', 'Amgen PAC', 1005785, 952185, 293911, TRUE);
+INSERT INTO interested_in VALUES ('C00409110', 'Green Mountain PAC', 716023.70, 730923.90, 43086.91, FALSE);
+INSERT INTO interested_in VALUES ('C00110338', 'American Crystal Sugar PAC', 1461832, 1360501, 1307526, TRUE);
+INSERT INTO interested_in VALUES ('C00375451', 'Moving America Forward', 403050.00, 395827.70, 34720.45, FALSE);
+INSERT INTO interested_in VALUES ('C00286922', 'Blue Cross/Blue Shield', 26715, 30000, 11330, TRUE);
+INSERT INTO interested_in VALUES ('C00387464', 'Alamo PAC', 1202061.70, 1314736.80, 141722.09, FALSE);
+INSERT INTO interested_in VALUES ('C00477067', 'Empire Political Action Committee', 394358.00, 318767.90, 171794.57, FALSE);
+INSERT INTO interested_in VALUES ('C00006080', 'American Healthcare Association PAC', 666237, 705638, 213354, TRUE);
+INSERT INTO interested_in VALUES ('C00008474', 'Citigroup PAC', 857989, 701833, 225470, TRUE);
+INSERT INTO interested_in VALUES ('C00564187', 'Educate and Innovate PAC', 139000.00, 84753.90, 54246.12, FALSE);
+INSERT INTO interested_in VALUES ('C00483677', 'American Petroleum Institute', 215930, 100526, 13959, TRUE);
+INSERT INTO interested_in VALUES ('C00432930', 'Fiscal Leadership and Knowing Economics PAC', 345476.60, 315183.70, 36636.14, FALSE);
+INSERT INTO interested_in VALUES ('C00078451', 'General Dynamics PAC', 1082555, 1018597, 373307, TRUE);
+INSERT INTO interested_in VALUES ('C00181826', 'Aetna PAC', 651825, 733750, 360510, TRUE);
+INSERT INTO interested_in VALUES ('C00349233', 'New Millennium PAC', 444727.80, 458030.80, 141791.52, FALSE);
+INSERT INTO interested_in VALUES ('C00415752', 'Border Health PAC', 500639, 829935, 664840, TRUE);
+INSERT INTO interested_in VALUES ('C00305805', 'The Freedom Project', 3662245.00, 3043827.10, 890661.12, FALSE);
+INSERT INTO interested_in VALUES ('C00330233', 'Alliance Coal', 500639, 829935, 664840, TRUE);
+INSERT INTO interested_in VALUES ('C00039321', 'PepsiCo', 278863, 185279, 265232, TRUE);
+INSERT INTO interested_in VALUES ('C00344234', 'PAC to the Future', 1229800.00, 864312.90, 561,670.96, FALSE);
+INSERT INTO interested_in VALUES ('C00104901', 'Akin Gump et al', 393869, 433920, 89882, TRUE);
+INSERT INTO interested_in VALUES ('C00384701', 'Every Republican is Crucial PAC', 4088262, 4544979, 882162, FALSE);
+INSERT INTO interested_in VALUES ('C00377689', 'Prosperity Action Inc.', 3788202.60, 4371582.50, 331971.84, FALSE);
+INSERT INTO interested_in VALUES ('C00040279', 'Abbott Laboratories', 1000399, 1047962, 13218, TRUE);
+INSERT INTO interested_in VALUES ('C00428052', 'Majority Commmittee PAC', 3298846.00, 2730502.90, 625252.41, FALSE);
+INSERT INTO interested_in VALUES ('C00104299', 'J.P. Morgan Chase', 1183520, 830000, 347812, TRUE);
+INSERT INTO interested_in VALUES ('C00542993', 'Time to Unite Lead and Serve with Integrity', 48075.00, 42119.60, 5955.42, FALSE);
+INSERT INTO interested_in VALUES ('C00027342', 'International Brotherhood of Electric Workers PAC', 5427820, 4938247, 986673, TRUE);
+INSERT INTO interested_in VALUES ('C00271338', 'AmeriPAC: the Fund for a Greater America', 2284242.00, 2593085.80, 772314.07, FALSE);
+INSERT INTO interested_in VALUES ('C00399196', 'Bridge PAC', 1323963.60, 1203316.00, 277332.68, FALSE);
+INSERT INTO interested_in VALUES ('C00095869', 'Edison Electric PowerPAC', 488291, 371000, 53438, TRUE);
+INSERT INTO interested_in VALUES ('C00469429', 'CMR PAC', 757719.50, 756271.80, 6678.97, FALSE);
+
+-- pac_supports
+-- lists "Leadership PACs" == pacs affiliated with a poltiician
+-- INSERT INTO pac_supports VALUES (committeeID, politician_name, politician_DOB, amount);
+ INSERT INTO pac_supports VALUES ('C00327395', 'Harry Reid', '1939-12-02', 876826.70);
+ INSERT INTO pac_supports VALUES ('C00500025', 'Marco Rubio', ' 1971-05-28', 3905826.00);
+ INSERT INTO pac_supports VALUES ('C00536540', 'Ted Cruz', '1970-12-22', 2196311.00);
+ INSERT INTO pac_supports VALUES ('C00348607', 'Chuck Schumer', '1950-11-23', 1056282.20);
+ INSERT INTO pac_supports VALUES ('C00406553', 'Bernie Sanders', '1941-09-08', 535198.60);
+ INSERT INTO pac_supports VALUES ('C00493924', 'Rand Paul', '1963-01-07', 3742138.10);
+ INSERT INTO pac_supports VALUES ('C00235655', 'Mitch McConnell', '1942-02-20', 1128851.80);
+ INSERT INTO pac_supports VALUES ('C00342048', 'Barbara Boxer', '1940-11-11', 1129172.00);
+ INSERT INTO pac_supports VALUES ('C00471607', 'Dean Heller', '1960-05-10', 686280.10);
+ INSERT INTO pac_supports VALUES ('C00433219', 'Dianne Feinstein', '1933-06-22', 408960.60);
+ INSERT INTO pac_supports VALUES ('C00409110', 'Patrick Leahy', '1940-03-31', 716023.70);
+ INSERT INTO pac_supports VALUES ('C00375451', 'Bill Nelson', '1942-09-29', 403050.00);
+ INSERT INTO pac_supports VALUES ('C00387464', 'John Cornyn', '1952-02-02', 1202061.70);
+ INSERT INTO pac_supports VALUES ('C00477067', 'Kirsten Gillibrand', '1966-12-09', 394358.00);
+ INSERT INTO pac_supports VALUES ('C00564187', 'Ed Markey', '1946-07-11', 139000.00);
+ INSERT INTO pac_supports VALUES ('C00432930', 'Jeff Flake', '1962-12-31', 345476.60);
+ INSERT INTO pac_supports VALUES ('C00349233', 'Bob Menendez', '1954-01-01', 444727.80);
+ INSERT INTO pac_supports VALUES ('C00305805', 'John Boehner', '1949-11-17', 3662245.00);
+ INSERT INTO pac_supports VALUES ('C00344234', 'Nancy Pelosi', '1940-03-26', 1229800.00);
+ INSERT INTO pac_supports VALUES ('C00377689', 'Paul Ryan', '1970-01-29', 3788202.60);
+ INSERT INTO pac_supports VALUES ('C00428052', 'Kevin McCarthy', '1965-01-26', 3298846.00);
+ INSERT INTO pac_supports VALUES ('C00542993', 'Tulsi Gabbard', '1981-04-12', 48075.00);
+ INSERT INTO pac_supports VALUES ('C00271338', 'Steny Hoyer', '1939-06-14', 2284242.00);
+ INSERT INTO pac_supports VALUES ('C00399196', 'James Clyburn', '1940-07-21', 1323963.60);
+ INSERT INTO pac_supports VALUES ('C00469429', 'Cathy McMorris Rodgers', '1969-05-22', 757719.50);
 
 -- pac_donate
--- INSERT INTO pac_donate VALUE(from_committeeID, to_committeeID);
+-- INSERT INTO pac_donate VALUES (from_committeeID, to_committeeID);
+INSERT INTO pac_donate VALUES ('C00010082', 'C00327395');
+INSERT INTO pac_donate VALUES ('C00385120', 'C00327395');
+INSERT INTO pac_donate VALUES ('C00296624', 'C00500025');
+INSERT INTO pac_donate VALUES ('C00350744', 'C00500025');
+INSERT INTO pac_donate VALUES ('C00236489', 'C00536540');
+INSERT INTO pac_donate VALUES ('C00303024', 'C00536540');
+INSERT INTO pac_donate VALUES ('C00030718', 'C00348607');
+INSERT INTO pac_donate VALUES ('C00144766', 'C00348607');
+INSERT INTO pac_donate VALUES ('C00411330', 'C00406553');
+INSERT INTO pac_donate VALUES ('C00481200', 'C00493924');
+INSERT INTO pac_donate VALUES ('C00109017', 'C00493924');
+INSERT INTO pac_donate VALUES ('C00089136', 'C00235655');
+INSERT INTO pac_donate VALUES ('C00359588', 'C00235655');
+INSERT INTO pac_donate VALUES ('C00493940', 'C00342048');
+INSERT INTO pac_donate VALUES ('C00024521', 'C00342048');
+INSERT INTO pac_donate VALUES ('C00227744', 'C00471607');
+INSERT INTO pac_donate VALUES ('C00109017', 'C00471607');
+INSERT INTO pac_donate VALUES ('C00004275', 'C00433219');
+INSERT INTO pac_donate VALUES ('C00251876', 'C00433219');
+INSERT INTO pac_donate VALUES ('C00024521', 'C00409110');
+INSERT INTO pac_donate VALUES ('C00110338', 'C00409110');
+INSERT INTO pac_donate VALUES ('C00286922', 'C00375451');
+INSERT INTO pac_donate VALUES ('C00024521', 'C00375451');
+INSERT INTO pac_donate VALUES ('C00286922', 'C00387464');
+INSERT INTO pac_donate VALUES ('C00089136', 'C00387464');
+INSERT INTO pac_donate VALUES ('C00006080', 'C00477067');
+INSERT INTO pac_donate VALUES ('C00008474', 'C00477067');
+INSERT INTO pac_donate VALUES ('C00024521', 'C00564187');
+INSERT INTO pac_donate VALUES ('C00483677', 'C00564187');
+INSERT INTO pac_donate VALUES ('C00078451', 'C00432930');
+INSERT INTO pac_donate VALUES ('C00181826', 'C00432930');
+INSERT INTO pac_donate VALUES ('C00415752', 'C00349233');
+INSERT INTO pac_donate VALUES ('C00109017', 'C00349233');
+INSERT INTO pac_donate VALUES ('C00330233', 'C00305805');
+INSERT INTO pac_donate VALUES ('C00039321', 'C00305805');
+INSERT INTO pac_donate VALUES ('C00030718', 'C00344234');
+INSERT INTO pac_donate VALUES ('C00104901', 'C00344234');
+INSERT INTO pac_donate VALUES ('C00350744', 'C00384701');
+INSERT INTO pac_donate VALUES ('C00089136', 'C00384701');
+INSERT INTO pac_donate VALUES ('C00008474', 'C00384701');
+INSERT INTO pac_donate VALUES ('C00236489', 'C00377689');
+INSERT INTO pac_donate VALUES ('C00040279', 'C00377689');
+INSERT INTO pac_donate VALUES ('C00089136', 'C00428052');
+INSERT INTO pac_donate VALUES ('C00104299', 'C00428052');
+INSERT INTO pac_donate VALUES ('C00027342', 'C00542993');
+INSERT INTO pac_donate VALUES ('C00303024', 'C00542993');
+INSERT INTO pac_donate VALUES ('C00104901', 'C00271338');
+INSERT INTO pac_donate VALUES ('C00286922', 'C00271338');
+INSERT INTO pac_donate VALUES ('C00095869', 'C00399196');
+INSERT INTO pac_donate VALUES ('C00040279', 'C00399196');
+INSERT INTO pac_donate VALUES ('C00004275', 'C00469429');
+INSERT INTO pac_donate VALUES ('C00104299', 'C00469429');
 
 -- interested_in
+-- lists "Industry PACs" == pacs funded by a company
 -- INSTERT INTO interested_in(PAC_committee_ID, industry_summary)
+INSERT INTO interested_in VALUES ('C00010082', 'Communications');
+INSERT INTO interested_in VALUES ('C00385120', 'Health');
+INSERT INTO interested_in VALUES ('C00296624', 'Agribusiness');
+INSERT INTO interested_in VALUES ('C00350744', 'Finance');
+INSERT INTO interested_in VALUES ('C00236489', 'Finance');
+INSERT INTO interested_in VALUES ('C00303024', 'Defense');
+INSERT INTO interested_in VALUES ('C00030718', 'Law Firms');
+INSERT INTO interested_in VALUES ('C00144766', 'Alcohol');
+INSERT INTO interested_in VALUES ('C00411330', 'Liberal');
+INSERT INTO interested_in VALUES ('C00481200', 'Pro-gun');
+INSERT INTO interested_in VALUES ('C00109017', 'AT&T', 'Communications');
+INSERT INTO interested_in VALUES ('C00089136', 'Tobacco');
+INSERT INTO interested_in VALUES ('C00359588', 'Lobbyists');
+INSERT INTO interested_in VALUES ('C00493940', 'Health');
+INSERT INTO interested_in VALUES ('C00024521', 'Law Firms');
+INSERT INTO interested_in VALUES ('C00227744', 'Finance');
+INSERT INTO interested_in VALUES ('C00004275', 'Finance');
+INSERT INTO interested_in VALUES ('C00251876', 'Pharmaceuticals');
+INSERT INTO interested_in VALUES ('C00110338', 'Agribusiness');
+INSERT INTO interested_in VALUES ('C00006080', 'Health');
+INSERT INTO interested_in VALUES ('C00008474', 'Finance');
+INSERT INTO interested_in VALUES ('C00483677', 'Fossil Fuels');
+INSERT INTO interested_in VALUES ('C00078451', 'Defense');
+INSERT INTO interested_in VALUES ('C00181826', 'Healthcare');
+INSERT INTO interested_in VALUES ('C00415752', 'Healthcare');
+INSERT INTO interested_in VALUES ('C00330233', 'Fossil Fuels');
+INSERT INTO interested_in VALUES ('C00039321', 'Food Industry');
+INSERT INTO interested_in VALUES ('C00104901', 'Law Firms');
+INSERT INTO interested_in VALUES ('C00040279', 'Healthcare');
+INSERT INTO interested_in VALUES ('C00104299', 'Finance');
+INSERT INTO interested_in VALUES ('C00027342', 'Labor');
+INSERT INTO interested_in VALUES ('C00095869', 'Energy');
+
 
 --------------------------------------------------------- all inserted up to here
 
 -- super_pacs
--- INSERT INTO super_pacs VALUE(committee_id, name, viewpoint, budget, cash_spent);
+-- INSERT INTO super_pacs(committee_id, name, viewpoint, budget, cash_spent);
 
 -- spac_supports
 -- INSERT INTO spac_supports VALUE(committeeID, politician_name, politician_DOB, amount);
