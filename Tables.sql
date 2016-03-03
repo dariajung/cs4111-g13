@@ -8,6 +8,8 @@ CREATE TABLE politicians (
 	PRIMARY KEY (name, DOB)
 );
 
+-- There is not a way to have a constraint to make sure senators don't appear in
+-- representatives, and vise versa with good style.
 
 CREATE TABLE senators (
 	name varchar(50),
