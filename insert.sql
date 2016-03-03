@@ -406,9 +406,13 @@ INSERT INTO interested_in VALUES ('C00286922', 'Healthcare');
 
 -- super_pacs
 -- INSERT INTO super_pacs(committee_id, name, viewpoint, budget, cash_spent);
-INSERT INTO super_pacs VALUES (‘C00484642’, ‘Senate Majority PAC’, ‘Liberal’, 66914461, 66914067); -- attacking mitch mcconnell
-INSERT INTO super_pacs VALUES (‘C00564765’, ‘Freedom Partners Action Fund’, ‘Conservative’, 29111416, 25755878); -- attacking kay hagan
-INSERT INTO super_pacs VALUES (‘C00489856’, ‘Ending Spending Action Fund’, ‘Conservative’, 24451993, 24201752); -- attacking mary landrieu
+INSERT INTO super_pacs VALUES ('C00484642', 'Senate Majority PAC', 'Liberal', 66914461, 66914067); -- attacking mitch mcconnell
+INSERT INTO super_pacs VALUES ('C00564765', 'Freedom Partners Action Fund', 'Conservative', 29111416, 25755878); -- attacking kay hagan
+INSERT INTO super_pacs VALUES ('C00489856', 'Ending Spending Action Fund', 'Conservative', 24451993, 24201752); -- attacking mary landrieu
+INSERT INTO super_pacs VALUES ('C00488742', 'National Association of Realtors', NULL, 10082110, 10077030); -- for mitch mcconnell
+INSERT INTO super_pacs VALUES ('C00486845', 'League of Conservation Voters', 'Liberal', 10295171, 9717046); -- for kay hagan
+INSERT INTO super_pacs VALUES ('C00540443', 'Americans for Responsible Solutions', 'Liberal', 21343357, 19532856); -- for kay hagan
+
 
 -- spac_supports
 -- INSERT INTO spac_supports VALUE(committeeID, politician_name, politician_DOB, amount);
