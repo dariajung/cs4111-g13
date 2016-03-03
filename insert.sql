@@ -44,12 +44,10 @@ INSERT INTO politicians VALUES ('Kay Hagan', '1953-05-26', 29007831, TRUE, 'Demo
 INSERT INTO senators VALUES ('Kay Hagan', '1953-05-26');
 INSERT INTO politicians VALUES ('Richard Burr', '1955-11-30', 2636270, TRUE, 'Republican', 9);
 INSERT INTO senators VALUES ('Richard Burr', '1955-11-30');
-
--- ADD LOUISIANA senators
 INSERT INTO politicians VALUES ('Mary Landrieu', '1955-11-23', 1588507, TRUE, 'Democrat', 18);
 INSERT INTO senators VALUES ('Mary Landrieu', '1955-11-23');
-INSERT INTO politicians VALUES ('David Vitter', '1961-05-03', 1570522, TRUE 'Republican', 10);
-INSERT INTO politicains VALUES ('David Vitter', '1961-05-03');
+INSERT INTO politicians VALUES ('David Vitter', '1961-05-03', 1570522, TRUE, 'Republican', 10);
+INSERT INTO senators VALUES ('David Vitter', '1961-05-03');
 
 -- representatives 
 INSERT INTO politicians VALUES ('John Boehner', '1949-11-17', 4092054, TRUE, 'Republican', 23);
@@ -87,8 +85,6 @@ INSERT INTO rep_state VALUES ('Massachusetts', 6745408, 'White', 39.1, 'Democrat
 INSERT INTO rep_state VALUES ('Arizona', 6731484, 'White', 35.9, 'Republican', 49928, 18.2, 'John McCain', '1936-08-29', 'Jeff Flake', '1962-12-31');
 INSERT INTO rep_state VALUES ('New Jersey', 8791894, 'White', 39.0, 'Democrat', 72062, 11.1, 'Bob Menendez', '1954-01-01', 'Cory Booker', '1969-04-27');
 INSERT INTO rep_state VALUES ('North Carolina', 9943964, 'White', 37.4, 'Republican', 46334	, 17.5, 'Richard Burr', '1955-11-30', 'Kay Hagan', '1953-05-26');
-
--- need to add
 INSERT INTO rep_state VALUES ('Louisiana', 4649676, 'White', 35.9 , 'Democrat', 44874, 19.1, 'Mary Landrieu', '1955-11-23', 'David Vitter', '1961-05-03');
 
 -- rep_district
@@ -130,8 +126,6 @@ INSERT INTO industries VALUES ('Renewable Energy');
 INSERT INTO industries VALUES ('Pro-Israel');
 INSERT INTO industries VALUES ('Education');
 INSERT INTO industries VALUES ('Pharmaceuticals');
-
--- not inserted yet
 INSERT INTO industries VALUES ('Tobacco');
 INSERT INTO industries VALUES ('Law Firms');
 
