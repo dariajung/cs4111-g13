@@ -31,3 +31,10 @@ FROM (SELECT *
 FROM pac_supports INNER JOIN pac_donate ON pac_supports.committee_id = pac_donate.to_committee_id
 WHERE pac_supports.amount > 1000000) as new_t, interested_in i
 WHERE i.committee_id = new_t.from_committee_id
+
+-- select all pacs with a budget over $1,000,000 USD who donated to republicans
+SELECT pn.name, pc.name, pc.budget
+FROM pacs pc, politicians pn  
+WHERE pc.budget > 1000000 AND pn.party_affiliation = 'Republican' 
+GROUP BY pn.name
+
