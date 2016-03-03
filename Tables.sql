@@ -27,11 +27,11 @@ CREATE TABLE representatives (
 
 CREATE TABLE rep_state (
 	state_name varchar(15),
-	population real CHECK (population >= 0),
+	population real CHECK (population > 0),
 	major_ethnicity varchar(50),
-	median_age real CHECK (median_age >= 0),
+	median_age real CHECK (median_age > 0),
 	major_party varchar(50),
-	median_income real CHECK (median_income >= 0),
+	median_income real CHECK (median_income > 0),
 	poverty_level real CHECK (poverty_level >= 0),
 	sr_senator_name varchar(50) NOT NULL,
 	sr_senator_DOB date NOT NULL,
@@ -47,12 +47,12 @@ CREATE TABLE rep_state (
 
 CREATE TABLE rep_district (
 	state_name varchar(15),
-	district_number integer CHECK (district_number >= 0),
-	population real CHECK (population >= 0),
+	district_number integer CHECK (district_number > 0),
+	population real CHECK (population > 0),
 	major_ethnicity varchar(50),
-	median_age real CHECK (median_age >= 0),
+	median_age real CHECK (median_age > 0),
 	major_party varchar(50),
-	median_income real CHECK (median_income >= 0),
+	median_income real CHECK (median_income > 0),
 	poverty_level real CHECK (poverty_level >= 0),
 	representative_name varchar(50) NOT NULL,
 	representative_DOB date NOT NULL,
