@@ -12,7 +12,6 @@ GROUP BY p.name, p.party_affiliation;
 -- GROUP BY p.name, pacs.committee_id, pacs.name, ps.amount
 -- HAVING ps.amount > (SELECT AVG(pac_supports.amount) FROM pac_supports)
 
-
 -- Show the average amount that PACs donate to leadership PACs by party affiliation
 SELECT p.party_affiliation, AVG(ps.amount)
 FROM politicians p, pacs, pac_supports ps 
@@ -28,7 +27,7 @@ GROUP BY p.party_affiliation
 
 
 -- return committee_id of PAC and their industry that have donated over $1,000,000 USD to a PAC that supports a politician
-SELECT DISTINCT i.committee_id, i.industry_summary
+SELECT i.committee_id, i.industry_summary
 FROM (SELECT *
 FROM pac_supports INNER JOIN pac_donate ON pac_supports.committee_id = pac_donate.to_committee_id
 WHERE pac_supports.amount > 1000000) as new_t, interested_in i
