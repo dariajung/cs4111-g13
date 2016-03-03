@@ -369,6 +369,8 @@ INSERT INTO interested_in VALUES ('C00040279', 'Healthcare');
 INSERT INTO interested_in VALUES ('C00104299', 'Finance');
 INSERT INTO interested_in VALUES ('C00027342', 'Labor');
 INSERT INTO interested_in VALUES ('C00095869', 'Energy');
+INSERT INTO interested_in VALUES ('C00286922', 'Healthcare');
+
 
 
 --------------------------------------------------------- all inserted up to here
