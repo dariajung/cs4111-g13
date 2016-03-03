@@ -1,4 +1,3 @@
-
 -- show all names and party affiliation of politicians who are also senators 
 -- and are worth at least $1 million USD
 SELECT p.name, p.party_affiliation
@@ -26,3 +25,10 @@ SELECT p.party_affiliation, AVG(rep_state.median_income)
 FROM politicians p, rep_state
 WHERE rep_state.percentage_minorities > 10 AND (p.name = rep_state.sr_senator_name)
 GROUP BY p.party_affiliation
+
+
+-- select all industries who donated over $1,000,000 USD to a politician
+SELECT i.summary, p.name, p.party_affiliation
+FROM politicians p, industries i, 
+WHERE 
+GROUP BY
