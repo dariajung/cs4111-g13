@@ -163,9 +163,6 @@ CREATE TABLE SPAC_against(
 	FOREIGN KEY (name, DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
 	PRIMARY KEY (committee_id, name, DOB)
 );
-	
---- inserted up to here ---
-
 
 -- get rid of participation constraint between politician and vote
 -- Real world constraint - not all  bills get to the floor for a vote, but instead get dropped after being introduced.  
@@ -176,9 +173,10 @@ Create TABLE Vote(
 	legislation_name varchar(100),
 	voting_stage varchar (100), -- cloture, house, senate
 	voted_for BOOLEAN, -- NULL if abstain from voting
-	FOREIGN KEY (politican_name, politician_DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
-	FOREIGN KEY (legislation_name) REFERENCES Legislation(name) ON DELETE CASCADE,
+	FOREIGN KEY (politician_name, politician_DOB) REFERENCES politicians(name, DOB) ON DELETE CASCADE,
+	FOREIGN KEY (legislation_name) REFERENCES legislation(name) ON DELETE CASCADE,
 	PRIMARY KEY(politician_name, politician_DOB, legislation_name)
 );
 
+--- inserted up to here ---
 
