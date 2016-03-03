@@ -446,6 +446,7 @@ INSERT INTO spac_against VALUES ('C00557595', 'Ed Markey', '1946-07-11', 200);
 -- votes
 -- INSERT INTO votes VALUES (politician_name, dob, legislation name, voting_stage, voted_for);
 
+-- 'S. 1569 - Default Prevention Act of 2013'
 INSERT INTO votes VALUES ('Harry Reid', '1939-12-02', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
 INSERT INTO votes VALUES ('Marco Rubio', '1971-05-28', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
 INSERT INTO votes VALUES ('Ted Cruz', '1970-12-22', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
@@ -457,7 +458,6 @@ INSERT INTO votes VALUES ('Barbara Boxer', '1940-11-11', 'S. 1569 - Default Prev
 INSERT INTO votes VALUES ('Elizabeth Warren', '1949-06-22', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
 INSERT INTO votes VALUES ('John McCain', '1936-08-29', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
 INSERT INTO votes VALUES ('Dean Heller', '1960-05-10', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
-
 INSERT INTO votes VALUES ('Dianne Feinstein', '1933-06-22', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
 INSERT INTO votes VALUES ('Patrick Leahy', '1940-03-31', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
 INSERT INTO votes VALUES ('Bill Nelson', '1942-09-29', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
@@ -471,3 +471,42 @@ INSERT INTO votes VALUES ('Richard Burr', '1955-11-30', 'S. 1569 - Default Preve
 INSERT INTO votes VALUES ('Mary Landrieu', '1955-11-23', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', TRUE);
 INSERT INTO votes VALUES ('David Vitter', '1961-05-03', 'S. 1569 - Default Prevention Act of 2013', 'Cloture in the Senate', FALSE);
 
+-- ‘S. 47 - Violence Against Women Reauthorization Act of 2013
+
+-- house votes
+
+INSERT INTO votes VALUES ('John Boehner', '1949-11-17', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'House of Representatives', NULL);
+INSERT INTO votes VALUES ('Nancy Pelosi', '1940-03-26', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Eric Cantor', '1963-06-06', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'House of Representatives', FALSE);
+INSERT INTO votes VALUES ('Paul Ryan', '1970-01-29', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Kevin McCarthy', '1965-01-26', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Tulsi Gabbard', '1981-04-12', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Steny Hoyer', '1939-06-14', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('James Clyburn', '1940-07-21', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'House of Representatives', TRUE);
+INSERT INTO votes VALUES ('Steve Scalise', '1965-10-06', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'House of Representatives', FALSE);
+INSERT INTO votes VALUES ('Cathy McMorris Rodgers', '1969-05-22', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'House of Representatives', TRUE);
+
+-- senate votes
+
+INSERT INTO votes VALUES ('Harry Reid', '1939-12-02', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Marco Rubio', '1971-05-28', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Ted Cruz', '1970-12-22', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Chuck Schumer', '1950-11-23', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Bernie Sanders', '1941-09-08', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Rand Paul', '1963-01-07', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Mitch McConnell', '1942-02-20', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Barbara Boxer', '1940-11-11', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Elizabeth Warren', '1949-06-22', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('John McCain', '1936-08-29', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Dean Heller', '1960-05-10', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Dianne Feinstein', '1933-06-22', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Patrick Leahy', '1940-03-31', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Bill Nelson', '1942-09-29', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('John Cornyn', '1952-02-02', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', FALSE);
+INSERT INTO votes VALUES ('Kirsten Gillibrand', '1966-12-09', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Jeff Flake', '1962-12-31', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Bob Menendez', '1954-01-01', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Kay Hagan', '1953-05-26', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Richard Burr', '1955-11-30', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('Mary Landrieu', '1955-11-23', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
+INSERT INTO votes VALUES ('David Vitter', '1961-05-03', 'S. 47 - Violence Against Women Reauthorization Act of 2013', 'Senate', TRUE);
