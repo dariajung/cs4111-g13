@@ -98,7 +98,6 @@ CREATE TABLE super_PACs (
 	UNIQUE (name)
 );
 
-
 -- Removed  participation constraint between PACS and Interested_In: 
 -- PACs covers Leadership PACs, which directly support a politician, 
 -- and Lobbyist PACs, which are funded by companies and industries in the private sector

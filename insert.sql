@@ -92,7 +92,7 @@ INSERT INTO rep_state VALUES ('North Carolina', 9943964, 'White', 37.4, 'Republi
 INSERT INTO rep_state VALUES ('Louisiana', 4649676, 'White', 35.9 , 'Democrat', 44874, 19.1, 'Mary Landrieu', '1955-11-23', 'David Vitter', '1961-05-03', 36.6);
 
 -- rep_district
--- INSERT INTO rep_dist VALUE(state_name, district_number, population, major_ethnicity, median_age, major_party, median_income, poverty_level, rep_name, rep_dob);
+-- INSERT INTO rep_dist VALUE(state_name, district_number, population, major_ethnicity, median_age, major_party, median_income, poverty_level, rep_name, rep_dob, percentage_minorities);
 INSERT INTO rep_district VALUES ('Ohio', 8, 722889, 'White', 38.8, 'Republican', 51699, 10.2, 'John Boehner', '1949-11-17', 10.5);
 INSERT INTO rep_district VALUES ('California', 12, 736123,  'White', 38.6, 'Democrat', 85370, 6.9, 'Nancy Pelosi', '1940-03-26', 47.7);
 INSERT INTO rep_district VALUES ('Virginia', 7,  769995, 'White', 40.0, 'Republican', 74172, 5.0, 'Eric Cantor', '1963-06-06', 22.8);
