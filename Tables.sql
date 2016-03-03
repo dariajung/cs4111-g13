@@ -171,7 +171,7 @@ CREATE TABLE SPAC_against(
 -- get rid of participation constraint between politician and vote
 -- real world constraint - not all  bills get to the floor for a vote, but instead get dropped after being introduced.  
 -- representatives might vote, but if the bill is defeated in the House, Senators will never vote on the bill.
-Create TABLE Vote(
+Create TABLE Votes(
 	politician_name varchar(50),
 	politician_DOB DATE,
 	legislation_name varchar(100),
@@ -183,4 +183,4 @@ Create TABLE Vote(
 );
 
 --- inserted up to here ---
-
+ 
