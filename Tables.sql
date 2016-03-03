@@ -10,6 +10,7 @@ CREATE TABLE politicians (
 
 -- is there a way to have a constraint on making sure senators don't appear in
 -- representatives, and vise versa?
+-- there's no way to do this with good style
 
 CREATE TABLE senators (
 	name varchar(50),
@@ -27,12 +28,13 @@ CREATE TABLE representatives (
 
 CREATE TABLE rep_state (
 	state_name varchar(15),
-	population real, -- Attribute constraint > 0
-	major_ethnicity varchar(50), -- talk to sania about changing this to % minorities
-	median_age real, -- Attribute constraint > 0
+	population real CHECK (population >= 0),
+	percentage_minorities real CHECK (percentage_minorities >= 0),
+	major_ethnicity varchar(50),
+	median_age real CHECK (median_age >= 0),
 	major_party varchar(50),
-	median_income real, -- Attribute constraint > 0
-	poverty_level real,  -- Attribute constraint >= 0
+	median_income real CHECK (median_income >= 0),
+	poverty_level real CHECK (poverty_level >= 0),
 	sr_senator_name varchar(50) NOT NULL,
 	sr_senator_DOB date NOT NULL,
 	jr_senator_name varchar(50) NOT NULL,
@@ -46,13 +48,14 @@ CREATE TABLE rep_state (
 
 CREATE TABLE rep_district (
 	state_name varchar(15),
-	population real,  -- Attribute constraint > 0
-	district_number integer,  -- Attribute constraint > 0
-	major_ethnicity varchar(50), -- talk to sania about changing this to % minorities
-	median_age real,  -- Attribute constraint > 0
+	population real CHECK (population >= 0),
+	district_number integer CHECK (district_number >= 0),
+	percentage_minorities real CHECK (percentage_minorities >= 0),
+	major_ethnicity varchar(50),
+	median_age real CHECK (median_age >= 0),
 	major_party varchar(50),
-	median_income real,  -- Attribute constraint > 0
-	poverty_level real,  -- Attribute constraint >= 0
+	median_income real CHECK (median_income >= 0),
+	poverty_level real CHECK (poverty_level >= 0),
 	representative_name varchar(50) NOT NULL,
 	representative_DOB date NOT NULL,
 	FOREIGN KEY(representative_name, representative_DOB) REFERENCES Representatives(name, DOB)
@@ -63,7 +66,6 @@ CREATE TABLE rep_district (
 
 -- Not every industry advocates for legislation, but each legislation should relate somehow to industries
 -- get rid of participation constraint between industries and advocates
--- should we be more specific from the beginning? 
 CREATE TABLE industries (
 	summary varchar(300),
 	PRIMARY KEY (summary)
@@ -177,8 +179,10 @@ Create TABLE Vote(
 	politician_name varchar(50),
 	politician_DOB DATE,
 	legislation_name varchar(100),
-	voted_for BOOLEAN,
+	voted_for BOOLEAN, -- NULL if abstain from voting
 	FOREIGN KEY (politican_name, politician_DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
 	FOREIGN KEY (legislation_name) REFERENCES Legislation(name) ON DELETE CASCADE,
 	PRIMARY KEY(politician_name, politician_DOB, legislation_name)
 );
+
+
