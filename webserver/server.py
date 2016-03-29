@@ -34,7 +34,7 @@ app = Flask(__name__, template_folder=tmpl_dir)
 #
 #     DATABASEURI = "postgresql://gravano:foobar@w4111a.eastus.cloudapp.azure.com/proj1part2"
 #
-DATABASEURI = "postgresql://user:password@w4111a.eastus.cloudapp.azure.com/proj1part2"
+DATABASEURI = "postgresql://djj2115:0358@w4111a.eastus.cloudapp.azure.com/proj1part2"
 
 
 #
