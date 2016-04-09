@@ -236,6 +236,27 @@ def search_polit():
 
 #   return render_template("search_results.html", pac_data = [])
 
+
+#.route() tells flask what URL should trigger function
+#route is given name '/search/pac' which creates URL & displays in browser
+
+# @app.route('/search/pac', methods=['POST', 'GET'])
+# def search_pac():
+
+#   query = request.form['query']
+
+#   print 'search/pac'
+#   print query
+#   cursor = g.conn.execute("SELECT p.committee_id, p.name, p.budget FROM pacs p WHERE p.name = %s", query)
+#   results[]
+#   for result in cursor:
+#     results.append(result[0])
+#     results.append(result[1])
+#     results.append(result[2])
+#   cursor.close()
+#   context = dict(data = results)
+#   return render_template("search.html")
+
 # @app.route('/search/superpac', methods=['POST', 'GET'])
 # def search_spac():
 #   return render_template("search.html")
