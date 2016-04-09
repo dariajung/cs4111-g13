@@ -6,7 +6,6 @@
     }
   </style>
 
-
 <body>
   <h1>Some famous Computer Scientists</h1>
   <div>{{data}}</div>
@@ -21,6 +20,11 @@
 
 <form method="POST" action="/add">
 <p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
+</form>
+
+<!-- Implement Delete -->
+<form method="POST" action="/delete">
+<p>Name of computer scientist to delete: <input type="text" name="name"> <input type="submit" value="Delete"></p>
 </form>
 
 </body>

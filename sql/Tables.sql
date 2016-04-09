@@ -1,6 +1,7 @@
 CREATE TABLE politicians (
 	name varchar(50),
 	-- also make sure that DOB is within a reasonable time frame b/c we're not doing historical data
+	-- oldest birthdate has to be in 1923
 	DOB date CHECK (DATE_PART('year', '1995-01-01'::date) - DATE_PART('year', DOB::date) >=0),-- must be 18 to run for office generally
 	net_worth real,
 	incumbent_status boolean,

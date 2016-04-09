@@ -36,7 +36,6 @@ app = Flask(__name__, template_folder=tmpl_dir)
 #
 DATABASEURI = "postgresql://djj2115:0358@w4111a.eastus.cloudapp.azure.com/proj1part2"
 
-
 #
 # This line creates a database engine that knows how to connect to the URI above.
 #
@@ -108,8 +107,6 @@ def index():
 
   # DEBUG: this is debugging code to see what request looks like
   print request.args
-
-
   #
   # example of a database query
   #
@@ -146,8 +143,6 @@ def index():
   #     {% endfor %}
   #
   context = dict(data = names)
-
-
   #
   # render_template looks in the templates/ folder for files.
   # for example, the below file reads template/index.html
@@ -175,6 +170,13 @@ def add():
   s = text("INSERT INTO test(name) VALUES (:n)")
   g.conn.execute(s, n = name)
   return redirect('/')
+
+# another way of doing the same thing:
+# @app.route('/add', methods=['POST'])
+# def add():
+#   name = request.form['name']
+#   g.conn.execute('INSERT INTO test(name) VALUES (%s)', name)
+#   return redirect('/')
 
 
 @app.route('/login')
