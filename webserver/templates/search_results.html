@@ -70,13 +70,27 @@
 <div>
 	{% if spac_data is defined %}
 		{% for n in spac_data %}
-		<h2>Super PAC Information for: {{ n.name}}</h2>
+		<h2>Super PAC Information for: {{ n.name }}</h2>
 	  		<div>Committee ID: {{ n.committee_id }}</div>
 	  		<div>Name: {{ n.name }}</div>
 	  		<div>Budget: {{ n.budget }}</div>
 	  		<div>Cash Spent: {{ n.cash_spent }}</div>
 	  		<div>Viewpoint: {{ n.viewpoint }}</div>
 	  	{% endfor %}
+	{% endif %}
+</div>
+
+<!-- money data -->
+<div>
+	{% if money_data is defined %}
+		{% for n in money_data %}
+			<h2>{{n.name}} donated to {{ n.politician_name }}</h2>
+			<div>Politician: {{ n.politician_name }}</div>
+			<div>Organization Name: {{ n.name }}</div>
+			<div>Organization Industry: {{ n.industry_summary }}</div>
+			<div>Amount donated: ${{ n.amount }}</div>
+			<div>Organization Committee ID: {{ n.committee_id }}</div>
+		{% endfor %}
 	{% endif %}
 </div>
 

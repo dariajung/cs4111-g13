@@ -259,33 +259,29 @@ def search_spac():
 
   return render_template("search_results.html", spac_data = results)
 
-#.route() tells flask what URL should trigger function
-#route is given name '/search/pac' which creates URL & displays in browser
+@app.route('/search_money', methods=['GET'])
+def search_money():
 
-# @app.route('/search/pac', methods=['POST', 'GET'])
-# def search_pac():
+  query = request.args.get('query')
 
-#   query = request.form['query']
+  # s = text('''SELECT new_t.politician_name, new_t.amount, i.committee_id, i.industry_summary, p.name
+  # FROM (SELECT *
+  # FROM pac_supports INNER JOIN pac_donate ON pac_supports.committee_id = pac_donate.to_committee_id
+  # WHERE pac_supports.politician_name = %s) as new_t, interested_in i, pacs p
+  # WHERE i.committee_id = new_t.from_committee_id AND p.committee_id = i.committee_id''', query)
 
-#   print 'search/pac'
-#   print query
-#   cursor = g.conn.execute("SELECT p.committee_id, p.name, p.budget FROM pacs p WHERE p.name = %s", query)
-#   results[]
-#   for result in cursor:
-#     results.append(result[0])
-#     results.append(result[1])
-#     results.append(result[2])
-#   cursor.close()
-#   context = dict(data = results)
-#   return render_template("search.html")
+  cursor = g.conn.execute('''SELECT new_t.politician_name, new_t.amount, i.committee_id, i.industry_summary, p.name
+  FROM (SELECT *
+  FROM pac_supports INNER JOIN pac_donate ON pac_supports.committee_id = pac_donate.to_committee_id
+  WHERE pac_supports.politician_name = %s) as new_t, interested_in i, pacs p
+  WHERE i.committee_id = new_t.from_committee_id AND p.committee_id = i.committee_id''', query)
 
-# @app.route('/search/superpac', methods=['POST', 'GET'])
-# def search_spac():
-#   return render_template("search.html")
+  results = []
+  for result in cursor:
+    results.append(result)
+  cursor.close()
 
-# @app.route('/search/money', methods=['POST', 'GET'])
-# def search_money():
-#   return render_template("search.html")
+  return render_template('search_results.html', money_data = results)
 
 
 # --------------------------------------------
