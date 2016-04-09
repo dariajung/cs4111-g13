@@ -3,7 +3,7 @@
 
 	<!-- Politician search query result -->
 	<div>
-		{% if (politician_data is defined) and (politician_data|length > 1) %}
+		{% if (politician_data is defined) and (politician_data|length > 0) %}
 			{% for n in politician_data %}
 				<h2> Information for {{n.name}}</h2>
 		  		<div>Name: {{ n.name }}</div>
@@ -18,7 +18,7 @@
 
 	<!-- Rep state search by state query result -->
 	<div>
-		{% if (state_data is defined) and (state_data|length > 1) %}
+		{% if (state_data is defined) and (state_data|length > 0) %}
 			{% for n in state_data %}
 			<h2>State information for: {{ n.state_name }}</h2>
 
