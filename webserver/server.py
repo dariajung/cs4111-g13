@@ -20,6 +20,7 @@ from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
 from collections import namedtuple
 import json
+import time
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
@@ -195,31 +196,32 @@ def search_polit():
   rows = cursor.fetchall()
 
   cursor.close()
-
-  # context = dict(politician_data = results)
   
   return render_template('search_results.html', politician_data = rows)
 
 
-# @app.route('/search/state', methods=['POST', 'GET'])
-# def search_state():
+@app.route('/search_state', methods=['GET'])
+def search_state():
 
-#   query = request.form['query']
+  query = request.args.get('query')
 
-#   print 'search/state'
-#   print query
-#   cursor = g.conn.execute("SELECT * FROM rep_state r WHERE r.state_name = %s", query)
-#   results = []
-#   for result in cursor:
-#     results.append(result)
+  print 'search_state'
+  print query
 
-#   cursor = g.conn.execute("SELECT * FROM rep_district d WHERE d.state_name = %s", query)
-#   for result in cursor:
-#     results.append(result)
+  cursor = g.conn.execute("SELECT * FROM rep_state r WHERE r.state_name = %s", query)
+  results = []
 
-#   cursor.close()
+  for result in cursor:
+    results.append(result)
+
+  results2 = []
+  cursor = g.conn.execute("SELECT * FROM rep_district d WHERE d.state_name = %s", query)
+  for result in cursor:
+    results2.append(result)
+
+  cursor.close()
   
-#   return render_template("search_results.html", state_data = results)
+  return render_template("search_results.html", state_data = results, rep_data = results2)
 
 # # returns a list of all pacs
 # @app.route('/search/pac', methods=['POST', 'GET'])

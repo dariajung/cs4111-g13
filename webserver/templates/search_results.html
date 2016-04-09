@@ -1,16 +1,55 @@
 
+<div>
+	{% if politician_data is defined %}
+		{% for n in politician_data %}
+	  		<div>Name: {{ n.name }}</div>
+	  		<div>DOB: {{ n.DOB }}</div>
+	  		<div>Net worth: ${{ n.net_worth }}</div>
+	  		<div>Incumbent: {{ n.incumbent_status }}</div>
+	  		<div>Party Affiliation: {{ n.party_affiliation }}</div>
+	  		<div>Years in Office: {{ n.years_in_office }}</div>
+	  	{% endfor %}
+	{% endif %}
+</div>
 
-{% if politician_data is defined %}
-	{% for n in politician_data %}
-  		<div>{{ n.name }}</div>
-  	{% endfor %}
-{% endif %}
+<div>
+	{% if state_data is defined %}
+		{% for n in state_data %}
+		<h2>State information for: {{ n.state_name }}</h2>
 
-{% if state_data is defined %}
-	{% for n in state_data %}
-  		<div>{{ n }}</div>
-  	{% endfor %}
-{% endif %}
+	  		<div>State Name: {{ n.state_name }}</div>
+	  		<div>Population: {{ n.population }}</div>
+	  		<div>Major Ethnicity: {{ n.major_ethnicity }}</div>
+	  		<div>Median Age: {{ n.median_age }}</div>
+	  		<div>Major Party: {{ n.major_party }}</div>
+	  		<div>Median Income: {{ n.median_income }}</div>
+	  		<div>Poverty Level: {{ n.poverty_level }}</div>
+	  		<div>Senior Senator: {{ n.sr_senator_name }}</div>
+	  		<div>Junior Senator: {{ n.jr_senator_name }}</div>
+	  	{% endfor %}
+	{% endif %}
+</div>
 
+<div>
+	{% if rep_data is defined %}
+		{% for n in rep_data %}
+		<h2>District Information for: {{ n.state_name }}</h2>
 
-<a href="/search">Back to search</a>
+	  		<div>State Name: {{ n.state_name }}</div>
+	  		<div>District Number: {{ n.district_number }}</div>
+	  		<div>Population: {{ n.population }}</div>
+	  		<div>Major Ethnicity: {{ n.major_ethnicity }}</div>
+	  		<div>Median Age: {{ n.median_age }}</div>
+	  		<div>Major Party: {{ n.major_party }}</div>
+	  		<div>Median Income: {{ n.median_income }}</div>
+	  		<div>Poverty Level: {{ n.poverty_level }}</div>
+	  		<div>Representative: {{ n.representative_name }}</div>
+	  	{% endfor %}
+	{% endif %}
+</div>
+
+<hr>
+
+<div>
+	<a href="/search">Back to search</a>
+</div>
