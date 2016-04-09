@@ -24,7 +24,6 @@ FROM politicians p, rep_state
 WHERE rep_state.percentage_minorities > 10 AND (p.name = rep_state.sr_senator_name)
 GROUP BY p.party_affiliation
 
-
 -- return committee_id of PAC and their industry that have donated over $1,000,000 USD to a PAC that supports a politician
 SELECT i.committee_id, i.industry_summary
 FROM (SELECT *

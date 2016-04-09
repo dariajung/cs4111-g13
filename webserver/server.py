@@ -164,7 +164,7 @@ def another():
 @app.route('/politicians')
 def politicians():
   print request.args
-  cursor = g.conn.execute("SELECT name FROM politicians")
+  cursor = g.conn.execute("SELECT p.name FROM politicians p, senators s WHERE p.name = s.name")
   names = []
   for result in cursor:
     names.append(result['name'])  # can also be accessed using result[0]
@@ -173,15 +173,54 @@ def politicians():
 
   return render_template("politicians.html", **context)
 
+# need search by: politician name, state, cause, legislation, pac, superpac
 
-# Example of adding new data to the database
-@app.route('/add', methods=['POST'])
-def add():
-  name = request.form['name']
-  print name
-  s = text("INSERT INTO test(name) VALUES (:n)")
-  g.conn.execute(s, n = name)
-  return redirect('/')
+@app.route('/search')
+def search():
+  return render_template("search.html")
+
+
+@app.route('/search/politician', methods=['POST'])
+def search_polit():
+
+  query = request.form['query']
+
+  print 'search/politician'
+  print query
+  cursor = g.conn.execute("SELECT p FROM politicians p WHERE p.name = %s", query)
+  results = []
+  for result in cursor:
+    results.append(result[0])  # can also be accessed using result[0]
+  cursor.close()
+  context = dict(data = results)
+  
+  return render_template("search_results.html", **context)
+
+
+# @app.route('/search_state', methods=['POST', 'GET'])
+# def search_state():
+#   return render_template("search.html")
+
+# @app.route('/search_pac', methods=['POST', 'GET'])
+# def search_pac():
+#   return render_template("search.html")
+
+# @app.route('/search_superpac', methods=['POST', 'GET'])
+# def search_spac():
+#   return render_template("search.html")
+
+# @app.route('/search_money', methods=['POST', 'GET'])
+# def search_money():
+#   return render_template("search.html")
+
+# # Example of adding new data to the database
+# @app.route('/add', methods=['POST'])
+# def add():
+#   name = request.form['name']
+#   print name
+#   s = text("INSERT INTO test(name) VALUES (:n)")
+#   g.conn.execute(s, n = name)
+#   return redirect('/')
 
 # another way of doing the same thing:
 # @app.route('/add', methods=['POST'])
