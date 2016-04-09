@@ -1,103 +1,107 @@
+{% include "header.html" %}
+<div class="container">
 
-<!-- Politician search query result -->
-<div>
-	{% if politician_data is defined %}
-		{% for n in politician_data %}
-	  		<div>Name: {{ n.name }}</div>
-	  		<div>DOB: {{ n.DOB }}</div>
-	  		<div>Net worth: ${{ n.net_worth }}</div>
-	  		<div>Incumbent: {{ n.incumbent_status }}</div>
-	  		<div>Party Affiliation: {{ n.party_affiliation }}</div>
-	  		<div>Years in Office: {{ n.years_in_office }}</div>
-	  	{% endfor %}
-	{% endif %}
-</div>
+	<!-- Politician search query result -->
+	<div>
+		{% if politician_data is defined %}
+			{% for n in politician_data %}
+		  		<div>Name: {{ n.name }}</div>
+		  		<div>DOB: {{ n.DOB }}</div>
+		  		<div>Net worth: ${{ n.net_worth }}</div>
+		  		<div>Incumbent: {{ n.incumbent_status }}</div>
+		  		<div>Party Affiliation: {{ n.party_affiliation }}</div>
+		  		<div>Years in Office: {{ n.years_in_office }}</div>
+		  	{% endfor %}
+		{% endif %}
+	</div>
 
-<!-- Rep state search by state query result -->
-<div>
-	{% if state_data is defined %}
-		{% for n in state_data %}
-		<h2>State information for: {{ n.state_name }}</h2>
+	<!-- Rep state search by state query result -->
+	<div>
+		{% if state_data is defined %}
+			{% for n in state_data %}
+			<h2>State information for: {{ n.state_name }}</h2>
 
-	  		<div>State Name: {{ n.state_name }}</div>
-	  		<div>Population: {{ n.population }}</div>
-	  		<div>Major Ethnicity: {{ n.major_ethnicity }}</div>
-	  		<div>Median Age: {{ n.median_age }}</div>
-	  		<div>Major Party: {{ n.major_party }}</div>
-	  		<div>Median Income: {{ n.median_income }}</div>
-	  		<div>Poverty Level: {{ n.poverty_level }}</div>
-	  		<div>Senior Senator: {{ n.sr_senator_name }}</div>
-	  		<div>Junior Senator: {{ n.jr_senator_name }}</div>
-	  	{% endfor %}
-	{% endif %}
-</div>
+		  		<div>State Name: {{ n.state_name }}</div>
+		  		<div>Population: {{ n.population }}</div>
+		  		<div>Major Ethnicity: {{ n.major_ethnicity }}</div>
+		  		<div>Median Age: {{ n.median_age }}</div>
+		  		<div>Major Party: {{ n.major_party }}</div>
+		  		<div>Median Income: {{ n.median_income }}</div>
+		  		<div>Poverty Level: {{ n.poverty_level }}</div>
+		  		<div>Senior Senator: {{ n.sr_senator_name }}</div>
+		  		<div>Junior Senator: {{ n.jr_senator_name }}</div>
+		  	{% endfor %}
+		{% endif %}
+	</div>
 
-<!-- rep dist search by state query result -->
-<div>
-	{% if rep_data is defined %}
-		{% for n in rep_data %}
-		<h2>District Information for: {{ n.state_name }}</h2>
+	<!-- rep dist search by state query result -->
+	<div>
+		{% if rep_data is defined %}
+			{% for n in rep_data %}
+			<h2>District Information for: {{ n.state_name }}</h2>
 
-	  		<div>State Name: {{ n.state_name }}</div>
-	  		<div>District Number: {{ n.district_number }}</div>
-	  		<div>Population: {{ n.population }}</div>
-	  		<div>Major Ethnicity: {{ n.major_ethnicity }}</div>
-	  		<div>Median Age: {{ n.median_age }}</div>
-	  		<div>Major Party: {{ n.major_party }}</div>
-	  		<div>Median Income: {{ n.median_income }}</div>
-	  		<div>Poverty Level: {{ n.poverty_level }}</div>
-	  		<div>Representative: {{ n.representative_name }}</div>
-	  	{% endfor %}
-	{% endif %}
-</div>
+		  		<div>State Name: {{ n.state_name }}</div>
+		  		<div>District Number: {{ n.district_number }}</div>
+		  		<div>Population: {{ n.population }}</div>
+		  		<div>Major Ethnicity: {{ n.major_ethnicity }}</div>
+		  		<div>Median Age: {{ n.median_age }}</div>
+		  		<div>Major Party: {{ n.major_party }}</div>
+		  		<div>Median Income: {{ n.median_income }}</div>
+		  		<div>Poverty Level: {{ n.poverty_level }}</div>
+		  		<div>Representative: {{ n.representative_name }}</div>
+		  	{% endfor %}
+		{% endif %}
+	</div>
 
-<!-- PAC search by name -->
-<div>
-	{% if pac_data is defined %}
-		{% for n in pac_data %}
-		<h2>PAC Information for: {{ n.name}}</h2>
-	  		<div>Committee ID: {{ n.committee_id }}</div>
-	  		<div>Name: {{ n.name }}</div>
-	  		<div>Budget: {{ n.budget }}</div>
-	  		<div>Cash Spent: {{ n.cash_spent }}</div>
-	  		<div>Cash on Hand: {{ n.cash_on_hand }}</div>
-	  		<div>Registrant: {{ n.registrant }}</div>
-	  	{% endfor %}
-	{% endif %}
-</div>
+	<!-- PAC search by name -->
+	<div>
+		{% if pac_data is defined %}
+			{% for n in pac_data %}
+			<h2>PAC Information for: {{ n.name}}</h2>
+		  		<div>Committee ID: {{ n.committee_id }}</div>
+		  		<div>Name: {{ n.name }}</div>
+		  		<div>Budget: {{ n.budget }}</div>
+		  		<div>Cash Spent: {{ n.cash_spent }}</div>
+		  		<div>Cash on Hand: {{ n.cash_on_hand }}</div>
+		  		<div>Registrant: {{ n.registrant }}</div>
+		  	{% endfor %}
+		{% endif %}
+	</div>
 
-<!-- Super PAC search by name -->
-<div>
-	{% if spac_data is defined %}
-		{% for n in spac_data %}
-		<h2>Super PAC Information for: {{ n.name }}</h2>
-	  		<div>Committee ID: {{ n.committee_id }}</div>
-	  		<div>Name: {{ n.name }}</div>
-	  		<div>Budget: {{ n.budget }}</div>
-	  		<div>Cash Spent: {{ n.cash_spent }}</div>
-	  		<div>Viewpoint: {{ n.viewpoint }}</div>
-	  	{% endfor %}
-	{% endif %}
-</div>
+	<!-- Super PAC search by name -->
+	<div>
+		{% if spac_data is defined %}
+			{% for n in spac_data %}
+			<h2>Super PAC Information for: {{ n.name }}</h2>
+		  		<div>Committee ID: {{ n.committee_id }}</div>
+		  		<div>Name: {{ n.name }}</div>
+		  		<div>Budget: {{ n.budget }}</div>
+		  		<div>Cash Spent: {{ n.cash_spent }}</div>
+		  		<div>Viewpoint: {{ n.viewpoint }}</div>
+		  	{% endfor %}
+		{% endif %}
+	</div>
 
-<!-- money data -->
-<div>
-	{% if money_data is defined %}
-		{% for n in money_data %}
-			<h2>{{n.name}} donated to {{ n.politician_name }}</h2>
-			<div>Politician: {{ n.politician_name }}</div>
-			<div>Organization Name: {{ n.name }}</div>
-			<div>Organization Industry: {{ n.industry_summary }}</div>
-			<div>Amount donated: ${{ n.amount }}</div>
-			<div>Organization Committee ID: {{ n.committee_id }}</div>
-		{% endfor %}
-	{% endif %}
-</div>
+	<!-- money data -->
+	<div>
+		{% if money_data is defined %}
+			{% for n in money_data %}
+				<h2>{{n.name}} donated to {{ n.politician_name }}</h2>
+				<div>Politician: {{ n.politician_name }}</div>
+				<div>Organization Name: {{ n.name }}</div>
+				<div>Organization Industry: {{ n.industry_summary }}</div>
+				<div>Amount donated: ${{ n.amount }}</div>
+				<div>Organization Committee ID: {{ n.committee_id }}</div>
+			{% endfor %}
+		{% endif %}
+	</div>
 
-<hr>
+	<hr>
 
-<div>
-	<p>
-		<a href="/search">Back to search</a>
-	</p>
+	<div>
+		<p>
+			<a class="btn btn-primary" href="/search">Back to search</a>
+		</p>
+	</div>
+
 </div>
