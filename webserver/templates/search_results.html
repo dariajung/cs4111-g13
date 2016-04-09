@@ -1,9 +1,16 @@
-<!--  <div>{{data}}</div> -->
 
-<div>
-  {% for n in data %}
-  <div>{{ n }}</div>
-  {% endfor %}
-</div>
+
+{% if politician_data is defined %}
+	{% for n in politician_data %}
+  		<div>{{ n.name }}</div>
+  	{% endfor %}
+{% endif %}
+
+{% if state_data is defined %}
+	{% for n in state_data %}
+  		<div>{{ n }}</div>
+  	{% endfor %}
+{% endif %}
+
 
 <a href="/search">Back to search</a>

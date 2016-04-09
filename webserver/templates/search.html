@@ -1,22 +1,22 @@
 <h1>Search</h1>
 
-<form method="POST" action="/search/politician">
+<form method="GET" action="/search_politician">
 	<p>Search by politician name: <input type="text" name="query"> <input type="submit" value="Search"></p>
 </form>
 
-<form method="POST" action="/search/state">
+<form method="GET" action="/search/state">
 	<p>Search politicians by state name: <input type="text" name="query"> <input type="submit" value="Search"></p>
 </form>
 
-<form method="POST" action="/search/pac">
-	<p>Search by PAC name: <input type="text" name="query"> <input type="submit" value="Search"></p>
+<form method="GET" action="/search/pac">
+	<p>Search for PAC Info. by PAC name: <input type="text" name="query"> <input type="submit" value="Search"></p>
 </form>
 
-<form method="POST" action="/search/superpac">
+<form method="GET" action="/search/superpac">
 	<p>Search by SuperPAC name: <input type="text" name="query"> <input type="submit" value="Search"></p>
 </form>
 
-<form method="POST" action="/search/money">
+<form method="GET" action="/search/money">
 	<p>Return organizations by amount of money donated: <input type="text" name="query"> <input type="submit" value="Search"></p>
 </form>
 

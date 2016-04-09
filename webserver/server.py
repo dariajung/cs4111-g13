@@ -18,6 +18,8 @@ import os
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
+from collections import namedtuple
+import json
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
@@ -49,7 +51,9 @@ engine.execute("""CREATE TABLE IF NOT EXISTS test (
   id serial,
   name text
 );""")
-engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
+
+# comment out code that keeps inserting grace hopper, alan turing, ada lovelace
+# engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
 
 
 @app.before_request
@@ -116,7 +120,6 @@ def index():
     names.append(result['name'])  # can also be accessed using result[0]
   cursor.close()
 
-  #
   # Flask uses Jinja templates, which is an extension to HTML where you can
   # pass data to a template and dynamically generate HTML based on the data
   # (you can think of it as simple PHP)
@@ -181,48 +184,57 @@ def politicians():
 def search():
   return render_template("search.html")
 
-@app.route('/search/politician', methods=['POST'])
+@app.route('/search_politician', methods=['GET'])
 def search_polit():
 
-  query = request.form['query']
+  query = request.args.get('query')
 
-  print 'search/politician'
+  print 'search_politician'
   print query
-  cursor = g.conn.execute("SELECT p FROM politicians p WHERE p.name = %s", query)
-  results = []
-  for result in cursor:
-    results.append(result[0])  # can also be accessed using result[0]
-  cursor.close()
-  context = dict(data = results)
-  
-  return render_template("search_results.html", **context)
-
-
-@app.route('/search/state', methods=['POST', 'GET'])
-def search_state():
-
-  query = request.form['query']
-
-  print 'search/state'
-  print query
-  cursor = g.conn.execute("SELECT r.jr_senator_name, r.sr_senator_name FROM rep_state r WHERE r.state_name = %s", query)
-  results = []
-  for result in cursor:
-    results.append(result[0])
-    results.append(result[1])
-
-  cursor = g.conn.execute("SELECT d.representative_name FROM rep_district d WHERE d.state_name = %s", query)
-  for result in cursor:
-    results.append(result[0])
+  cursor = g.conn.execute("SELECT * FROM politicians p WHERE p.name = %s", query)
+  rows = cursor.fetchall()
 
   cursor.close()
-  context = dict(data = results)
-  
-  return render_template("search_results.html", **context)
 
+  # context = dict(politician_data = results)
+  
+  return render_template('search_results.html', politician_data = rows)
+
+
+# @app.route('/search/state', methods=['POST', 'GET'])
+# def search_state():
+
+#   query = request.form['query']
+
+#   print 'search/state'
+#   print query
+#   cursor = g.conn.execute("SELECT * FROM rep_state r WHERE r.state_name = %s", query)
+#   results = []
+#   for result in cursor:
+#     results.append(result)
+
+#   cursor = g.conn.execute("SELECT * FROM rep_district d WHERE d.state_name = %s", query)
+#   for result in cursor:
+#     results.append(result)
+
+#   cursor.close()
+  
+#   return render_template("search_results.html", state_data = results)
+
+# # returns a list of all pacs
 # @app.route('/search/pac', methods=['POST', 'GET'])
 # def search_pac():
-#   return render_template("search.html")
+#   query = request.form['query']
+
+#   print 'search/pac'
+#   print query
+
+#   cursor = g.conn.execute("SELECT pacs FROM pacs WHERE pacs.name = %s", query)
+#   print cursor.keys()
+
+#   cursor.close()
+
+#   return render_template("search_results.html", pac_data = [])
 
 # @app.route('/search/superpac', methods=['POST', 'GET'])
 # def search_spac():
@@ -290,7 +302,7 @@ if __name__ == "__main__":
 
     HOST, PORT = host, port
     print "running on %s:%d" % (HOST, PORT)
-    app.run(host=HOST, port=PORT, debug=debug, threaded=threaded)
+    app.run(host=HOST, port=PORT, debug=debug, threaded=threaded, use_reloader=True)
 
 
   run()
