@@ -173,12 +173,13 @@ def politicians():
 
   return render_template("politicians.html", **context)
 
+# ----------------------- Search Routes -----------------------------------
+
 # need search by: politician name, state, cause, legislation, pac, superpac
 
 @app.route('/search')
 def search():
   return render_template("search.html")
-
 
 @app.route('/search/politician', methods=['POST'])
 def search_polit():
@@ -197,30 +198,51 @@ def search_polit():
   return render_template("search_results.html", **context)
 
 
-# @app.route('/search_state', methods=['POST', 'GET'])
-# def search_state():
-#   return render_template("search.html")
+@app.route('/search/state', methods=['POST', 'GET'])
+def search_state():
 
-# @app.route('/search_pac', methods=['POST', 'GET'])
+  query = request.form['query']
+
+  print 'search/state'
+  print query
+  cursor = g.conn.execute("SELECT r.jr_senator_name, r.sr_senator_name FROM rep_state r WHERE r.state_name = %s", query)
+  results = []
+  for result in cursor:
+    results.append(result[0])
+    results.append(result[1])
+
+  cursor = g.conn.execute("SELECT d.representative_name FROM rep_district d WHERE d.state_name = %s", query)
+  for result in cursor:
+    results.append(result[0])
+
+  cursor.close()
+  context = dict(data = results)
+  
+  return render_template("search_results.html", **context)
+
+# @app.route('/search/pac', methods=['POST', 'GET'])
 # def search_pac():
 #   return render_template("search.html")
 
-# @app.route('/search_superpac', methods=['POST', 'GET'])
+# @app.route('/search/superpac', methods=['POST', 'GET'])
 # def search_spac():
 #   return render_template("search.html")
 
-# @app.route('/search_money', methods=['POST', 'GET'])
+# @app.route('/search/money', methods=['POST', 'GET'])
 # def search_money():
 #   return render_template("search.html")
 
-# # Example of adding new data to the database
-# @app.route('/add', methods=['POST'])
-# def add():
-#   name = request.form['name']
-#   print name
-#   s = text("INSERT INTO test(name) VALUES (:n)")
-#   g.conn.execute(s, n = name)
-#   return redirect('/')
+
+# --------------------------------------------
+
+# Example of adding new data to the database
+@app.route('/add', methods=['POST'])
+def add():
+  name = request.form['name']
+  print name
+  s = text("INSERT INTO test(name) VALUES (:n)")
+  g.conn.execute(s, n = name)
+  return redirect('/')
 
 # another way of doing the same thing:
 # @app.route('/add', methods=['POST'])
