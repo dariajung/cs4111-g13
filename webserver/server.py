@@ -161,6 +161,18 @@ def index():
 def another():
   return render_template("another.html")
 
+@app.route('/politicians')
+def politicians():
+  print request.args
+  cursor = g.conn.execute("SELECT name FROM politicians")
+  names = []
+  for result in cursor:
+    names.append(result['name'])  # can also be accessed using result[0]
+  cursor.close()
+  context = dict(data = names)
+
+  return render_template("politicians.html", **context)
+
 
 # Example of adding new data to the database
 @app.route('/add', methods=['POST'])
