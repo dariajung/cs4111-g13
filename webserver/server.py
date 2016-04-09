@@ -178,6 +178,15 @@ def add():
 #   g.conn.execute('INSERT INTO test(name) VALUES (%s)', name)
 #   return redirect('/')
 
+# Deletion of data in a table in the database
+@app.route('/delete/test', methods=['POST'])
+def delete():
+  name = request.form['name']
+  print name
+  s = text("DELETE FROM test WHERE test.name = :n", name)
+  g.conn.execute(s, n = name)
+  return redirect('/')
+
 
 @app.route('/login')
 def login():
