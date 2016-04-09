@@ -223,20 +223,24 @@ def search_state():
   
   return render_template("search_results.html", state_data = results, rep_data = results2)
 
-# # returns a list of all pacs
-# @app.route('/search/pac', methods=['POST', 'GET'])
-# def search_pac():
-#   query = request.form['query']
+# search for pacs by name
+@app.route('/search_pac', methods=['POST', 'GET'])
+def search_pac():
 
-#   print 'search/pac'
-#   print query
+  query = request.args.get('query')
 
-#   cursor = g.conn.execute("SELECT pacs FROM pacs WHERE pacs.name = %s", query)
-#   print cursor.keys()
+  print 'search/pac'
+  print query
 
-#   cursor.close()
+  cursor = g.conn.execute("SELECT * FROM pacs WHERE pacs.name = %s", query)
+  results = []
 
-#   return render_template("search_results.html", pac_data = [])
+  for result in cursor:
+    results.append(result)
+
+  cursor.close()
+
+  return render_template("search_results.html", pac_data = results)
 
 
 #.route() tells flask what URL should trigger function
