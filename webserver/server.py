@@ -264,12 +264,6 @@ def search_money():
 
   query = request.args.get('query')
 
-  # s = text('''SELECT new_t.politician_name, new_t.amount, i.committee_id, i.industry_summary, p.name
-  # FROM (SELECT *
-  # FROM pac_supports INNER JOIN pac_donate ON pac_supports.committee_id = pac_donate.to_committee_id
-  # WHERE pac_supports.politician_name = %s) as new_t, interested_in i, pacs p
-  # WHERE i.committee_id = new_t.from_committee_id AND p.committee_id = i.committee_id''', query)
-
   cursor = g.conn.execute('''SELECT new_t.politician_name, new_t.amount, i.committee_id, i.industry_summary, p.name
   FROM (SELECT *
   FROM pac_supports INNER JOIN pac_donate ON pac_supports.committee_id = pac_donate.to_committee_id
@@ -283,6 +277,22 @@ def search_money():
 
   return render_template('search_results.html', money_data = results)
 
+# add route on seeing how given politician x voted for a bill that supports industry y
+@app.route('/search_voting_bill', methods=['GET'])
+def search_how_polit_voted_on_bill():
+  query_p = request.args.get('query_p')
+  query_l = request.args.get('query_l')
+
+  cursor = g.conn.execute('''SELECT DISTINCT on (l.name) l.name, l.passed, v.voted_for, p.name, a.summary
+            FROM votes v, politicians p, legislation l, advocates a
+            WHERE p.name = %s AND a.summary = %s AND a.name = l.name''', query_p, query_l)
+
+  results = []
+  for result in cursor:
+    results.append(result)
+  cursor.close()
+
+  return render_template('search_results.html', vote_i_data = results)
 
 # --------------------------------------------
 

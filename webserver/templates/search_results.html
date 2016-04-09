@@ -3,7 +3,7 @@
 
 	<!-- Politician search query result -->
 	<div>
-		{% if politician_data is defined %}
+		{% if (politician_data is defined) and (politician_data|length > 1) %}
 			{% for n in politician_data %}
 				<h2> Information for {{n.name}}</h2>
 		  		<div>Name: {{ n.name }}</div>
@@ -18,7 +18,7 @@
 
 	<!-- Rep state search by state query result -->
 	<div>
-		{% if state_data is defined %}
+		{% if (state_data is defined) and (state_data|length > 1) %}
 			{% for n in state_data %}
 			<h2>State information for: {{ n.state_name }}</h2>
 
@@ -93,6 +93,20 @@
 				<div>Organization Industry: {{ n.industry_summary }}</div>
 				<div>Amount donated: ${{ n.amount }}</div>
 				<div>Organization Committee ID: {{ n.committee_id }}</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+
+	<!-- vote / industry summary -->
+	<div>
+		{% if vote_i_data is defined %}
+			{% for n in vote_i_data %}
+				<h2> {{ n[3]}}'s Voting Record for {{n[0]}} that Advocates {{n.summary}}</h2>
+				<div>Bill Name: {{ n[0] }}</div>
+				<div>Bill advocates: {{ n[summary] }}</div>
+				<div>Bill Enacted Into Law: {{ n.passed }}</div>
+				<div>Politician Name: {{ n[3] }}</div>
+				<div>{{n[3]}} Voted For: {{ n.voted_for }}</div>
 			{% endfor %}
 		{% endif %}
 	</div>

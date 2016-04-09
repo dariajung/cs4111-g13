@@ -8,7 +8,7 @@
   </form>
 
   <form method="GET" action="/search_state">
-  	<p>Search politicians by state name: <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
+  	<p>Search state information by state name: <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
   </form>
 
   <form method="GET" action="/search_pac">
@@ -21,6 +21,14 @@
 
   <form method="GET" action="/search_money">
   	<p>Return organizations which donated to specified politician: <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
+  </form>
+
+  <form method="GET" action="/search_voting_bill">
+    <p>Return which bills specified politician voted for that supported specified industry: </p>
+      Politician Name: <input type="text" name="query_p"> 
+      Industry Summary: <input type="text" name="query_l"> 
+      <input type="submit" value="Search" class="btn btn-primary">
+    
   </form>
 
 </div>
