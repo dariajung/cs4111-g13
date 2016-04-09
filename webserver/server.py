@@ -242,6 +242,22 @@ def search_pac():
 
   return render_template("search_results.html", pac_data = results)
 
+@app.route('/search_spac', methods=['GET'])
+def search_spac():
+  query = request.args.get('query')
+
+  print 'search/spac'
+  print query
+
+  cursor = g.conn.execute("SELECT * FROM super_pacs WHERE super_pacs.name = %s", query)
+  results = []
+
+  for result in cursor:
+    results.append(result)
+
+  cursor.close()
+
+  return render_template("search_results.html", spac_data = results)
 
 #.route() tells flask what URL should trigger function
 #route is given name '/search/pac' which creates URL & displays in browser
