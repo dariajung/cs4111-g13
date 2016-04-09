@@ -5,6 +5,7 @@
 	<div>
 		{% if politician_data is defined %}
 			{% for n in politician_data %}
+				<h2> Information for {{n.name}}</h2>
 		  		<div>Name: {{ n.name }}</div>
 		  		<div>DOB: {{ n.DOB }}</div>
 		  		<div>Net worth: ${{ n.net_worth }}</div>
