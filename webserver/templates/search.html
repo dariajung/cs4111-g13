@@ -3,32 +3,51 @@
 <div class="container">
   <h1>Search</h1>
 
+  <hr>
+
   <form method="GET" action="/search_politician">
-  	<p>Search by politician name: <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
+  	<h4>Search by politician name: </h4>
+    <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary">
   </form>
+
+  <hr>
 
   <form method="GET" action="/search_state">
-  	<p>Search state information by state name: <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
+  	<h4>Search state information by state name:</h4>
+    <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
   </form>
+
+  <hr>
 
   <form method="GET" action="/search_pac">
-  	<p>Search for PAC Info. by PAC name: <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
+  	<h4>Search for PAC Info. by PAC name:</h4>
+    <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
   </form>
+
+  <hr>
 
   <form method="GET" action="/search_spac">
-  	<p>Search by SuperPAC name: <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
+  	<h4>Search by SuperPAC name:</h4>
+    <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
   </form>
+
+  <hr>
 
   <form method="GET" action="/search_money">
-  	<p>Return organizations which donated to specified politician: <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
+  	<h4>Return organizations that donated to specified politician:</h4>
+    <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
   </form>
 
+  <hr>
+
   <form method="GET" action="/search_voting_bill">
-    <p>Return which bills specified politician voted for that supported specified industry: </p>
-      Politician Name: <input type="text" name="query_p"> 
-      Industry Summary: <input type="text" name="query_l"> 
+    <h4>Return how the given politician voted on bills that supported the specified industry: </h4>
+      <p>Politician Name: <input type="text" name="query_p"> </p>
+      <p>Industry Summary: <input type="text" name="query_l"> </p>
       <input type="submit" value="Search" class="btn btn-primary">
     
   </form>
+
+  <hr>
 
 </div>
