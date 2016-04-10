@@ -7,43 +7,43 @@
 
   <form method="GET" action="/search_politician">
   	<h4>Search by politician name: </h4>
-    <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary">
+    <input type="text" name="query" required> <input type="submit" value="Search" class="btn btn-primary">
   </form>
 
   <hr>
 
   <form method="GET" action="/search_state">
   	<h4>Search state information by state name:</h4>
-    <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
+    <input type="text" name="query" required> <input type="submit" value="Search" class="btn btn-primary"></p>
   </form>
 
   <hr>
 
   <form method="GET" action="/search_pac">
   	<h4>Search for PAC Info. by PAC name:</h4>
-    <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
+    <input type="text" name="query" required> <input type="submit" value="Search" class="btn btn-primary"></p>
   </form>
 
   <hr>
 
   <form method="GET" action="/search_spac">
   	<h4>Search by SuperPAC name:</h4>
-    <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
+    <input type="text" name="query" required> <input type="submit" value="Search" class="btn btn-primary"></p>
   </form>
 
   <hr>
 
   <form method="GET" action="/search_money">
   	<h4>Return organizations that donated to specified politician:</h4>
-    <input type="text" name="query"> <input type="submit" value="Search" class="btn btn-primary"></p>
+    <input type="text" name="query" required> <input type="submit" value="Search" class="btn btn-primary"></p>
   </form>
 
   <hr>
 
   <form method="GET" action="/search_voting_bill">
     <h4>Return how the given politician voted on bills that supported the specified industry: </h4>
-      <p>Politician Name: <input type="text" name="query_p"> </p>
-      <p>Industry Summary: <input type="text" name="query_l"> </p>
+      <p>Politician Name: <input type="text" name="query_p" required> </p>
+      <p>Industry Summary: <input type="text" name="query_l" required> </p>
       <input type="submit" value="Search" class="btn btn-primary">
     
   </form>
