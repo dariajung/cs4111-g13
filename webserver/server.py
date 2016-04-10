@@ -273,90 +273,143 @@ def industries_exists(s):
 
   return s in industries
 
-# TODO: Check user input
-@app.route('/search')
-def search():
-
-  # set up cache
-  recache = False
+def call_recache():
 
   results_politicians = []
   results_states = []
   pac_names = []
   pac_ids = []
   spac_names = []
+  industries = []
+
+  # everything in the cache expires after 300 seconds
 
   # get politician names
-  if cache.get('politicians') is None or recache:
-    print 'does this get called a lot'
-    cursor = g.conn.execute("SELECT p.name FROM politicians p")
-    
-    for result in cursor:
-      results_politicians.append(result)
+  print 'check how often this is called'
 
-    cursor.close() # import to make sure no SQL injection
+  cursor = g.conn.execute("SELECT p.name FROM politicians p")
+  
+  for result in cursor:
+    results_politicians.append(result)
 
-    cache.set("politicians", results_politicians)
-  else:
-    results_politicians = cache.get("politicians")
+  cursor.close() # import to make sure no SQL injection
+
+  cache.set("politicians", results_politicians, timeout=300)
+  
 
   # get state names
-  if cache.get('states') is None or recache:
-    cursor = g.conn.execute("SELECT s.state_name FROM rep_state s")
+  cursor = g.conn.execute("SELECT s.state_name FROM rep_state s")
 
-    for result in cursor:
-      results_states.append(result)
+  for result in cursor:
+    results_states.append(result)
 
-    cursor.close() # import to make sure no SQL injection
+  cursor.close() # import to make sure no SQL injection
 
-    cursor = g.conn.execute("SELECT s.state_name FROM rep_district s")
+  cursor = g.conn.execute("SELECT s.state_name FROM rep_district s")
 
-    for result in cursor:
-      results_states.append(result)
+  for result in cursor:
+    results_states.append(result)
 
-    cursor.close()
+  cursor.close()
 
-    cache.set("states", results_states)
-  else:
-    results_states = cache.get("states")
-
+  cache.set("states", results_states, timeout=300)
+  
 
   # get PAC names
-  if cache.get('pac_names') is None or cache.get('spac_names') is None or cache.get('pac_ids') is None or recache:
-    cursor = g.conn.execute("SELECT p.name, p.committee_id FROM pacs p")
+  cursor = g.conn.execute("SELECT p.name, p.committee_id FROM pacs p")
 
-    for result in cursor:
-      pac_names.append(result['name'])
-      pac_ids.append(result['committee_id'])
+  for result in cursor:
+    pac_names.append(result['name'])
+    pac_ids.append(result['committee_id'])
 
-    cursor.close()
+  cursor.close()
 
-    cursor = g.conn.execute("SELECT p.name, p.committee_id FROM super_pacs p")
-    for result in cursor:
-      spac_names.append(result['name'])
-      pac_ids.append(result['committee_id'])
+  cursor = g.conn.execute("SELECT p.name, p.committee_id FROM super_pacs p")
+  for result in cursor:
+    spac_names.append(result['name'])
+    pac_ids.append(result['committee_id'])
 
-    cursor.close()
+  cursor.close()
 
-    cache.set('pac_names', pac_names)
-    cache.set('pac_ids', pac_ids)
-    cache.set('spac_names', spac_names)
-  else:
-    pac_names = cache.get('pac_names')
-    pac_ids = cache.get('pac_ids')
-    spac_names = cache.get('spac_names')
+  cache.set('pac_names', pac_names, timeout=300)
+  cache.set('pac_ids', pac_ids, timeout=300)
+  cache.set('spac_names', spac_names, timeout=300)
+
+  # get industry summaries
+  cursor = g.conn.execute("SELECT i.summary FROM industries i")
+
+  for result in cursor:
+    industries.append(result)
+
+  cursor.close()
+
+  cache.set('industries', industries, timeout=300)
+
+
+# TODO: Check user input
+@app.route('/search')
+def search():
+
+  results_politicians = []
+  results_states = []
+  pac_names = []
+  pac_ids = []
+  spac_names = []
+  industries = []
+
+  if (cache.get("politicians") is None 
+      or cache.get("states") is None 
+      or cache.get("pac_names") is None
+      or cache.get("pac_ids") is None
+      or cache.get ("spac_ids" is None)):
+    call_recache()
+
+  results_politicians = cache.get("politicians")
+  results_states = cache.get("states")
+  pac_names = cache.get('pac_names')
+  pac_ids = cache.get('pac_ids')
+  spac_names = cache.get('spac_names')
+  industries = cache.get('industries')
 
   return render_template("search.html", 
-                            politicians=results_politicians, 
-                            state_names=results_states, 
-                            pac_names=pac_names, 
-                            pac_ids=pac_ids,
-                            spac_names=spac_names)
+                            politicians=results_politicians 
+                            , state_names=results_states
+                            , pac_names=pac_names
+                            , pac_ids=pac_ids
+                            , spac_names=spac_names
+                            , industries=industries)
 
 @app.route('/money_search')
 def money_search():
-  return render_template("money_search.html")
+  results_politicians = []
+  results_states = []
+  pac_names = []
+  pac_ids = []
+  spac_names = []
+  industries = []
 
+  if (cache.get("politicians") is None 
+      or cache.get("states") is None 
+      or cache.get("pac_names") is None
+      or cache.get("pac_ids") is None
+      or cache.get("spac_ids" is None)
+      or cache.get("industries") is None):
+    call_recache()
+
+  results_politicians = cache.get("politicians")
+  results_states = cache.get("states")
+  pac_names = cache.get('pac_names')
+  pac_ids = cache.get('pac_ids')
+  spac_names = cache.get('spac_names')
+  industries = cache.get('industries')
+
+  return render_template("money_search.html", 
+                            politicians=results_politicians 
+                            , state_names=results_states
+                            , pac_names=pac_names
+                            , pac_ids=pac_ids
+                            , spac_names=spac_names
+                            , industries=industries)
 
 @app.route('/error')
 def display_error():
