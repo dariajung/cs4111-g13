@@ -85,6 +85,13 @@ def teardown_request(exception):
   except Exception as e:
     pass
 
+# TODO: 
+# SQL Statements to watch out for:
+# - DROP TABLE
+# - DROP DATABASE
+# - DELETE TABLE
+# - DROP INDEX
+# - ALTER TABLE
 
 #
 # @app.route is a decorator around index() that means:
@@ -166,11 +173,14 @@ def index():
 def another():
   return render_template("another.html")
 
+# test route, not really important
 @app.route('/politicians')
 def politicians():
   print request.args
+
   cursor = g.conn.execute("SELECT p.name FROM politicians p")
   names = []
+
   for result in cursor:
     names.append(result['name'])  # can also be accessed using result[0]
 
@@ -181,6 +191,18 @@ def politicians():
   return render_template("politicians.html", **context)
 
 # ----------------------- Search Routes -----------------------------------
+
+# s is passed in query
+def is_query_safe(s):
+  # check against weird SQL statements
+  sql_statements = ['DROP TABLE', 'DROP DATABASE', 'DROP INDEX', 'DELETE TABLE']
+  s = s.upper()
+
+  for statement in sql_statements:
+    if statement in s:
+      return False
+
+  return True
 
 
 # TODO: Check user input
@@ -194,10 +216,20 @@ def money_search():
   return render_template("money_search.html")
 
 
+@app.route('/error')
+def display_error():
+  return render_template("error.html")
+
+
 @app.route('/search_politician', methods=['GET'])
 def search_polit():
 
   query = request.args.get('query') # do validation on query
+
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
 
   # is this too much
   politicians = ['Harry Reid'
@@ -238,7 +270,8 @@ def search_polit():
   # make sure less than 30 characters
   if len(query) > 30 or query not in politicians:
     print 'Politician not in the database'
-    return redirect('/search')
+    msg = 'Politician ' + query + ' is not in the database'
+    return render_template('error.html', error_msg=msg)
 
   print 'search_politician'
   print query
@@ -254,12 +287,19 @@ def search_polit():
 def search_state():
 
   query = request.args.get('query') # do validation on query
+
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
   
   # make sure length is less than 15
   # Longest state name is Rhode Island
   if len(query) > 15 or not all(x.isalpha() or x.isspace() for x in query):
     print 'Query was too long or contained non alphabet characters'
-    return redirect('/search')
+
+    msg = 'State query was too long or contained non-alphabet and/or non-space characters'
+    return render_template('error.html', error_msg=msg)
 
   print 'search_state'
   print query
@@ -286,6 +326,11 @@ def search_state():
 def search_pac_id():
   query = request.args.get('query') # do validation on query
 
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
+
   print 'search/pac_id'
   print query
 
@@ -294,6 +339,9 @@ def search_pac_id():
   regex_test = re.match(pattern, query)
   if not regex_test:
     print 'Committee ID is not in the correct format'
+    msg = 'Committee ID is not in the correct format'
+    return render_template('error.html', error_msg=msg)
+
     return redirect('/search')
 
   cursor = g.conn.execute("SELECT * FROM pacs WHERE pacs.committee_id = %s", query)
@@ -318,7 +366,12 @@ def search_pac_id():
 @app.route('/search_pac_name', methods=['POST', 'GET'])
 def search_pac():
 
-  query = request.args.get('query') # do validation on query
+  query = request.args.get('query') # TODO: do validation on query
+
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
 
   print 'search/pac'
   print query
@@ -335,7 +388,12 @@ def search_pac():
 
 @app.route('/search_spac', methods=['GET'])
 def search_spac():
-  query = request.args.get('query') # do validation on query
+  query = request.args.get('query') # TODO: do validation on query
+
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
 
   print 'search/spac'
   print query
@@ -353,7 +411,12 @@ def search_spac():
 @app.route('/search_money_from_pacs', methods=['GET'])
 def search_money():
 
-  query = request.args.get('query') # do validation on query
+  query = request.args.get('query') # TODO: do validation on query
+
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
 
   cursor = g.conn.execute('''SELECT new_t.politician_name, new_t.amount, i.committee_id, i.industry_summary, p.name
   FROM (SELECT *
@@ -379,6 +442,16 @@ def search_money():
 def search_how_polit_voted_on_bill():
 
   query_p = request.args.get('query_p') # do validation on query_p
+
+  # check for malicious intent
+  if not is_query_safe(query_p):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
+
+  # check for malicious intent
+  if not is_query_safe(query_l):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
 
   # make sure query_l is one of specified industries
   query_l = request.args.get('query_l') # do validation on query_l
@@ -417,7 +490,8 @@ def search_how_polit_voted_on_bill():
 
   if (query_l not in industries):
     print 'Given industry summary is not in the database'
-    return redirect('/search')
+    msg = 'Given industry summary is not in the database'
+    return render_template('error.html', error_msg=msg)
 
   cursor = g.conn.execute('''SELECT DISTINCT on (l.name) l.name, l.passed, v.voted_for, p.name, a.summary
             FROM votes v, politicians p, legislation l, advocates a
@@ -442,7 +516,12 @@ def search_how_polit_voted_on_bill():
 @app.route('/search_polit_spac_supports', methods=['GET'])
 def search_politician_spacs_supports():
 
-  query = request.args.get('query') # do validation on query
+  query = request.args.get('query') # TODO: do validation on query
+
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
 
   results = []
 
@@ -461,7 +540,12 @@ def search_politician_spacs_supports():
 @app.route('/search_polit_spac_against', methods=['GET'])
 def search_politician_spacs_against():
 
-  query = request.args.get('query') # do validation on query
+  query = request.args.get('query') # TODO: do validation on query
+
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
 
   results = []
 
