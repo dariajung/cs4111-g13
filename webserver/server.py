@@ -168,11 +168,13 @@ def another():
 @app.route('/politicians')
 def politicians():
   print request.args
-  cursor = g.conn.execute("SELECT p.name FROM politicians p, senators s WHERE p.name = s.name")
+  cursor = g.conn.execute("SELECT p.name FROM politicians p")
   names = []
   for result in cursor:
     names.append(result['name'])  # can also be accessed using result[0]
-  cursor.close()
+
+  cursor.close() # import to make sure no SQL injection
+
   context = dict(data = names)
 
   return render_template("politicians.html", **context)
@@ -189,14 +191,54 @@ def search():
 @app.route('/search_politician', methods=['GET'])
 def search_polit():
 
-  query = request.args.get('query')
+  query = request.args.get('query') # do validation on query
+
+  politicians = ['Harry Reid'
+                  ,'Marco Rubio'
+                  ,'Ted Cruz'
+                  ,'Chuck Schumer'
+                  ,'Bernie Sanders'
+                  ,'Rand Paul'
+                  ,'Mitch McConnell'
+                  ,'Barbara Boxer'
+                  ,'Elizabeth Warren'
+                  ,'John McCain'
+                  ,'Dean Heller'
+                  ,'Dianne Feinstein'
+                  ,'Patrick Leahy'
+                  ,'Bill Nelson'
+                  ,'John Cornyn'
+                  ,'Ed Markey'
+                  ,'Jeff Flake'
+                  ,'Bob Menendez'
+                  ,'Cory Booker'
+                  ,'John Boehner'
+                  ,'Nancy Pelosi'
+                  ,'Paul Ryan'
+                  ,'Kevin McCarthy'
+                  ,'Tulsi Gabbard'
+                  ,'Steny Hoyer'
+                  ,'James Clyburn'
+                  ,'Steve Scalise'
+                  ,'Cathy McMorris Rodgers'
+                  ,'Eric Cantor'
+                  ,'Kirsten Gillibrand'
+                  ,'Kay Hagan'
+                  ,'Richard Burr'
+                  ,'Mary Landrieu'
+                  ,'David Vitter']
+
+  # make sure less than 30 characters
+  if len(query) > 30 or query not in politicians:
+    print 'Politician not in the database'
+    return redirect('/search')
 
   print 'search_politician'
   print query
   cursor = g.conn.execute("SELECT * FROM politicians p WHERE p.name = %s", query)
   rows = cursor.fetchall()
 
-  cursor.close()
+  cursor.close() # import to make sure no SQL injection
   
   return render_template('search_results.html', politician_data = rows)
 
@@ -204,7 +246,12 @@ def search_polit():
 @app.route('/search_state', methods=['GET'])
 def search_state():
 
-  query = request.args.get('query')
+  query = request.args.get('query') # do validation on query
+  
+  # make sure length is less than 15
+  # Longest state name is Rhode Island
+  if len(query) > 15:
+    return redirect('/search')
 
   print 'search_state'
   print query
@@ -215,20 +262,22 @@ def search_state():
   for result in cursor:
     results.append(result)
 
+  cursor.close() # import to make sure no SQL injection
+
   results2 = []
   cursor = g.conn.execute("SELECT * FROM rep_district d WHERE d.state_name = %s", query)
   for result in cursor:
     results2.append(result)
 
-  cursor.close()
+  cursor.close() # import to make sure no SQL injection
   
   return render_template("search_results.html", state_data = results, rep_data = results2)
 
 # search for pacs by name
-@app.route('/search_pac', methods=['POST', 'GET'])
+@app.route('/search_pac_name', methods=['POST', 'GET'])
 def search_pac():
 
-  query = request.args.get('query')
+  query = request.args.get('query') # do validation on query
 
   print 'search/pac'
   print query
@@ -239,13 +288,13 @@ def search_pac():
   for result in cursor:
     results.append(result)
 
-  cursor.close()
+  cursor.close() # import to make sure no SQL injection
 
   return render_template("search_results.html", pac_data = results)
 
 @app.route('/search_spac', methods=['GET'])
 def search_spac():
-  query = request.args.get('query')
+  query = request.args.get('query') # do validation on query
 
   print 'search/spac'
   print query
@@ -256,14 +305,14 @@ def search_spac():
   for result in cursor:
     results.append(result)
 
-  cursor.close()
+  cursor.close() # import to make sure no SQL injection
 
   return render_template("search_results.html", spac_data = results)
 
 @app.route('/search_money', methods=['GET'])
 def search_money():
 
-  query = request.args.get('query')
+  query = request.args.get('query') # do validation on query
 
   cursor = g.conn.execute('''SELECT new_t.politician_name, new_t.amount, i.committee_id, i.industry_summary, p.name
   FROM (SELECT *
@@ -274,15 +323,55 @@ def search_money():
   results = []
   for result in cursor:
     results.append(result)
-  cursor.close()
+  
+  cursor.close() # import to make sure no SQL injection
 
   return render_template('search_results.html', money_data = results)
 
 # add route on seeing how given politician x voted for a bill that supports industry y
 @app.route('/search_voting_bill', methods=['GET'])
 def search_how_polit_voted_on_bill():
-  query_p = request.args.get('query_p')
-  query_l = request.args.get('query_l')
+
+  query_p = request.args.get('query_p') # do validation on query_p
+
+  # make sure query_l is one of specified industries
+  query_l = request.args.get('query_l') # do validation on query_l
+
+  industries = ['Agribusiness'
+                ,'Communications'
+                ,'Construction'
+                ,'Defense'
+                ,'Energy'
+                ,'Finance'
+                ,'Healthcare'
+                ,'Liberal'
+                ,'Conservative'
+                ,'Labor'
+                ,'Lobbyists'
+                ,'Transportation'
+                ,'Alcohol'
+                ,'Casinos'
+                ,'Pro-gun'
+                ,'Anti-gun'
+                ,'Immigration'
+                ,'Veteran Affairs'
+                ,'Economics and Public Finance'
+                ,'Human Rights'
+                ,'Renewable Energy'
+                ,'Fossil Fuels'
+                ,'Pro-Israel'
+                ,'Education'
+                ,'Pharmaceuticals'
+                ,'Tobacco'
+                ,'Law Firms'
+                ,'Food Industry'
+                ,'Emergency Management'
+                ,'Government Operations and Politics - Campaign Finance'
+                ,'Government Operations and Politics']
+
+  if (query_l not in industries):
+    print 'Given industry summary is not in the database'
+    return redirect('/search')
 
   cursor = g.conn.execute('''SELECT DISTINCT on (l.name) l.name, l.passed, v.voted_for, p.name, a.summary
             FROM votes v, politicians p, legislation l, advocates a
@@ -291,7 +380,8 @@ def search_how_polit_voted_on_bill():
   results = []
   for result in cursor:
     results.append(result)
-  cursor.close()
+  
+  cursor.close() # import to make sure no SQL injection
 
   return render_template('search_results.html', vote_i_data = results)
 
@@ -304,6 +394,9 @@ def add():
   print name
   s = text("INSERT INTO test(name) VALUES (:n)")
   g.conn.execute(s, n = name)
+
+  cursor.close() # import to make sure no SQL injection
+
   return redirect('/')
 
 # another way of doing the same thing:
