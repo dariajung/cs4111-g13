@@ -204,34 +204,7 @@ def is_query_safe(s):
 
   return True
 
-
-# TODO: Check user input
-
-@app.route('/search')
-def search():
-  return render_template("search.html")
-
-@app.route('/money_search')
-def money_search():
-  return render_template("money_search.html")
-
-
-@app.route('/error')
-def display_error():
-  return render_template("error.html")
-
-
-@app.route('/search_politician', methods=['GET'])
-def search_polit():
-
-  query = request.args.get('query') # do validation on query
-
-  # check for malicious intent
-  if not is_query_safe(query):
-    msg = 'Stop trying to alter the database!'
-    return render_template('error.html', error_msg=msg)
-
-  # is this too much
+def politician_exists(s):
   politicians = ['Harry Reid'
                   ,'Marco Rubio'
                   ,'Ted Cruz'
@@ -267,8 +240,72 @@ def search_polit():
                   ,'Mary Landrieu'
                   ,'David Vitter']
 
+  return s in politicians
+
+def industries_exists(s):
+  industries = ['Agribusiness'
+                ,'Communications'
+                ,'Construction'
+                ,'Defense'
+                ,'Energy'
+                ,'Finance'
+                ,'Healthcare'
+                ,'Liberal'
+                ,'Conservative'
+                ,'Labor'
+                ,'Lobbyists'
+                ,'Transportation'
+                ,'Alcohol'
+                ,'Casinos'
+                ,'Pro-gun'
+                ,'Anti-gun'
+                ,'Immigration'
+                ,'Veteran Affairs'
+                ,'Economics and Public Finance'
+                ,'Human Rights'
+                ,'Renewable Energy'
+                ,'Fossil Fuels'
+                ,'Pro-Israel'
+                ,'Education'
+                ,'Pharmaceuticals'
+                ,'Tobacco'
+                ,'Law Firms'
+                ,'Food Industry'
+                ,'Emergency Management'
+                ,'Government Operations and Politics - Campaign Finance'
+                ,'Government Operations and Politics']
+
+  return s in industries
+
+
+# TODO: Check user input
+
+@app.route('/search')
+def search():
+  return render_template("search.html")
+
+@app.route('/money_search')
+def money_search():
+  return render_template("money_search.html")
+
+
+@app.route('/error')
+def display_error():
+  return render_template("error.html")
+
+
+@app.route('/search_politician', methods=['GET'])
+def search_polit():
+
+  query = request.args.get('query')
+
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
+
   # make sure less than 30 characters
-  if len(query) > 30 or query not in politicians:
+  if len(query) > 30 or not politician_exists(query):
     print 'Politician not in the database'
     msg = 'Politician ' + query + ' is not in the database'
     return render_template('error.html', error_msg=msg)
@@ -286,7 +323,7 @@ def search_polit():
 @app.route('/search_state', methods=['GET'])
 def search_state():
 
-  query = request.args.get('query') # do validation on query
+  query = request.args.get('query')
 
   # check for malicious intent
   if not is_query_safe(query):
@@ -324,7 +361,7 @@ def search_state():
 #search for pacs by committee id
 @app.route('/search_pac_id', methods=['GET'])
 def search_pac_id():
-  query = request.args.get('query') # do validation on query
+  query = request.args.get('query')
 
   # check for malicious intent
   if not is_query_safe(query):
@@ -386,6 +423,7 @@ def search_pac():
 
   return render_template("search_results.html", pac_data = results)
 
+# search for Super PACs by name
 @app.route('/search_spac', methods=['GET'])
 def search_spac():
   query = request.args.get('query') # TODO: do validation on query
@@ -408,6 +446,7 @@ def search_spac():
 
   return render_template("search_results.html", spac_data = results)
 
+# search for money from PACs for specified politician
 @app.route('/search_money_from_pacs', methods=['GET'])
 def search_money():
 
@@ -416,6 +455,10 @@ def search_money():
   # check for malicious intent
   if not is_query_safe(query):
     msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
+
+  if not politician_exists(query):
+    msg = 'Politician ' + query + ' not in database'
     return render_template('error.html', error_msg=msg)
 
   cursor = g.conn.execute('''SELECT new_t.politician_name, new_t.amount, i.committee_id, i.industry_summary, p.name
@@ -448,49 +491,21 @@ def search_how_polit_voted_on_bill():
     msg = 'Stop trying to alter the database!'
     return render_template('error.html', error_msg=msg)
 
-  # check for malicious intent
-  if not is_query_safe(query_l):
-    msg = 'Stop trying to alter the database!'
+  if not politician_exists(query_p):
+    msg = 'Politician ' + query_p + ' not in database'
     return render_template('error.html', error_msg=msg)
 
   # make sure query_l is one of specified industries
   query_l = request.args.get('query_l') # do validation on query_l
 
-  industries = ['Agribusiness'
-                ,'Communications'
-                ,'Construction'
-                ,'Defense'
-                ,'Energy'
-                ,'Finance'
-                ,'Healthcare'
-                ,'Liberal'
-                ,'Conservative'
-                ,'Labor'
-                ,'Lobbyists'
-                ,'Transportation'
-                ,'Alcohol'
-                ,'Casinos'
-                ,'Pro-gun'
-                ,'Anti-gun'
-                ,'Immigration'
-                ,'Veteran Affairs'
-                ,'Economics and Public Finance'
-                ,'Human Rights'
-                ,'Renewable Energy'
-                ,'Fossil Fuels'
-                ,'Pro-Israel'
-                ,'Education'
-                ,'Pharmaceuticals'
-                ,'Tobacco'
-                ,'Law Firms'
-                ,'Food Industry'
-                ,'Emergency Management'
-                ,'Government Operations and Politics - Campaign Finance'
-                ,'Government Operations and Politics']
+  # check for malicious intent
+  if not is_query_safe(query_l):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
 
-  if (query_l not in industries):
-    print 'Given industry summary is not in the database'
-    msg = 'Given industry summary is not in the database'
+  # check industries exist
+  if not industries_exists(query_l):
+    msg = 'Industry ' + query_l + ' not in database'
     return render_template('error.html', error_msg=msg)
 
   cursor = g.conn.execute('''SELECT DISTINCT on (l.name) l.name, l.passed, v.voted_for, p.name, a.summary
