@@ -1,14 +1,16 @@
-<html>
-  <style>
-    body{ 
-      font-size: 15pt;
-      font-family: georgia;
-    }
-  </style>
+{% include "header.html" %}
 
-<body>
+<div class="container">
+
+  <h1>Group 13 Project Part 3</h1>
+  <hr>
   
-  <p><a href="another">Go to the other page</a></p>
+  <p><a href="search" class="btn btn-info">Go to General Search</a></p>
+  <p><a href="money_search" class="btn btn-success">Go to Money Related Searches</a></p>
+
+  <hr>
+
+  <h2>Test Data</h2>
 
   <form method="POST" action="/add">
   <p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
@@ -28,7 +30,7 @@
       {% endfor %}
     </div>
 
-</body>
+</div>
 
 
-</html>
+
