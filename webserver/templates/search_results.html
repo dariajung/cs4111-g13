@@ -102,8 +102,9 @@
 		{% if vote_i_data is defined %}
 			{% for n in vote_i_data %}
 				<h2> {{ n[3]}}'s Voting Record for {{n[0]}} that Advocates {{n.summary}}</h2>
+				{{n.keys()}}
 				<div>Bill Name: {{ n[0] }}</div>
-				<div>Bill advocates: {{ n[summary] }}</div>
+				<div>Bill advocates: {{ n.summary }}</div>
 				<div>Bill Enacted Into Law: {{ n.passed }}</div>
 				<div>Politician Name: {{ n[3] }}</div>
 				<div>{{n[3]}} Voted For: {{ n.voted_for }}</div>
