@@ -114,7 +114,11 @@
 
 	<!-- money data -->
 	<div>
-		{% if money_data is defined %}
+		{% if (money_data is defined) and (money_data | length == 0) %}
+			<h2>No results</h2>
+		{% endif %}
+
+		{% if (money_data is defined) and (money_data | length > 0) %}
 			{% for n in money_data %}
 				<h2>{{n.name}} donated to {{ n.politician_name }}</h2>
 				<div>Politician: {{ n.politician_name }}</div>
@@ -139,6 +143,10 @@
 				<div>{{n[3]}} Voted For: {{ n.voted_for }}</div>
 			{% endfor %}
 		{% endif %}
+
+		{% if (vote_i_data is defined) and (vote_i_data | length == 0) %}
+			<h2>No results</h2>
+		{% endif %}
 	</div>
 
 
@@ -153,12 +161,16 @@
 				<div>Super PAC viewpoint: {{ n.viewpoint }} </div>
 			{% endfor %}
 		{% endif %}
+
+		{% if (polit_spac_supports_data is defined) and (polit_spac_supports_data | length == 0) %}
+			<h2>No results</h2>
+		{% endif %}
 	</div>
 
 
 	<!-- Super PAC against -->
 	<div>
-		{% if polit_spac_against_data is defined %}
+		{% if (polit_spac_against_data is defined) and (polit_spac_against_data | length > 0) %}
 			{% for n in polit_spac_against_data %}
 				<h2>{{ n[3] }} Super PAC against {{ n[2] }}</h2>
 				<div>Name of Super PAC: {{ n[3] }} </div>
@@ -166,6 +178,10 @@
 				<div>Amount used against {{ n[2] }}: ${{ n.amount }} </div>
 				<div>Super PAC viewpoint: {{ n.viewpoint }} </div>
 			{% endfor %}
+		{% endif %}
+
+		{% if (polit_spac_against_data is defined) and (polit_spac_against_data | length == 0) %}
+			<h2>No results</h2>
 		{% endif %}
 	</div>
 
