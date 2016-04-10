@@ -3,7 +3,7 @@
 
 	<!-- Politician search query result -->
 	<div>
-		{% if (politician_data is defined) and (politician_data|length > 0) %}
+		{% if (politician_data is defined) and (politician_data | length > 0) %}
 			{% for n in politician_data %}
 				<h2> Information for {{n.name}}</h2>
 		  		<div>Name: {{ n.name }}</div>
@@ -18,7 +18,7 @@
 
 	<!-- Rep state search by state query result -->
 	<div>
-		{% if (state_data is defined) and (state_data|length > 0) %}
+		{% if (state_data is defined) and (state_data | length > 0) %}
 			{% for n in state_data %}
 			<h2>State information for: {{ n.state_name }}</h2>
 
@@ -27,7 +27,7 @@
 		  		<div>Major Ethnicity: {{ n.major_ethnicity }}</div>
 		  		<div>Median Age: {{ n.median_age }}</div>
 		  		<div>Major Party: {{ n.major_party }}</div>
-		  		<div>Median Income: {{ n.median_income }}</div>
+		  		<div>Median Income: ${{ n.median_income }}</div>
 		  		<div>Poverty Level: {{ n.poverty_level }}</div>
 		  		<div>Senior Senator: {{ n.sr_senator_name }}</div>
 		  		<div>Junior Senator: {{ n.jr_senator_name }}</div>
@@ -47,7 +47,7 @@
 		  		<div>Major Ethnicity: {{ n.major_ethnicity }}</div>
 		  		<div>Median Age: {{ n.median_age }}</div>
 		  		<div>Major Party: {{ n.major_party }}</div>
-		  		<div>Median Income: {{ n.median_income }}</div>
+		  		<div>Median Income: ${{ n.median_income }}</div>
 		  		<div>Poverty Level: {{ n.poverty_level }}</div>
 		  		<div>Representative: {{ n.representative_name }}</div>
 		  	{% endfor %}
@@ -61,9 +61,9 @@
 			<h2>PAC Information for: {{ n.name}}</h2>
 		  		<div>Committee ID: {{ n.committee_id }}</div>
 		  		<div>Name: {{ n.name }}</div>
-		  		<div>Budget: {{ n.budget }}</div>
-		  		<div>Cash Spent: {{ n.cash_spent }}</div>
-		  		<div>Cash on Hand: {{ n.cash_on_hand }}</div>
+		  		<div>Budget: ${{ n.budget }}</div>
+		  		<div>Cash Spent: ${{ n.cash_spent }}</div>
+		  		<div>Cash on Hand: ${{ n.cash_on_hand }}</div>
 		  		<div>Registrant: {{ n.registrant }}</div>
 		  	{% endfor %}
 		{% endif %}
@@ -76,9 +76,9 @@
 			<h2>PAC Information for: {{ n.name}}</h2>
 		  		<div>Committee ID: {{ n.committee_id }}</div>
 		  		<div>Name: {{ n.name }}</div>
-		  		<div>Budget: {{ n.budget }}</div>
-		  		<div>Cash Spent: {{ n.cash_spent }}</div>
-		  		<div>Cash on Hand: {{ n.cash_on_hand }}</div>
+		  		<div>Budget: ${{ n.budget }}</div>
+		  		<div>Cash Spent: ${{ n.cash_spent }}</div>
+		  		<div>Cash on Hand: ${{ n.cash_on_hand }}</div>
 		  		<div>Registrant: {{ n.registrant }}</div>
 		  	{% endfor %}
 		{% endif %}
@@ -88,13 +88,12 @@
 	<div>
 		{% if spac_id_data is defined %}
 			{% for n in spac_id_data %}
-			<h2>PAC Information for: {{ n.name}}</h2>
+			<h2>Super PAC Information for: {{ n.name}}</h2>
 		  		<div>Committee ID: {{ n.committee_id }}</div>
 		  		<div>Name: {{ n.name }}</div>
-		  		<div>Budget: {{ n.budget }}</div>
-		  		<div>Cash Spent: {{ n.cash_spent }}</div>
-		  		<div>Cash on Hand: {{ n.cash_on_hand }}</div>
-		  		<div>Registrant: {{ n.registrant }}</div>
+		  		<div>Budget: ${{ n.budget }}</div>
+		  		<div>Cash Spent: ${{ n.cash_spent }}</div>
+		  		<div>Viewpoint: {{ n.viewpoint }}</div>
 		  	{% endfor %}
 		{% endif %}
 	</div>
