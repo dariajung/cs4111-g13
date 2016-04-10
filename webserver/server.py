@@ -350,7 +350,7 @@ def search_spac():
 
   return render_template("search_results.html", spac_data = results)
 
-@app.route('/search_money', methods=['GET'])
+@app.route('/search_money_from_pacs', methods=['GET'])
 def search_money():
 
   query = request.args.get('query') # do validation on query
