@@ -361,13 +361,18 @@ def search_money():
   WHERE pac_supports.politician_name = %s) as new_t, interested_in i, pacs p
   WHERE i.committee_id = new_t.from_committee_id AND p.committee_id = i.committee_id''', query)
 
+  total_amount = 0
+
   results = []
   for result in cursor:
     results.append(result)
+    total_amount += result.amount
+
+  print total_amount
   
   cursor.close() # import to make sure no SQL injection
 
-  return render_template('search_results.html', money_data = results)
+  return render_template('search_results.html', money_data = results, total_amount = total_amount)
 
 # add route on seeing how given politician x voted for a bill that supports industry y
 @app.route('/search_voting_bill', methods=['GET'])
