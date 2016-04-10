@@ -252,7 +252,7 @@ def search_state():
   
   # make sure length is less than 15
   # Longest state name is Rhode Island
-  if len(query) > 15 or not query.isalpha():
+  if len(query) > 15 or not all(x.isalpha() or x.isspace() for x in query):
     print 'Query was too long or contained non alphabet characters'
     return redirect('/search')
 
