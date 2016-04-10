@@ -421,6 +421,33 @@ def search_how_polit_voted_on_bill():
 
   return render_template('search_results.html', vote_i_data = results)
 
+# TODO: Add search form for seeing how politicians voted on legislation 
+# that was in the same industry as their donation pacs (input: politician name)
+# @app.route('/search_money_legislation', methods=['GET'])
+# def money_legislation():
+#   query = request.args.get('query') # do validation on query, which is politician name
+#   results = []
+#   return render_template('search_results.html', money_legislation_data = results)
+
+@app.route('/search_polit_spac_supports', methods=['GET'])
+def search_politician_spacs_supports():
+
+  query = request.args.get('query') # do validation on query
+
+  results = []
+
+  cursor = g.conn.execute("""SELECT sp.committee_id, ss.amount, p.name, sp.name, sp.viewpoint
+                              FROM super_pacs sp, spac_supports ss, politicians p
+                              WHERE ss.name = p.name AND ss.committee_id = sp.committee_id AND p.name = %s
+                              """, query)
+
+  for result in cursor:
+    results.append(result)
+
+  cursor.close()
+  
+  return render_template('/search_results.html', polit_spac_supports_data = results)
+
 # --------------------------------------------
 
 # Example of adding new data to the database

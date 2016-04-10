@@ -48,3 +48,16 @@ WHERE i.committee_id = new_t.from_committee_id AND p.committee_id = i.committee_
 SELECT DISTINCT on (l.name) l.name, l.passed, v.voted_for
 FROM votes v, politicians p, legislation l, advocates a
 WHERE p.name = 'Bernie Sanders' AND a.summary = 'Anti-gun' AND v.politician_name = p.name AND a.name = l.name
+
+
+
+-- Add search form for seeing how politicians voted on legislation 
+-- that was in the same industry as their donation pacs (input: politician name)
+SELECT DISTINCT on (i.industry_summary) i.industry_summary, l.name
+FROM pac_supports ps, pac_donate pd, interested_in i, pacs p, legislation l, advocates a
+WHERE ps.politician_name = 'Mitch McConnell' AND pd.to_committee_id = ps.committee_id AND i.committee_id = pd.from_committee_id AND p.committee_id = pd.from_committee_id AND a.summary = i.industry_summary AND a.name = l.name
+
+
+SELECT *
+FROM super_pacs sp, spac_supports ss, politicians p
+WHERE ss.name = p.name AND ss.committee_id = sp.committee_id AND p.name = 'Mitch McConnell'

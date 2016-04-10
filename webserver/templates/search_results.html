@@ -141,6 +141,21 @@
 		{% endif %}
 	</div>
 
+
+	<!-- Super PAC supports -->
+	<div>
+		{% if polit_spac_supports_data is defined %}
+			{% for n in polit_spac_supports_data %}
+				<h2>{{ n[3] }} Super PAC supporting {{ n[2] }}</h2>
+				<div>Name of Super PAC: {{ n[3] }} </div>
+				<div>Super PAC Committee ID: {{ n.committee_id }} </div>
+				<div>Amount used on behalf of {{ n[2] }}: ${{ n.amount }} </div>
+				<div>Super PAC viewpoint: {{ n.viewpoint }} </div>
+			{% endfor %}
+		{% endif %}
+	</div>
+
+
 	<hr>
 
 	<div>
