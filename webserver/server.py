@@ -179,6 +179,8 @@ def politicians():
 
 # ----------------------- Search Routes -----------------------------------
 
+
+# TODO: Check user input
 # need search by: politician name, state, cause, legislation, pac, superpac
 
 @app.route('/search')
