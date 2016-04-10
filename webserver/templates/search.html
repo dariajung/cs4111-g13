@@ -1,7 +1,7 @@
 {% include "header.html" %}
 
 <div class="container">
-  <h1>Search</h1>
+  <h1>General Search</h1>
 
   <hr>
 
@@ -41,38 +41,6 @@
 
   <hr>
 
-  <form method="GET" action="/search_money">
-  	<h4>Return organizations that donated to specified politician:</h4>
-    <input type="text" name="query" required> <input type="submit" value="Search" class="btn btn-primary"></p>
-  </form>
-
-  <hr>
-
-  <form method="GET" action="/search_voting_bill">
-    <h4>Return how the given politician voted on bills that supported the specified industry: </h4>
-      <p>Politician Name: <input type="text" name="query_p" required> </p>
-      <p>Industry Summary: <input type="text" name="query_l" required> </p>
-      <input type="submit" value="Search" class="btn btn-primary">
-    
-  </form>
-
-  <hr>
-
-  <form method="GET" action="/search_polit_spac_supports">
-    <h4>Return the Super PACs that support the given politician: </h4>
-      <p>Politician Name: <input type="text" name="query" required> </p>
-      <input type="submit" value="Search" class="btn btn-primary">
-  </form>
-
-
-  <hr>
-
-    <form method="GET" action="/search_polit_spac_against">
-    <h4>Return the Super PACs that are against the given politician: </h4>
-      <p>Politician Name: <input type="text" name="query" required> </p>
-      <input type="submit" value="Search" class="btn btn-primary">
-  </form>
-
-  <hr>
+  <a href="/money_search" class="btn btn-success">Go to Searches Related to Money </a>
 
 </div>

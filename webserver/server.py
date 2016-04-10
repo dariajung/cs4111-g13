@@ -189,6 +189,11 @@ def politicians():
 def search():
   return render_template("search.html")
 
+@app.route('/money_search')
+def money_search():
+  return render_template("money_search.html")
+
+
 @app.route('/search_politician', methods=['GET'])
 def search_polit():
 
