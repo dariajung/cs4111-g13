@@ -69,6 +69,36 @@
 		{% endif %}
 	</div>
 
+	<!-- PAC search by committee id -->
+	<div>
+		{% if pac_id_data is defined %}
+			{% for n in pac_id_data %}
+			<h2>PAC Information for: {{ n.name}}</h2>
+		  		<div>Committee ID: {{ n.committee_id }}</div>
+		  		<div>Name: {{ n.name }}</div>
+		  		<div>Budget: {{ n.budget }}</div>
+		  		<div>Cash Spent: {{ n.cash_spent }}</div>
+		  		<div>Cash on Hand: {{ n.cash_on_hand }}</div>
+		  		<div>Registrant: {{ n.registrant }}</div>
+		  	{% endfor %}
+		{% endif %}
+	</div>
+
+	<!-- Super Pac search by committee id -->
+	<div>
+		{% if spac_id_data is defined %}
+			{% for n in spac_id_data %}
+			<h2>PAC Information for: {{ n.name}}</h2>
+		  		<div>Committee ID: {{ n.committee_id }}</div>
+		  		<div>Name: {{ n.name }}</div>
+		  		<div>Budget: {{ n.budget }}</div>
+		  		<div>Cash Spent: {{ n.cash_spent }}</div>
+		  		<div>Cash on Hand: {{ n.cash_on_hand }}</div>
+		  		<div>Registrant: {{ n.registrant }}</div>
+		  	{% endfor %}
+		{% endif %}
+	</div>
+
 	<!-- Super PAC search by name -->
 	<div>
 		{% if spac_data is defined %}

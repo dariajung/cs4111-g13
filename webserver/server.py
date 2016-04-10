@@ -20,6 +20,7 @@ from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
 from collections import namedtuple
 import json
+import re
 import time
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
@@ -193,6 +194,7 @@ def search_polit():
 
   query = request.args.get('query') # do validation on query
 
+  # is this too much
   politicians = ['Harry Reid'
                   ,'Marco Rubio'
                   ,'Ted Cruz'
@@ -250,7 +252,8 @@ def search_state():
   
   # make sure length is less than 15
   # Longest state name is Rhode Island
-  if len(query) > 15:
+  if len(query) > 15 or not query.isalpha():
+    print 'Query was too long or contained non alphabet characters'
     return redirect('/search')
 
   print 'search_state'
@@ -272,6 +275,39 @@ def search_state():
   cursor.close() # import to make sure no SQL injection
   
   return render_template("search_results.html", state_data = results, rep_data = results2)
+
+#search for pacs by committee id
+@app.route('/search_pac_id', methods=['GET'])
+def search_pac_id():
+  query = request.args.get('query') # do validation on query
+
+  print 'search/pac_id'
+  print query
+
+  # all committee_ids are in the form C[00411330], C followed by 8 numbers
+  pattern = "C\d{8}"
+  regex_test = re.match(pattern, query)
+  if not regex_test:
+    print 'Committee ID is not in the correct format'
+    return redirect('/search')
+
+  cursor = g.conn.execute("SELECT * FROM pacs WHERE pacs.committee_id = %s", query)
+  results_pacs = []
+
+  for result in cursor:
+    results_pacs.append(result)
+
+  cursor.close() # import to make sure no SQL injection
+
+  cursor = g.conn.execute("SELECT * FROM super_pacs WHERE super_pacs.committee_id = %s", query)
+  results_spacs = []
+
+  for result in cursor:
+    results_spacs.append(result)
+
+  cursor.close() # import to make sure no SQL injection
+
+  return render_template("search_results.html", pac_id_data = results_pacs, spac_id_data = results_spacs)
 
 # search for pacs by name
 @app.route('/search_pac_name', methods=['POST', 'GET'])
