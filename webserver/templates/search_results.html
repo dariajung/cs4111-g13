@@ -156,6 +156,20 @@
 	</div>
 
 
+	<!-- Super PAC against -->
+	<div>
+		{% if polit_spac_against_data is defined %}
+			{% for n in polit_spac_against_data %}
+				<h2>{{ n[3] }} Super PAC against {{ n[2] }}</h2>
+				<div>Name of Super PAC: {{ n[3] }} </div>
+				<div>Super PAC Committee ID: {{ n.committee_id }} </div>
+				<div>Amount used against {{ n[2] }}: ${{ n.amount }} </div>
+				<div>Super PAC viewpoint: {{ n.viewpoint }} </div>
+			{% endfor %}
+		{% endif %}
+	</div>
+
+
 	<hr>
 
 	<div>
