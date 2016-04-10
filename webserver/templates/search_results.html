@@ -112,6 +112,19 @@
 		{% endif %}
 	</div>
 
+	<!-- Legislation search by name -->
+	<div>
+		{% if legislation_data is defined %}
+			{% for n in legislation_data %}
+			<h2>Legislation Information for: {{ n.name }}</h2>
+		  		<div>Legislation Sponsor: {{ n[0] }} </div>
+		  		<div>Legislation Name: {{ n[1] }} </div>
+		  		<div>Enacted: {{ n.passed }} </div>
+		  		
+		  	{% endfor %}
+		{% endif %}
+	</div>
+
 	<!-- money data -->
 	<div>
 		{% if (money_data is defined) and (money_data | length == 0) %}

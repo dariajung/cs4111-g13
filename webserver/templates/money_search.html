@@ -1,7 +1,7 @@
 {% include "header.html" %}
 
 <div class="container">
-  <h2>Money Related Searches</h2>
+  <h2>Money and Legislation Related Searches</h2>
 
   <hr>
 
@@ -14,6 +14,19 @@
       {% endfor %}
     </select>
     <!-- <input type="text" name="query" required> --> <input type="submit" value="Search" class="btn btn-primary"></p>
+  </form>
+
+  <hr>
+
+  <form method="GET" action="/search_legislation">
+    <h4>Search by Legislation name:</h4>
+    <select name="query">
+      {{ legislation }}
+      {% for p in legislation %}
+        <option value="{{ p.name }}">{{ p.name }}</option>
+      {% endfor %}
+    </select>
+    <!-- <input type="text" name="query" required>  --><input type="submit" value="Search" class="btn btn-primary"></p>
   </form>
 
   <hr>

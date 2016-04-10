@@ -281,6 +281,7 @@ def call_recache():
   pac_ids = []
   spac_names = []
   industries = []
+  legislation = []
 
   # everything in the cache expires after 300 seconds
 
@@ -345,6 +346,16 @@ def call_recache():
 
   cache.set('industries', industries, timeout=300)
 
+  # get legislation names
+  cursor = g.conn.execute("SELECT l.name FROM legislation l")
+
+  for result in cursor:
+    legislation.append(result)
+
+  cursor.close()
+
+  cache.set('legislation', legislation, timeout=300)
+
 
 # TODO: Check user input
 @app.route('/search')
@@ -356,12 +367,14 @@ def search():
   pac_ids = []
   spac_names = []
   industries = []
+  legislation = []
 
   if (cache.get("politicians") is None 
       or cache.get("states") is None 
       or cache.get("pac_names") is None
       or cache.get("pac_ids") is None
-      or cache.get ("spac_ids" is None)):
+      or cache.get("spac_names" is None)
+      or cache.get("legislation" is None)):
     call_recache()
 
   results_politicians = cache.get("politicians")
@@ -370,6 +383,7 @@ def search():
   pac_ids = cache.get('pac_ids')
   spac_names = cache.get('spac_names')
   industries = cache.get('industries')
+  legislation = cache.get('legislation')
 
   return render_template("search.html", 
                             politicians=results_politicians 
@@ -377,7 +391,8 @@ def search():
                             , pac_names=pac_names
                             , pac_ids=pac_ids
                             , spac_names=spac_names
-                            , industries=industries)
+                            , industries=industries
+                            , legislation=legislation)
 
 @app.route('/money_search')
 def money_search():
@@ -387,13 +402,15 @@ def money_search():
   pac_ids = []
   spac_names = []
   industries = []
+  legislation = []
 
   if (cache.get("politicians") is None 
       or cache.get("states") is None 
       or cache.get("pac_names") is None
       or cache.get("pac_ids") is None
-      or cache.get("spac_ids" is None)
-      or cache.get("industries") is None):
+      or cache.get("spac_names") is None
+      or cache.get("industries") is None
+      or cache.get("legislation" is None)):
     call_recache()
 
   results_politicians = cache.get("politicians")
@@ -402,6 +419,7 @@ def money_search():
   pac_ids = cache.get('pac_ids')
   spac_names = cache.get('spac_names')
   industries = cache.get('industries')
+  legislation = cache.get('legislation')
 
   return render_template("money_search.html", 
                             politicians=results_politicians 
@@ -409,7 +427,8 @@ def money_search():
                             , pac_names=pac_names
                             , pac_ids=pac_ids
                             , spac_names=spac_names
-                            , industries=industries)
+                            , industries=industries
+                            , legislation=legislation)
 
 @app.route('/error')
 def display_error():
@@ -567,6 +586,32 @@ def search_spac():
   cursor.close() # import to make sure no SQL injection
 
   return render_template("search_results.html", spac_data = results)
+
+# search for legislation by name
+@app.route('/search_legislation', methods=['GET'])
+def search_legislation():
+  query = request.args.get('query') # TODO: do validation on query
+
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
+
+  print 'search/legislation'
+  print query
+
+  cursor = g.conn.execute("""SELECT p.name, legislation.name, legislation.passed
+                              FROM legislation, politicians p, p_sponsors s 
+                              WHERE legislation.name = %s AND s.legislation_name = %s AND s.p_sponsor_name = p.name""", query, query)
+  results = []
+
+  for result in cursor:
+    results.append(result)
+
+  cursor.close() # import to make sure no SQL injection
+
+  return render_template("search_results.html", legislation_data = results)
+
 
 # search for money from PACs for specified politician
 @app.route('/search_money_from_pacs', methods=['GET'])
