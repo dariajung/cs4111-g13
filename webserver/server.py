@@ -22,6 +22,7 @@ from collections import namedtuple
 import json
 import re
 import time
+from werkzeug.contrib.cache import SimpleCache
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
@@ -57,6 +58,8 @@ engine.execute("""CREATE TABLE IF NOT EXISTS test (
 # comment out code that keeps inserting grace hopper, alan turing, ada lovelace
 # engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
 
+# set up a simple cache
+cache = SimpleCache()
 
 @app.before_request
 def before_request():
@@ -84,14 +87,6 @@ def teardown_request(exception):
     g.conn.close()
   except Exception as e:
     pass
-
-# TODO: 
-# SQL Statements to watch out for:
-# - DROP TABLE
-# - DROP DATABASE
-# - DELETE TABLE
-# - DROP INDEX
-# - ALTER TABLE
 
 #
 # @app.route is a decorator around index() that means:
@@ -238,7 +233,8 @@ def politician_exists(s):
                   ,'Kay Hagan'
                   ,'Richard Burr'
                   ,'Mary Landrieu'
-                  ,'David Vitter']
+                  ,'David Vitter'
+                  , 'Sania']
 
   return s in politicians
 
@@ -277,12 +273,85 @@ def industries_exists(s):
 
   return s in industries
 
-
 # TODO: Check user input
-
 @app.route('/search')
 def search():
-  return render_template("search.html")
+
+  # set up cache
+  recache = False
+
+  results_politicians = []
+  results_states = []
+  pac_names = []
+  pac_ids = []
+  spac_names = []
+
+  # get politician names
+  if cache.get('politicians') is None or recache:
+    print 'does this get called a lot'
+    cursor = g.conn.execute("SELECT p.name FROM politicians p")
+    
+    for result in cursor:
+      results_politicians.append(result)
+
+    cursor.close() # import to make sure no SQL injection
+
+    cache.set("politicians", results_politicians)
+  else:
+    results_politicians = cache.get("politicians")
+
+  # get state names
+  if cache.get('states') is None or recache:
+    cursor = g.conn.execute("SELECT s.state_name FROM rep_state s")
+
+    for result in cursor:
+      results_states.append(result)
+
+    cursor.close() # import to make sure no SQL injection
+
+    cursor = g.conn.execute("SELECT s.state_name FROM rep_district s")
+
+    for result in cursor:
+      results_states.append(result)
+
+    cursor.close()
+
+    cache.set("states", results_states)
+  else:
+    results_states = cache.get("states")
+
+
+  # get PAC names
+  if cache.get('pac_names') is None or cache.get('spac_names') is None or cache.get('pac_ids') is None or recache:
+    cursor = g.conn.execute("SELECT p.name, p.committee_id FROM pacs p")
+
+    for result in cursor:
+      pac_names.append(result['name'])
+      pac_ids.append(result['committee_id'])
+
+    cursor.close()
+
+    cursor = g.conn.execute("SELECT p.name, p.committee_id FROM super_pacs p")
+    for result in cursor:
+      spac_names.append(result['name'])
+      pac_ids.append(result['committee_id'])
+
+    cursor.close()
+
+    cache.set('pac_names', pac_names)
+    cache.set('pac_ids', pac_ids)
+    cache.set('spac_names', spac_names)
+  else:
+    pac_names = cache.get('pac_names')
+    pac_ids = cache.get('pac_ids')
+    spac_names = cache.get('spac_names')
+
+  return render_template("search.html", 
+                            politicians=results_politicians, 
+                            state_names=results_states, 
+                            pac_names=pac_names, 
+                            pac_ids=pac_ids,
+                            spac_names=spac_names)
 
 @app.route('/money_search')
 def money_search():

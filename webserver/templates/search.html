@@ -7,28 +7,52 @@
 
   <form method="GET" action="/search_politician">
   	<h4>Search by politician name: </h4>
-    <input type="text" name="query" required> <input type="submit" value="Search" class="btn btn-primary">
+    <select name ="query">
+
+      {% for p in politicians %}
+        <option value="{{ p.name }}">{{ p.name }}</option>
+      {% endfor %}
+    </select>
+
+    <!-- <input type="text" name="query" required> --> <input type="submit" value="Search" class="btn btn-primary">
   </form>
 
   <hr>
 
   <form method="GET" action="/search_state">
   	<h4>Search state information by state name:</h4>
-    <input type="text" name="query" required> <input type="submit" value="Search" class="btn btn-primary"></p>
+    <select name="query">
+
+      {% for s in state_names %}
+        <option value="{{ s.state_name }}">{{ s.state_name }}</option>
+      {% endfor %}
+    </select>
+
+    <!-- <input type="text" name="query" required> --> <input type="submit" value="Search" class="btn btn-primary"></p>
   </form>
 
   <hr>
 
   <form method="GET" action="/search_pac_name">
   	<h4>Search for PAC Info. by PAC name:</h4>
-    <input type="text" name="query" required> <input type="submit" value="Search" class="btn btn-primary"></p>
+    <select name="query">
+      {% for p in pac_names %}
+        <option value="{{ p }}">{{ p }}</option>
+      {% endfor %}
+    </select>
+    <!-- <input type="text" name="query" required> --> <input type="submit" value="Search" class="btn btn-primary"></p>
   </form>
 
   <hr>
 
   <form method="GET" action="/search_pac_id">
     <h4>Search for PAC Info. by Committee ID:</h4>
-    <input type="text" name="query" required> <input type="submit" value="Search" class="btn btn-primary"></p>
+    <select name="query">
+      {% for p in pac_ids %}
+        <option value="{{ p }}">{{ p }}</option>
+      {% endfor %}
+    </select>
+    <!-- <input type="text" name="query" required> --> <input type="submit" value="Search" class="btn btn-primary"></p>
     <p>* Super PACs are included in this search </p>
   </form>
 
@@ -36,7 +60,13 @@
 
   <form method="GET" action="/search_spac">
   	<h4>Search by SuperPAC name:</h4>
-    <input type="text" name="query" required> <input type="submit" value="Search" class="btn btn-primary"></p>
+    <select name="query">
+      {{ spac_names }}
+      {% for p in spac_names %}
+        <option value="{{ p }}">{{ p }}</option>
+      {% endfor %}
+    </select>
+    <!-- <input type="text" name="query" required>  --><input type="submit" value="Search" class="btn btn-primary"></p>
   </form>
 
   <hr>
