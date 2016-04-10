@@ -14,10 +14,18 @@
 		  		<div>Years in Office: {{ n.years_in_office }}</div>
 		  	{% endfor %}
 		{% endif %}
+
+		{% if (politician_data is defined) and (politician_data | length == 0) %}
+			<h2>No results</h2>
+		{% endif %}
 	</div>
 
 	<!-- Rep state search by state query result -->
 	<div>
+		{% if (state_data is defined) and (state_data | length == 0) %}
+			<h2>No results</h2>
+		{% endif %}
+
 		{% if (state_data is defined) and (state_data | length > 0) %}
 			{% for n in state_data %}
 			<h2>State information for: {{ n.state_name }}</h2>
@@ -37,6 +45,10 @@
 
 	<!-- rep dist search by state query result -->
 	<div>
+		{% if (rep_data is defined) and (rep_data | length == 0) %}
+			<h2>No results</h2>
+		{% endif %}
+
 		{% if rep_data is defined %}
 			{% for n in rep_data %}
 			<h2>District Information for: {{ n.state_name }}</h2>
@@ -56,6 +68,10 @@
 
 	<!-- PAC search by name -->
 	<div>
+		{% if (pac_data is defined) and (pac_data | length == 0) %}
+			<h2>No results</h2>
+		{% endif %}
+
 		{% if pac_data is defined %}
 			{% for n in pac_data %}
 			<h2>PAC Information for: {{ n.name}}</h2>
@@ -71,6 +87,10 @@
 
 	<!-- PAC search by committee id -->
 	<div>
+		{% if (pac_id_data is defined) and (pac_id_data | length == 0) %}
+			<h2>No results</h2>
+		{% endif %}
+
 		{% if pac_id_data is defined %}
 			{% for n in pac_id_data %}
 			<h2>PAC Information for: {{ n.name}}</h2>
@@ -84,23 +104,9 @@
 		{% endif %}
 	</div>
 
-	<!-- Super Pac search by committee id -->
-	<div>
-		{% if spac_id_data is defined %}
-			{% for n in spac_id_data %}
-			<h2>Super PAC Information for: {{ n.name}}</h2>
-		  		<div>Committee ID: {{ n.committee_id }}</div>
-		  		<div>Name: {{ n.name }}</div>
-		  		<div>Budget: ${{ n.budget }}</div>
-		  		<div>Cash Spent: ${{ n.cash_spent }}</div>
-		  		<div>Viewpoint: {{ n.viewpoint }}</div>
-		  	{% endfor %}
-		{% endif %}
-	</div>
-
 	<!-- Super PAC search by name -->
 	<div>
-		{% if spac_data is defined %}
+		{% if (spac_data is defined) and (spac_data | length > 0) %}
 			{% for n in spac_data %}
 			<h2>Super PAC Information for: {{ n.name }}</h2>
 		  		<div>Committee ID: {{ n.committee_id }}</div>
@@ -110,11 +116,15 @@
 		  		<div>Viewpoint: {{ n.viewpoint }}</div>
 		  	{% endfor %}
 		{% endif %}
+
+		{% if (spac_data is defined) and (spac_data | length == 0) %}
+			<h2>No results</h2>
+		{% endif %}
 	</div>
 
 	<!-- Legislation search by name -->
 	<div>
-		{% if legislation_data is defined %}
+		{% if (legislation_data is defined) and (legislation_data | length > 0) %}
 			{% for n in legislation_data %}
 			<h2>Legislation Information for: {{ n.name }}</h2>
 		  		<div>Legislation Sponsor: {{ n[0] }} </div>
@@ -122,6 +132,9 @@
 		  		<div>Enacted: {{ n.passed }} </div>
 		  		
 		  	{% endfor %}
+		{% endif %}
+		{% if (legislation_data is defined) and (legislation_data | length == 0) %}
+			<h2>No results</h2>
 		{% endif %}
 	</div>
 
