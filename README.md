@@ -11,7 +11,7 @@ djj2115
 
 URL of web application
 -------------------------------------
-extra.eastus.cloudapp.azure.com:8111
+http://extra.eastus.cloudapp.azure.com:8111
 
 Parts of Part1 Proposal Implemented
 -------------------------------------
