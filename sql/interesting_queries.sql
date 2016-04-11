@@ -61,3 +61,65 @@ WHERE ps.politician_name = 'Mitch McConnell' AND pd.to_committee_id = ps.committ
 SELECT *
 FROM super_pacs sp, spac_supports ss, politicians p
 WHERE ss.name = p.name AND ss.committee_id = sp.committee_id AND p.name = 'Mitch McConnell'
+
+
+--------Search forms for Industry and Demographics
+
+
+--INDUSTRY Queries
+
+--Find the industry summary, primary sponsor's name and party affiliation 
+--of each piece legislation with all information
+--(can match to a specific query by using a specific politician name/industry):
+SELECT i.summary, ps.p_sponsor_name, p.party_affiliation
+FROM industries i, advocates a, p_sponsors ps, politicians p
+WHERE i.summary = a.summary AND a.name = ps.legislation_name AND ps.p_sponsor_name = p.name
+
+--Gives the max cash_spent per industry which has a related PAC:
+SELECT DISTINCT ON (foo.industry_summary) foo.industry_summary, foo.cash_spent
+FROM (
+SELECT p.name, i.industry_summary, p.cash_spent
+FROM interested_in i, pacs p
+WHERE i.committee_id = p.committee_id ) as foo
+ORDER BY foo.industry_summary, cash_spent DESC
+
+
+
+--DEMOGRAPHICS Queries
+
+--STATES
+--Investigate what states are associated with what parties, given increasing minority voters:
+--gives ALL states listed
+SELECT s.state_name, s.major_party, s.population, s.poverty_level, s.percentage_minorities
+FROM rep_state s
+ORDER BY s.percentage_minorities
+
+--gives state linked to single senator given by user
+SELECT s.state_name, s.major_party, s.population, s.poverty_level, s.percentage_minorities
+FROM rep_state s
+WHERE s.sr_senator_name = 'Bernie Sanders' OR s.jr_senator_name = 'Bernie Sanders'
+
+--gives single state requested by user
+SELECT s.state_name, s.major_party, s.population, s.poverty_level, s.percentage_minorities
+FROM rep_state s
+WHERE s.state = 'New York'
+
+--DISTRICTS
+--Investigate what districts are associated with what parties, given increasing minority voters:
+--gives ALL districts listed
+SELECT d.state_name, d.district_number, d.major_party, d.population, d.poverty_level, d.percentage_minorities
+FROM rep_district d
+ORDER BY d.percentage_minorities
+
+--gives state linked to single representative given by user
+SELECT d.state_name, d.district_number, d.major_party, d.population, d.poverty_level, d.percentage_minorities
+FROM rep_district d
+WHERE d.representative_name = 'Nancy Pelosi'
+
+--gives single district requested by user
+SELECT d.state_name, d.district_number, d.major_party, d.population, d.poverty_level, d.percentage_minorities
+FROM rep_district d
+WHERE d.state_name = 'California' AND d.district_number = '12'
+
+
+
