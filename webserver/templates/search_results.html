@@ -138,6 +138,24 @@
 		{% endif %}
 	</div>
 
+
+	<!-- Legislation search by industry -->
+	<div>
+		{% if (legislation_industry_data is defined) and (legislation_industry_data | length > 0) %}
+			<h2> Legislation supporting {{ legislation_industry_data[0].summary }} Causes</h2>
+
+			{% for n in legislation_industry_data %}
+				<hr></hr>
+				<div>Industry: {{ n.summary }}</div>
+		  		<div>Legislation: {{ n.name }}</div>
+		  	{% endfor %}
+		{% endif %}
+		{% if (legislation_industry_data is defined) and (legislation_industry_data | length == 0) %}
+			<h2>No results</h2>
+		{% endif %}
+	</div>
+
+
 	<!-- money data -->
 	<div>
 		{% if (money_data is defined) and (money_data | length == 0) %}

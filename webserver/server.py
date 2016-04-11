@@ -118,11 +118,11 @@ def index():
   #
   # example of a database query
   #
-  cursor = g.conn.execute("SELECT name FROM test")
-  names = []
-  for result in cursor:
-    names.append(result['name'])  # can also be accessed using result[0]
-  cursor.close()
+  # cursor = g.conn.execute("SELECT name FROM test")
+  # names = []
+  # for result in cursor:
+  #   names.append(result['name'])  # can also be accessed using result[0]
+  # cursor.close()
 
   # Flask uses Jinja templates, which is an extension to HTML where you can
   # pass data to a template and dynamically generate HTML based on the data
@@ -149,12 +149,12 @@ def index():
   #     <div>{{n}}</div>
   #     {% endfor %}
   #
-  context = dict(data = names)
+  # context = dict(data = names)
   #
   # render_template looks in the templates/ folder for files.
   # for example, the below file reads template/index.html
   #
-  return render_template("index.html", **context)
+  return render_template("index.html")
 
 #
 # This is an example of a different path.  You can see it at:
@@ -282,6 +282,8 @@ def call_recache():
   spac_names = []
   industries = []
   legislation = []
+  results_senators = []
+  results_reps = []
 
   # everything in the cache expires after 300 seconds
 
@@ -296,6 +298,27 @@ def call_recache():
   cursor.close() # import to make sure no SQL injection
 
   cache.set("politicians", results_politicians, timeout=300)
+
+
+  # get senators
+  cursor = g.conn.execute("SELECT p.name FROM politicians p, senators s WHERE s.name = p.name")
+  
+  for result in cursor:
+    results_senators.append(result)
+
+  cursor.close() # import to make sure no SQL injection
+
+  cache.set("senators", results_senators, timeout=300)
+
+  # get representatives
+  cursor = g.conn.execute("SELECT p.name FROM politicians p, representatives r WHERE r.name = p.name")
+
+  for result in cursor:
+    results_reps.append(result)
+
+  cursor.close() # import to make sure no SQL injection
+
+  cache.set("representatives", results_reps, timeout=300)
   
 
   # get state names
@@ -368,13 +391,17 @@ def search():
   spac_names = []
   industries = []
   legislation = []
+  senators = []
+  reps = []
 
   if (cache.get("politicians") is None 
       or cache.get("states") is None 
       or cache.get("pac_names") is None
       or cache.get("pac_ids") is None
       or cache.get("spac_names" is None)
-      or cache.get("legislation" is None)):
+      or cache.get("legislation" is None)
+      or cache.get("senators" is None)
+      or cache.get("representatives" is None)):
     call_recache()
 
   results_politicians = cache.get("politicians")
@@ -384,6 +411,8 @@ def search():
   spac_names = cache.get('spac_names')
   industries = cache.get('industries')
   legislation = cache.get('legislation')
+  senators = cache.get('senators')
+  reps = cache.get('representatives')
 
   return render_template("search.html", 
                             politicians=results_politicians 
@@ -392,7 +421,9 @@ def search():
                             , pac_ids=pac_ids
                             , spac_names=spac_names
                             , industries=industries
-                            , legislation=legislation)
+                            , legislation=legislation
+                            , senators=senators
+                            , reps=reps)
 
 @app.route('/money_search')
 def money_search():
@@ -403,14 +434,17 @@ def money_search():
   spac_names = []
   industries = []
   legislation = []
+  senators = []
+  reps = []
 
   if (cache.get("politicians") is None 
       or cache.get("states") is None 
       or cache.get("pac_names") is None
       or cache.get("pac_ids") is None
-      or cache.get("spac_names") is None
-      or cache.get("industries") is None
-      or cache.get("legislation" is None)):
+      or cache.get("spac_names" is None)
+      or cache.get("legislation" is None)
+      or cache.get("senators" is None)
+      or cache.get("representatives" is None)):
     call_recache()
 
   results_politicians = cache.get("politicians")
@@ -420,6 +454,8 @@ def money_search():
   spac_names = cache.get('spac_names')
   industries = cache.get('industries')
   legislation = cache.get('legislation')
+  senators = cache.get('senators')
+  reps = cache.get('representatives')
 
   return render_template("money_search.html", 
                             politicians=results_politicians 
@@ -428,7 +464,9 @@ def money_search():
                             , pac_ids=pac_ids
                             , spac_names=spac_names
                             , industries=industries
-                            , legislation=legislation)
+                            , legislation=legislation
+                            , senators=senators
+                            , reps=reps)
 
 @app.route('/error')
 def display_error():
@@ -459,6 +497,34 @@ def search_polit():
   cursor.close() # import to make sure no SQL injection
   
   return render_template('search_results.html', politician_data = rows)
+
+
+@app.route('/search_senator', methods=['GET'])
+def search_senator():
+
+  query = request.args.get('query')
+
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
+
+  print 'search_senator'
+  print query
+
+  cursor = g.conn.execute("""SELECT p.name, p.DOB, p.net_worth, p.incumbent_status, p.party_affiliation, p.years_in_office
+                              FROM politicians p, senators s 
+                              WHERE p.name = %s AND p.name = s.name""", query)
+
+  cursor.close() # import to make sure no SQL injection
+  results = []
+
+  for result in cursor:
+    results.append(result)
+
+  cursor.close() # import to make sure no SQL injection
+  
+  return render_template('search_results.html', senators_data = rows)
 
 
 @app.route('/search_state', methods=['GET'])
@@ -564,6 +630,8 @@ def search_pac():
 
   return render_template("search_results.html", pac_data = results)
 
+# search for pacs by industry
+
 # search for Super PACs by name
 @app.route('/search_spac', methods=['GET'])
 def search_spac():
@@ -611,6 +679,30 @@ def search_legislation():
   cursor.close() # import to make sure no SQL injection
 
   return render_template("search_results.html", legislation_data = results)
+
+@app.route('/search_legislation_by_summary', methods=['GET'])
+def search_legislation_by_summary():
+  query = request.args.get('query') # TODO: do validation on query
+
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
+
+  print 'search/legislation by summary'
+  print query
+
+  cursor = g.conn.execute("""SELECT a.summary, l.name 
+                            FROM advocates a, legislation l
+                            WHERE a.summary = %s AND l.name = a.name""", query)
+  results = []
+
+  for result in cursor:
+    results.append(result)
+
+  cursor.close() # import to make sure no SQL injection
+
+  return render_template("search_results.html", legislation_industry_data = results)
 
 
 # search for money from PACs for specified politician
