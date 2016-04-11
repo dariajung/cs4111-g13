@@ -177,6 +177,23 @@
 		{% endif %}
 	</div>
 
+	<!-- Legislation voting record per politician -->
+	<div>
+		{% if (vote_on_legislation is defined) and (vote_on_legislation | length > 0) %}
+			{% for n in vote_on_legislation %}
+				<h4>{{ n[1] }}'s voting record for {{ n[0] }}</h4>
+				<hr></hr>
+				<div>Name of Legislation: {{ n[0] }}</div>
+				<div>Voting Congressman: {{ n[1] }}</div>
+				<div>Voting Stage: {{ n.voting_stage }}</div>
+				<div>Voted For Legislation: {{ n.voted_for }}</div>			
+				<div>Legislation Enacted: {{ n.passed }}</div>				
+		  	{% endfor %}
+		{% endif %}
+		{% if (vote_on_legislation is defined) and (vote_on_legislation | length == 0) %}
+			<h2>No voting record found.</h2>
+		{% endif %}
+	</div>
 
 	<!-- Legislation search by industry -->
 	<div>

@@ -853,6 +853,28 @@ def search_how_polit_voted_on_bill():
 #   results = []
 #   return render_template('search_results.html', money_legislation_data = results)
 
+@app.route('/search_vote_on_legislation', methods=['GET'])
+def search_vote_on_legislation():
+
+  query_p = request.args.get('query_p')
+  query_l = request.args.get('query_l')
+
+  cursor = g.conn.execute("""SELECT v.legislation_name, v.politician_name, v.voting_stage, v.voted_for, l.passed
+                              FROM politicians p, legislation l, votes v
+                              WHERE v.politician_name = %s 
+                                    AND l.name = %s 
+                                    AND l.name = v.legislation_name 
+                                    AND v.politician_name = p.name """, query_p, query_l)
+
+  results = []
+
+  for result in cursor:
+    results.append(result)
+
+  cursor.close()
+
+  return render_template('/search_results.html', vote_on_legislation=results)
+
 @app.route('/search_polit_spac_supports', methods=['GET'])
 def search_politician_spacs_supports():
 

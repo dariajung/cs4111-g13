@@ -80,6 +80,32 @@
 
   <hr>
 
+  <form method="GET" action="/search_vote_on_legislation">
+    <h4>Return how the given politician voted on the specified legislation: </h4>
+      <p>Politician Name: 
+        <select name ="query_p">
+
+          {% for p in politicians %}
+            <option value="{{ p.name }}">{{ p.name }}</option>
+          {% endfor %}
+        </select><!-- <input type="text" name="query_p" required> --> </p>
+
+
+      <p>Legislation name:
+        <select name ="query_l">
+
+          {% for p in legislation %}
+            <option value="{{ p.name }}">{{ p.name }}</option>
+          {% endfor %}
+        </select> 
+
+       <!-- <input type="text" name="query_l" required> --> </p>
+      <input type="submit" value="Search" class="btn btn-primary">
+    
+  </form>
+
+  <hr>
+
   <form method="GET" action="/search_polit_spac_supports">
     <h4>Return the Super PACs that support the given politician: </h4>
       <p>Politician Name: 
