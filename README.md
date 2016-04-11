@@ -4,7 +4,7 @@ Databases - Project 1 - Part3
 
 Daria Jung (djj2115)
 Sona Roy (sbr2146)
--------------------------------------
+
 
 PostgreSQL account
 -------------------------------------
@@ -12,7 +12,7 @@ djj2115
 
 URL of web application
 -------------------------------------
-IP:port
+extra.eastus.cloudapp.azure.com:8111
 
 Parts of Part1 Proposal Implemented
 -------------------------------------
@@ -23,17 +23,17 @@ Parts of Part1 Proposal Implemented
 
 Two Webpages that require most interesting database operations:
 -------------------------------------
-Webpage: IP:port
+Webpage: extra.eastus.cloudapp.azure.com:8111
 * what pages are used for
 * page is related to the database operations
 * why you think they are interesting
 
-Webpage: IP:port
+Webpage: extra.eastus.cloudapp.azure.com:8111
 * what pages are used for
 * page is related to the database operations
 * why you think they are interesting
 
-Webpage: IP:port
+Webpage: extra.eastus.cloudapp.azure.com:8111
 * what pages are used for
 * page is related to the database operations
 * why you think they are interesting
