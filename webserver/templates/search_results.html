@@ -7,7 +7,7 @@
 			{% for n in politician_data %}
 				<h2> Information for {{n.name}}</h2>
 		  		<div>Name: {{ n.name }}</div>
-		  		<div>DOB: {{ n.DOB }}</div>
+		  		<div>Date of Birth (Year Month Day): {{ n.dob }}</div>
 		  		<div>Net worth: ${{ n.net_worth }}</div>
 		  		<div>Incumbent: {{ n.incumbent_status }}</div>
 		  		<div>Party Affiliation: {{ n.party_affiliation }}</div>
@@ -26,7 +26,7 @@
 			{% for n in senators_data %}
 				<h2> Information for Senator {{n.name}}</h2>
 		  		<div>Name: {{ n.name }}</div>
-		  		<div>DOB: {{ n.DOB }}</div>
+		  		<div>Date of Birth (Year Month Day): {{ n.dob }}</div>
 		  		<div>Net worth: ${{ n.net_worth }}</div>
 		  		<div>Incumbent: {{ n.incumbent_status }}</div>
 		  		<div>Party Affiliation: {{ n.party_affiliation }}</div>
@@ -45,7 +45,7 @@
 			{% for n in reps_data %}
 				<h2> Information for Representative {{n.name}}</h2>
 		  		<div>Name: {{ n.name }}</div>
-		  		<div>DOB: {{ n.DOB }}</div>
+		  		<div>Date of Birth (Year Month Day): {{ n.dob }}</div>
 		  		<div>Net worth: ${{ n.net_worth }}</div>
 		  		<div>Incumbent: {{ n.incumbent_status }}</div>
 		  		<div>Party Affiliation: {{ n.party_affiliation }}</div>
