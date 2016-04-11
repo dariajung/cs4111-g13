@@ -155,6 +155,27 @@
 		{% endif %}
 	</div>
 
+	<!-- PAC search by industry -->
+	<div>
+		{% if (pacs_industry_data is defined) and (pacs_industry_data | length > 0) %}
+			<h2> PACs Interested in {{ pacs_industry_data[0].industry_summary }} Causes</h2>
+
+			{% for n in pacs_industry_data %}
+				<hr></hr>
+				<div>Industry: {{ n.industry_summary }}</div>
+		  		<div>PAC Name: {{ n.name }}</div>
+		  		<div>PAC Committee_ID: {{ n.committee_id }}</div>
+		  		<div>PAC budget: ${{ n.budget }}</div>
+		  		<div>PAC Cash on Hand: ${{ n.cash_on_hand }}</div>
+		  		<div>PAC Cash on Spent: ${{ n.cash_spent }}</div>
+		  		<div>Registered to Lobby: {{ n.registrant }}</div>
+		  	{% endfor %}
+		{% endif %}
+		{% if (pacs_industry_data is defined) and (pacs_industry_data | length == 0) %}
+			<h2>No results</h2>
+		{% endif %}
+	</div>
+
 
 	<!-- money data -->
 	<div>

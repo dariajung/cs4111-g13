@@ -705,6 +705,32 @@ def search_legislation_by_summary():
   return render_template("search_results.html", legislation_industry_data = results)
 
 
+@app.route('/search_pac_by_summary', methods=['GET'])
+def search_pac_by_summary():
+  query = request.args.get('query') # TODO: do validation on query
+
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
+
+  print 'search/pac by summary'
+  print query
+
+  cursor = g.conn.execute("""SELECT p.name, p.committee_id, p.budget, p.cash_spent, p.cash_on_hand, p.registrant, i.industry_summary
+                            FROM pacs p, interested_in i
+                            WHERE i.industry_summary = %s AND p.committee_id = i.committee_id""", query)
+  results = []
+
+  for result in cursor:
+    results.append(result)
+
+  cursor.close() # import to make sure no SQL injection
+
+  return render_template("search_results.html", pacs_industry_data = results)
+
+
+
 # search for money from PACs for specified politician
 @app.route('/search_money_from_pacs', methods=['GET'])
 def search_money():

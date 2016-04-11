@@ -6,7 +6,7 @@
   <hr>
 
   <form method="GET" action="/search_money_from_pacs">
-  	<h4>Return organizations that donated to specified politician:</h4>
+  	<h4>Search for Organizations that Donated to Specified Politician:</h4>
     <select name ="query">
 
       {% for p in politicians %}
@@ -19,7 +19,7 @@
   <hr>
 
   <form method="GET" action="/search_legislation">
-    <h4>Search by Legislation name:</h4>
+    <h4>Search for Legislation by Name:</h4>
     <select name="query">
       {% for p in legislation %}
         <option value="{{ p.name }}">{{ p.name }}</option>
@@ -31,7 +31,19 @@
   <hr>
 
   <form method="GET" action="/search_legislation_by_summary">
-    <h4>Search Legislation by Industry:</h4>
+    <h4>Search for Legislation by Industry Advocated:</h4>
+    <select name="query">
+      {% for p in industries %}
+        <option value="{{ p.summary }}">{{ p.summary }}</option>
+      {% endfor %}
+    </select>
+    <!-- <input type="text" name="query" required>  --><input type="submit" value="Search" class="btn btn-primary"></p>
+  </form>
+
+  <hr>
+
+  <form method="GET" action="/search_pac_by_summary">
+    <h4>Search for PACs by Industry Interests:</h4>
     <select name="query">
       {% for p in industries %}
         <option value="{{ p.summary }}">{{ p.summary }}</option>
