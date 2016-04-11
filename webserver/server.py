@@ -696,7 +696,7 @@ def search_legislation():
   print 'search/legislation'
   print query
 
-  cursor = g.conn.execute("""SELECT p.name, legislation.name, legislation.passed
+  cursor = g.conn.execute("""SELECT p.name, legislation.name, legislation.passed, p.party_affiliation
                               FROM legislation, politicians p, p_sponsors s 
                               WHERE legislation.name = %s AND s.legislation_name = %s AND s.p_sponsor_name = p.name""", query, query)
   results = []
@@ -720,9 +720,9 @@ def search_legislation_by_summary():
   print 'search/legislation by summary'
   print query
 
-  cursor = g.conn.execute("""SELECT a.summary, l.name 
-                            FROM advocates a, legislation l
-                            WHERE a.summary = %s AND l.name = a.name""", query)
+  cursor = g.conn.execute("""SELECT a.summary, l.name, p.name, p.party_affiliation 
+                            FROM advocates a, legislation l, politicians p, p_sponsors s
+                            WHERE a.summary = %s AND l.name = a.name AND p.name = s.p_sponsor_name AND s.legislation_name = l.name""", query)
   results = []
 
   for result in cursor:
