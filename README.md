@@ -24,12 +24,12 @@ Two Webpages that require most interesting database operations:
 -------------------------------------
 Webpage: http://extra.eastus.cloudapp.azure.com:8111/search_money_from_pacs?query=Harry+Reid
 * Use: Shows the PACs which donate directly to a politician (searched by name), and the total amount of money given to a politician from PACs.
-* Database Operations: 
-SELECT new_t.politician_name, new_t.amount, i.committee_id, i.industry_summary, p.name
-FROM (
-	SELECT *
-	FROM pac_supports INNER JOIN pac_donate ON pac_supports.committee_id = pac_donate.to_committee_id
-	WHERE pac_supports.politician_name = %s) as new_t, interested_in i, pacs p
+* Database Operations:  
+SELECT new_t.politician_name, new_t.amount, i.committee_id, i.industry_summary, p.name  
+FROM (  
+	SELECT *  
+	FROM pac_supports INNER JOIN pac_donate ON pac_supports.committee_id = pac_donate.to_committee_id  
+	WHERE pac_supports.politician_name = %s) as new_t, interested_in i, pacs p  
 WHERE i.committee_id = new_t.from_committee_id AND p.committee_id = i.committee_id
 * Why Interesting: Shows how much money affects a specific politician's campaign - the total donation amount shows how much this politician uses Citizens United, and the loosening of campaign money restrictions to their benefit.
 
