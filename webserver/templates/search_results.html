@@ -186,8 +186,8 @@
 			{% for n in legislation_industry_data %}
 				<hr></hr>
 				<div>Industry: {{ n.summary }}</div>
-		  		<div>Legislation: {{ n.name }}</div>
-		  		<div>Legislation Sponsor: {{ n[3] }}</div>
+		  		<div>Legislation: {{ n[1] }}</div>
+		  		<div>Legislation Sponsor: {{ n[2] }}</div>
 		  		<div>Sponsor Party Afilliation: {{ n.party_affiliation }} </div>
 		  	{% endfor %}
 		{% endif %}
