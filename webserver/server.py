@@ -755,8 +755,20 @@ def search_pac_by_summary():
 
   cursor.close() # import to make sure no SQL injection
 
-  return render_template("search_results.html", pacs_industry_data = results)
+  cursor = g.conn.execute("""SELECT max(p.cash_spent)
+                              FROM interested_in i, pacs p
+                              WHERE p.committee_id = i.committee_id AND i.industry_summary = %s
+                              GROUP BY p.cash_spent
+                              ORDER BY p.cash_spent DESC
+                              """, query)
 
+  max_spent = []
+  for result in cursor:
+    max_spent.append(result[0])
+
+  cursor.close()
+
+  return render_template("search_results.html", pacs_industry_data = results, max_spent=max_spent)
 
 
 # search for money from PACs for specified politician

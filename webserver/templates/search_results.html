@@ -213,6 +213,13 @@
 		  		<div>Registered to Lobby: {{ n.registrant }}</div>
 		  	{% endfor %}
 		{% endif %}
+
+		<hr>
+
+		{% if (max_spent is defined) and (pacs_industry_data is defined) and (pacs_industry_data | length > 0) %}
+			<h3>Maximum Cash spent by a {{ pacs_industry_data[0].industry_summary }} PAC: ${{ max_spent[0] }}</h3>
+		{% endif %}
+
 		{% if (pacs_industry_data is defined) and (pacs_industry_data | length == 0) %}
 			<h2>No results</h2>
 		{% endif %}
