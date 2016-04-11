@@ -20,6 +20,44 @@
 		{% endif %}
 	</div>
 
+	<!-- Senators search query result -->
+	<div>
+		{% if (senators_data is defined) and (senators_data | length > 0) %}
+			{% for n in senators_data %}
+				<h2> Information for Senator {{n.name}}</h2>
+		  		<div>Name: {{ n.name }}</div>
+		  		<div>DOB: {{ n.DOB }}</div>
+		  		<div>Net worth: ${{ n.net_worth }}</div>
+		  		<div>Incumbent: {{ n.incumbent_status }}</div>
+		  		<div>Party Affiliation: {{ n.party_affiliation }}</div>
+		  		<div>Years in Office: {{ n.years_in_office }}</div>
+		  	{% endfor %}
+		{% endif %}
+
+		{% if (senators_data is defined) and (senators_data | length == 0) %}
+			<h2>No results</h2>
+		{% endif %}
+	</div>
+
+	<!-- Represenatative search query result -->
+	<div>
+		{% if (reps_data is defined) and (reps_data | length > 0) %}
+			{% for n in reps_data %}
+				<h2> Information for Representative {{n.name}}</h2>
+		  		<div>Name: {{ n.name }}</div>
+		  		<div>DOB: {{ n.DOB }}</div>
+		  		<div>Net worth: ${{ n.net_worth }}</div>
+		  		<div>Incumbent: {{ n.incumbent_status }}</div>
+		  		<div>Party Affiliation: {{ n.party_affiliation }}</div>
+		  		<div>Years in Office: {{ n.years_in_office }}</div>
+		  	{% endfor %}
+		{% endif %}
+
+		{% if (reps_data is defined) and (reps_data | length == 0) %}
+			<h2>No results</h2>
+		{% endif %}
+	</div>
+
 	<!-- Rep state search by state query result -->
 	<div>
 		{% if (state_data is defined) and (state_data | length == 0) %}

@@ -516,7 +516,7 @@ def search_senator():
                               FROM politicians p, senators s 
                               WHERE p.name = %s AND p.name = s.name""", query)
 
-  cursor.close() # import to make sure no SQL injection
+  # import to make sure no SQL injection
   results = []
 
   for result in cursor:
@@ -524,7 +524,35 @@ def search_senator():
 
   cursor.close() # import to make sure no SQL injection
   
-  return render_template('search_results.html', senators_data = rows)
+  return render_template('search_results.html', senators_data = results)
+
+
+@app.route('/search_rep', methods=['GET'])
+def search_representative():
+
+  query = request.args.get('query')
+
+  # check for malicious intent
+  if not is_query_safe(query):
+    msg = 'Stop trying to alter the database!'
+    return render_template('error.html', error_msg=msg)
+
+  print 'search_senator'
+  print query
+
+  cursor = g.conn.execute("""SELECT p.name, p.DOB, p.net_worth, p.incumbent_status, p.party_affiliation, p.years_in_office
+                              FROM politicians p, representatives r 
+                              WHERE p.name = %s AND p.name = r.name""", query)
+
+  # import to make sure no SQL injection
+  results = []
+
+  for result in cursor:
+    results.append(result)
+
+  cursor.close() # import to make sure no SQL injection
+  
+  return render_template('search_results.html', reps_data = results)
 
 
 @app.route('/search_state', methods=['GET'])
