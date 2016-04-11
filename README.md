@@ -22,7 +22,7 @@ Parts of Part1 Proposal Implemented
 
 Two Webpages that require most interesting database operations:
 -------------------------------------
-Webpage: http://extra.eastus.cloudapp.azure.com:8111/search_money_from_pacs?query=Harry+Reid
+######Webpage: http://extra.eastus.cloudapp.azure.com:8111/search_money_from_pacs?query=Harry+Reid
 * Use: Shows the PACs which donate directly to a politician (searched by name), and the total amount of money given to a politician from PACs.
 * Database Operations:
 ```SQL  
@@ -35,7 +35,7 @@ WHERE i.committee_id = new_t.from_committee_id AND p.committee_id = i.committee_
 ```
 * Why Interesting: Shows how much money affects a specific politician's campaign - the total donation amount shows how much this politician uses Citizens United, and the loosening of campaign money restrictions to their benefit.
 
-Webpage: http://extra.eastus.cloudapp.azure.com:8111/search_voting_bill?query_p=Harry+Reid&query_l=Healthcare
+######Webpage: http://extra.eastus.cloudapp.azure.com:8111/search_voting_bill?query_p=Harry+Reid&query_l=Healthcare
 * Use: Shows how a politician votes on bills related to industries.
 * Database Operations:
 ```SQL
@@ -45,7 +45,7 @@ WHERE ss.name = p.name AND ss.committee_id = sp.committee_id AND p.name = %s
 ```
 * Why Interesting: Shows how a politician's implementation of actual laws are affected by donations from specific industries.
 
-Webpage: extra.eastus.cloudapp.azure.com:8111
+######Webpage: extra.eastus.cloudapp.azure.com:8111
 * Use:
 * Database Operations:
 * Why Interesting:
