@@ -76,6 +76,10 @@ Extra Implementation Details
 
 * In order to allow the population of all drop down menus with the data in the database, we populate the information with many SQL queries on the first load of search.html or money_search.html. Then we cache this information in a Python Flask SimpleCache object so that we can get the data without hitting the database everytime we load these two pages. This cached data expires after 300 seconds and is then re-cached.
 
+Dropdown menus look like this:
+
+![alt text](http://imgur.com/opNC4D1)
+
 ##### Styling
 * We included Twitter's Bootstrap for styling via a CDN. 
 
