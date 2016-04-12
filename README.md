@@ -6,6 +6,8 @@ Daria Jung (djj2115) & Sona Roy (sbr2146)
 
 Project Directory Structure
 ----------------------------
+
+```
 .
 ├── README.md
 ├── requirements.txt
@@ -25,6 +27,7 @@ Project Directory Structure
         ├── politicians.html
         ├── search.html
         └── search_results.html
+```
 
 
 PostgreSQL account
