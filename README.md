@@ -45,7 +45,35 @@ WHERE ss.name = p.name AND ss.committee_id = sp.committee_id AND p.name = %s
 ```
 * Why Interesting: Shows how a politician's implementation of actual laws are affected by donations from specific industries.
 
-##### Extra Implementation Details
+An Extra Interesting Page:
+--------------------------
+#####Webpage: http://extra.eastus.cloudapp.azure.com:8111/search_pac_by_summary?query=Defense
+* Use: Shows the PACs that are interested in a specific industry and the max cash spent by a PAC in that industry.
+* Database Operations:
+```SQL
+SELECT p.name, p.committee_id, p.budget, p.cash_spent, p.cash_on_hand, p.registrant, i.industry_summary
+                            FROM pacs p, interested_in i
+                            WHERE i.industry_summary = %s AND p.committee_id = i.committee_id
+```
+
+and 
+
+```SQL
+SELECT max(p.cash_spent)
+FROM interested_in i, pacs p
+WHERE p.committee_id = i.committee_id AND i.industry_summary = %s
+GROUP BY p.cash_spent
+ORDER BY p.cash_spent DESC
+```
+
+Where ```%s``` is replaced by an industry summary.
+
+* Why Interesting: We see the power of each industry based on how much money that they are able to donate to politicians.
+
+Extra Implementation Details
+-----------------------------
+##### Caching
+
 * In order to allow the population of all drop down menus with the data in the database, we populate the information with many SQL queries on the first load of search.html or money_search.html. Then we cache this information in a Python Flask SimpleCache object so that we can get the data without hitting the database everytime we load these two pages. This cached data expires after 300 seconds and is then re-cached.
 
 ##### Styling
