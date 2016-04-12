@@ -50,12 +50,12 @@ CREATE TABLE rep_state (
 
 CREATE TABLE rep_district (
 	state_name varchar(15),
-	district_number integer CHECK (district_number >= 0),
-	population real CHECK (population > 0),
+	district_number integer CHECK (district_number >= 0 AND district_number < 60),
+	population real CHECK (population > 0 AND population < 40000000),
 	major_ethnicity varchar(50),
-	median_age real CHECK (median_age > 0),
+	median_age real CHECK (median_age > 0 AND median_age < 50),
 	major_party varchar(50),
-	median_income real CHECK (median_income > 0),
+	median_income real CHECK (median_income > 0 AND median_income < 100000),
 	poverty_level real CHECK (poverty_level >= 0 AND poverty_level <= 100),
 	representative_name varchar(50) NOT NULL,
 	representative_DOB date NOT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE super_PACs (
 	committee_id char(9),
 	name varchar(50),
 	viewpoint varchar(30),
-	budget real CHECK (budget >= 0 AND budget < 20000000),
+	budget real CHECK (budget >= 0 AND budget < 70000000),
 	cash_spent real CHECK ((cash_spent <= budget) AND (cash_spent >= 0)),
 	PRIMARY KEY (committee_id),
 	UNIQUE (name)
