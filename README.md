@@ -78,7 +78,7 @@ Extra Implementation Details
 
 Dropdown menus look like this:
 
-![alt text](http://imgur.com/opNC4D1)
+![alt text](http://i.imgur.com/opNC4D1.png)
 
 ##### Styling
 * We included Twitter's Bootstrap for styling via a CDN. 
