@@ -89,7 +89,7 @@
 
 		{% if rep_data is defined %}
 			{% for n in rep_data %}
-			<h2>District Information for: {{ n.state_name }}</h2>
+			<h2>Information for: {{ n.state_name }} District {{ n.district_number }} </h2>
 
 		  		<div>State Name: {{ n.state_name }}</div>
 		  		<div>District Number: {{ n.district_number }}</div>
@@ -166,6 +166,7 @@
 			{% for n in legislation_data %}
 			<h2>Legislation Information for: {{ n.name }}</h2>
 		  		<div>Legislation Sponsor: {{ n[0] }} </div>
+		  		<div>Sponsor Party Afilliation: {{ n.party_affiliation }} </div>
 		  		<div>Legislation Name: {{ n[1] }} </div>
 		  		<div>Enacted: {{ n.passed }} </div>
 		  		
@@ -176,6 +177,23 @@
 		{% endif %}
 	</div>
 
+	<!-- Legislation voting record per politician -->
+	<div>
+		{% if (vote_on_legislation is defined) and (vote_on_legislation | length > 0) %}
+			{% for n in vote_on_legislation %}
+				<h4>{{ n[1] }}'s voting record for {{ n[0] }}</h4>
+				<hr></hr>
+				<div>Name of Legislation: {{ n[0] }}</div>
+				<div>Voting Congressman: {{ n[1] }}</div>
+				<div>Voting Stage: {{ n.voting_stage }}</div>
+				<div>Voted For Legislation: {{ n.voted_for }}</div>			
+				<div>Legislation Enacted: {{ n.passed }}</div>				
+		  	{% endfor %}
+		{% endif %}
+		{% if (vote_on_legislation is defined) and (vote_on_legislation | length == 0) %}
+			<h2>No voting record found.</h2>
+		{% endif %}
+	</div>
 
 	<!-- Legislation search by industry -->
 	<div>
@@ -185,7 +203,10 @@
 			{% for n in legislation_industry_data %}
 				<hr></hr>
 				<div>Industry: {{ n.summary }}</div>
-		  		<div>Legislation: {{ n.name }}</div>
+		  		<div>Legislation: {{ n[1] }}</div>
+		  		<div>Legislation Enacted: {{ n.passed }}</div>
+		  		<div>Legislation Sponsor: {{ n[2] }}</div>
+		  		<div>Sponsor Party Afilliation: {{ n.party_affiliation }} </div>
 		  	{% endfor %}
 		{% endif %}
 		{% if (legislation_industry_data is defined) and (legislation_industry_data | length == 0) %}
@@ -209,6 +230,13 @@
 		  		<div>Registered to Lobby: {{ n.registrant }}</div>
 		  	{% endfor %}
 		{% endif %}
+
+		<hr>
+
+		{% if (max_spent is defined) and (pacs_industry_data is defined) and (pacs_industry_data | length > 0) %}
+			<h3>Maximum Cash spent by a {{ pacs_industry_data[0].industry_summary }} PAC: ${{ max_spent[0] }}</h3>
+		{% endif %}
+
 		{% if (pacs_industry_data is defined) and (pacs_industry_data | length == 0) %}
 			<h2>No results</h2>
 		{% endif %}

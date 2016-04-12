@@ -696,7 +696,7 @@ def search_legislation():
   print 'search/legislation'
   print query
 
-  cursor = g.conn.execute("""SELECT p.name, legislation.name, legislation.passed
+  cursor = g.conn.execute("""SELECT p.name, legislation.name, legislation.passed, p.party_affiliation
                               FROM legislation, politicians p, p_sponsors s 
                               WHERE legislation.name = %s AND s.legislation_name = %s AND s.p_sponsor_name = p.name""", query, query)
   results = []
@@ -720,9 +720,9 @@ def search_legislation_by_summary():
   print 'search/legislation by summary'
   print query
 
-  cursor = g.conn.execute("""SELECT a.summary, l.name 
-                            FROM advocates a, legislation l
-                            WHERE a.summary = %s AND l.name = a.name""", query)
+  cursor = g.conn.execute("""SELECT a.summary, l.name, p.name, p.party_affiliation, l.passed
+                            FROM advocates a, legislation l, politicians p, p_sponsors s
+                            WHERE a.summary = %s AND l.name = a.name AND p.name = s.p_sponsor_name AND s.legislation_name = l.name""", query)
   results = []
 
   for result in cursor:
@@ -755,8 +755,20 @@ def search_pac_by_summary():
 
   cursor.close() # import to make sure no SQL injection
 
-  return render_template("search_results.html", pacs_industry_data = results)
+  cursor = g.conn.execute("""SELECT max(p.cash_spent)
+                              FROM interested_in i, pacs p
+                              WHERE p.committee_id = i.committee_id AND i.industry_summary = %s
+                              GROUP BY p.cash_spent
+                              ORDER BY p.cash_spent DESC
+                              """, query)
 
+  max_spent = []
+  for result in cursor:
+    max_spent.append(result[0])
+
+  cursor.close()
+
+  return render_template("search_results.html", pacs_industry_data = results, max_spent=max_spent)
 
 
 # search for money from PACs for specified politician
@@ -840,6 +852,28 @@ def search_how_polit_voted_on_bill():
 #   query = request.args.get('query') # do validation on query, which is politician name
 #   results = []
 #   return render_template('search_results.html', money_legislation_data = results)
+
+@app.route('/search_vote_on_legislation', methods=['GET'])
+def search_vote_on_legislation():
+
+  query_p = request.args.get('query_p')
+  query_l = request.args.get('query_l')
+
+  cursor = g.conn.execute("""SELECT v.legislation_name, v.politician_name, v.voting_stage, v.voted_for, l.passed
+                              FROM politicians p, legislation l, votes v
+                              WHERE v.politician_name = %s 
+                                    AND l.name = %s 
+                                    AND l.name = v.legislation_name 
+                                    AND v.politician_name = p.name """, query_p, query_l)
+
+  results = []
+
+  for result in cursor:
+    results.append(result)
+
+  cursor.close()
+
+  return render_template('/search_results.html', vote_on_legislation=results)
 
 @app.route('/search_polit_spac_supports', methods=['GET'])
 def search_politician_spacs_supports():
