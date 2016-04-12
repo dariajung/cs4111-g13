@@ -4,6 +4,28 @@ Databases - Project 1 - Part3
 
 Daria Jung (djj2115) & Sona Roy (sbr2146)
 
+Project Directory Structure
+----------------------------
+.
+├── README.md
+├── requirements.txt
+├── sql
+│   ├── Tables.sql
+│   ├── insert.sql
+│   └── interesting_queries.sql
+└── webserver
+    ├── server.py
+    └── templates
+        ├── another.html
+        ├── error.html
+        ├── footer.html
+        ├── header.html
+        ├── index.html
+        ├── money_search.html
+        ├── politicians.html
+        ├── search.html
+        └── search_results.html
+
 
 PostgreSQL account
 -------------------------------------
