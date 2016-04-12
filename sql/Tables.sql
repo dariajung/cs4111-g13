@@ -2,11 +2,12 @@ CREATE TABLE politicians (
 	name varchar(50),
 	-- also make sure that DOB is within a reasonable time frame b/c we're not doing historical data
 	-- oldest birthdate has to be in 1923
-	DOB date CHECK (DATE_PART('year', '1995-01-01'::date) - DATE_PART('year', DOB::date) >=0),-- must be 18 to run for office generally
-	net_worth real,
+	-- must be 100 years old or younger
+	DOB date CHECK (DATE_PART('year', '1995-01-01'::date) - DATE_PART('year', DOB::date) >=0 AND DATE_PART('year', '2013-01-03'::date) - DATE_PART('year', DOB::date) <= 100),-- must be 18 to run for office generally
+	net_worth real CHECK (net_worth < 400000000), --check net worth < 400 mill
 	incumbent_status boolean,
 	party_affiliation varchar(30),
-	years_in_office integer, -- need to years of service
+	years_in_office integer CHECK (years_in_office <= 82), -- need to years of service
 	PRIMARY KEY (name, DOB)
 );
 
@@ -29,11 +30,11 @@ CREATE TABLE representatives (
 
 CREATE TABLE rep_state (
 	state_name varchar(15),
-	population real CHECK (population > 0),
+	population real CHECK (population > 0 AND population < 40000000), --check 0 < population < 40 mill
 	major_ethnicity varchar(50),
-	median_age real CHECK (median_age > 0),
+	median_age real CHECK (median_age > 0 AND median_age < 50), -- check 0 < median_age < 50
 	major_party varchar(50),
-	median_income real CHECK (median_income > 0),
+	median_income real CHECK (median_income > 0 AND median_income < 100000), --check 0 < income < 100,000
 	poverty_level real CHECK (poverty_level >= 0 AND poverty_level <= 100),
 	sr_senator_name varchar(50) NOT NULL,
 	sr_senator_DOB date NOT NULL,
@@ -104,9 +105,9 @@ CREATE TABLE advocates (
 CREATE TABLE PACs (
 	committee_id char(9),
 	name varchar(50),
-	budget real CHECK (budget >= 0),
-	cash_spent real CHECK (cash_spent >= 0),
-	cash_on_hand real CHECK (cash_on_hand >= 0),
+	budget real CHECK (budget >= 0 AND budget < 20000000),
+	cash_spent real CHECK (cash_spent >= 0 AND cash_spent < 20000000),
+	cash_on_hand real CHECK (cash_on_hand >= 0 AND cash_on_hand < 20000000),
 	registrant boolean,
 	PRIMARY KEY (committee_id),
 	UNIQUE (name)
@@ -117,7 +118,7 @@ CREATE TABLE PAC_supports (
 	committee_id char(11),
 	politician_name varchar(50),
 	politician_DOB date,
-	amount real CHECK (amount >= 0), -- Attribute constraint >= 0
+	amount real CHECK (amount >= 0 AND amount < 20000000), -- Attribute constraint >= 0
 	FOREIGN KEY (politician_name, politician_DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
 	FOREIGN KEY (committee_id) references PACs(committee_id) ON DELETE CASCADE,
 	PRIMARY KEY (committee_id, politician_name, politician_DOB)
@@ -146,7 +147,7 @@ CREATE TABLE super_PACs (
 	committee_id char(9),
 	name varchar(50),
 	viewpoint varchar(30),
-	budget real CHECK (budget >= 0),
+	budget real CHECK (budget >= 0 AND budget < 20000000),
 	cash_spent real CHECK ((cash_spent <= budget) AND (cash_spent >= 0)),
 	PRIMARY KEY (committee_id),
 	UNIQUE (name)
@@ -156,7 +157,7 @@ CREATE TABLE SPAC_supports(
 	committee_id char(9),
 	name varchar(100),
 	DOB date,
-	amount real CHECK (amount >= 0),
+	amount real CHECK (amount >= 0 AND amount < 20000000),
 	FOREIGN KEY (committee_id) REFERENCES Super_PACs(committee_id) ON DELETE CASCADE,
 	FOREIGN KEY (name, DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
 	PRIMARY KEY (committee_id, name, DOB)
@@ -166,7 +167,7 @@ CREATE TABLE SPAC_against(
 	committee_id char(9),
 	name varchar(100),
 	DOB date,
-	amount real CHECK (amount >= 0),
+	amount real CHECK (amount >= 0 AND amount < 20000000),
 	FOREIGN KEY (committee_id) REFERENCES Super_PACs(committee_id) ON DELETE CASCADE,
 	FOREIGN KEY (name, DOB) REFERENCES Politicians(name, DOB) ON DELETE CASCADE,
 	PRIMARY KEY (committee_id, name, DOB)
