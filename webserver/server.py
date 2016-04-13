@@ -199,6 +199,8 @@ def is_query_safe(s):
 
   return True
 
+# used before to check input, but now unnecessary because 
+# using dropdown menus
 def politician_exists(s):
   politicians = ['Harry Reid'
                   ,'Marco Rubio'
@@ -238,6 +240,8 @@ def politician_exists(s):
 
   return s in politicians
 
+# used before to check input, but now unnecessary because 
+# using dropdown menus
 def industries_exists(s):
   industries = ['Agribusiness'
                 ,'Communications'
@@ -481,12 +485,6 @@ def search_polit():
   # check for malicious intent
   if not is_query_safe(query):
     msg = 'Stop trying to alter the database!'
-    return render_template('error.html', error_msg=msg)
-
-  # make sure less than 30 characters
-  if len(query) > 30 or not politician_exists(query):
-    print 'Politician not in the database'
-    msg = 'Politician ' + query + ' is not in the database'
     return render_template('error.html', error_msg=msg)
 
   print 'search_politician'
@@ -782,10 +780,6 @@ def search_money():
     msg = 'Stop trying to alter the database!'
     return render_template('error.html', error_msg=msg)
 
-  if not politician_exists(query):
-    msg = 'Politician ' + query + ' not in database'
-    return render_template('error.html', error_msg=msg)
-
   cursor = g.conn.execute('''SELECT new_t.politician_name, new_t.amount, i.committee_id, i.industry_summary, p.name
   FROM (SELECT *
   FROM pac_supports INNER JOIN pac_donate ON pac_supports.committee_id = pac_donate.to_committee_id
@@ -816,21 +810,12 @@ def search_how_polit_voted_on_bill():
     msg = 'Stop trying to alter the database!'
     return render_template('error.html', error_msg=msg)
 
-  if not politician_exists(query_p):
-    msg = 'Politician ' + query_p + ' not in database'
-    return render_template('error.html', error_msg=msg)
-
   # make sure query_l is one of specified industries
   query_l = request.args.get('query_l') # do validation on query_l
 
   # check for malicious intent
   if not is_query_safe(query_l):
     msg = 'Stop trying to alter the database!'
-    return render_template('error.html', error_msg=msg)
-
-  # check industries exist
-  if not industries_exists(query_l):
-    msg = 'Industry ' + query_l + ' not in database'
     return render_template('error.html', error_msg=msg)
 
   cursor = g.conn.execute('''SELECT DISTINCT on (l.name) l.name, l.passed, v.voted_for, p.name, a.summary
