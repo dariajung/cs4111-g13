@@ -6,11 +6,18 @@
 
 -- composite type = could create senators and representatives as politicians type (would have to change/drop tables)
 -- deletes a table & makes check constraints personal
-CREATE TYPE politician_type AS (name varchar(50), DOB date, net_worth real, incumbent_status boolean, party_affiliation varchar(30), years_in_office integer) 
+CREATE TYPE politician_type AS (
+	name varchar(50),
+	DOB date,
+	net_worth real, 
+	incumbent_status boolean, 
+	party_affiliation varchar(30), 
+	years_in_office integer
+) 
 
 CREATE TABLE senators1 OF politician_type (
-	DOB date CHECK (DATE_PART('year', '1983-01-03'::date) - DATE_PART('year', DOB::date) >=0)
-	PRIMARY_KEY (name, DOB)
+	test real,
+	PRIMARY KEY (name, DOB)
 )
 
 CREATE TABLE representatives1 OF politician_type (
@@ -21,14 +28,12 @@ CREATE TABLE representatives1 OF politician_type (
 -----------------------------------------------------------ARRAY TYPE ATTRIBUTE
 ALTER TABLE pacs ADD COLUMN top_recipients text[]
 ALTER TABLE pacs ADD COLUMN quarterly_money integer[]
-
 ALTER TABLE pacs DROP COLUMN top_recipients 
 
 -- adding 10 tuples of data
 -- goldman sachs
 UPDATE pacs
 	SET top_recipients = ARRAY['John Boehner', 'Ed Royce', 'Jeb Hensarling', 'Kevin McCarthy', 'Steve Scalise']
-
 	WHERE committee_id = 'C00350744'
 
 --pepsico
@@ -39,7 +44,7 @@ UPDATE pacs
 -- american petroleum institute
 UPDATE pacs
 	SET top_recipients = ARRAY['Kevin McCarthy', 'Fred Upton', 'Tom Reed', 'John Barrow', 'John Boehner']
-	WHERE committee_id = 
+	WHERE committee_id = 'C00483677'
 
 UPDATE pacs
 	SET top_recipients = ARRAY['', '', '', '', '']
@@ -71,9 +76,9 @@ UPDATE pacs
 
 -- querying
 -- finding pacs which have overlapping top recipients
-SELECT pacs.name
-FROM pacs
-WHERE 
+SELECT p.name
+FROM pacs p
+WHERE p.top_recipients && ARRAY['John Boehner']
 
 -----------------------------------------------------------TEXT TYPE ATTRIBUTE
 -- needed to do once
@@ -176,4 +181,4 @@ DELETE FROM legislation
 -- querying
 SELECT legislation.name
 FROM legislation
-WHERE to_tsvector('english', summary) @@ to_tsquery('english', 'israel')
+WHERE to_tsvector('english', summary) @@ to_tsquery('english', 'violence')
