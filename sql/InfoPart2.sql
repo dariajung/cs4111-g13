@@ -46,33 +46,40 @@ UPDATE pacs
 	SET top_recipients = ARRAY['Kevin McCarthy', 'Fred Upton', 'Tom Reed', 'John Barrow', 'John Boehner']
 	WHERE committee_id = 'C00483677'
 
+-- lockheed martin
 UPDATE pacs
-	SET top_recipients = ARRAY['', '', '', '', '']
-	WHERE committee_id = 
+	SET top_recipients = ARRAY['Bradley Byrne', 'Tom Rooney', 'Ken Calvert', 'John Carter', 'Tom Cole']
+	WHERE committee_id = 'C00303024'
 
+-- Aetna 
 UPDATE pacs
-	SET top_recipients = ARRAY['', '', '', '', '']
-	WHERE committee_id = 
+	SET top_recipients = ARRAY['Earl Blumenauer', 'Joseph Crowley', 'Tom Reed', 'Steve Scalise', 'Patrick J. Tiberi']
+	WHERE committee_id = 'C00181826'
 
+-- Ernst & Young
 UPDATE pacs
-	SET top_recipients = ARRAY['', '', '', '', '']
-	WHERE committee_id = 
+	SET top_recipients = ARRAY['Kevin McCarthy', 'Erik Paulsen', 'Renee Ellmers', 'George Holding', 'Frank D. Lucas']
+	WHERE committee_id = 'C00227744'
 
+-- Citigroup
 UPDATE pacs
-	SET top_recipients = ARRAY['', '', '', '', '']
-	WHERE committee_id = 
+	SET top_recipients = ARRAY['Eric Cantor', 'Paul Ryan', 'Ron Barber', 'John Boehner', 'John Carney']
+	WHERE committee_id = 'C00008474'
 
+-- Green Mountain Pac
 UPDATE pacs
-	SET top_recipients = ARRAY['', '', '', '', '']
-	WHERE committee_id = 
+	SET top_recipients = ARRAY['Michael F. Bennet', 'Richard Blumenthal', 'Ron Wyden', 'Patty Murray', 'Tammy Duckworth']
+	WHERE committee_id = 'C00409110'
 
+-- national association of gun rights
 UPDATE pacs
-	SET top_recipients = ARRAY['', '', '', '', '']
-	WHERE committee_id = 
+	SET top_recipients = ARRAY['Jody B. Hice', 'Thomas Massie', 'Alex Mooney', 'Chris McDaniel', 'Steve Stockman']
+	WHERE committee_id = 'C00481200'
 
+-- American Bankers Association
 UPDATE pacs
-	SET top_recipients = ARRAY['', '', '', '', '']
-	WHERE committee_id = 
+	SET top_recipients = ARRAY['Robert B. Alderholt', 'Andy Barr', 'Mike Conaway', 'Richard Burr', 'Ron Johnson']
+	WHERE committee_id = 'C00004275'
 
 -- querying
 -- finding pacs which have overlapping top recipients
