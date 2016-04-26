@@ -1,31 +1,79 @@
------------------------------------------------------------TRIGGER/COMPOSITE TYPE
--- trigger = could replace all the check attributes with single trigger
--- create triggers for all the check constraints below, for an entire set of tables
--- deleted this = went to office hours and got told that seems redundant...
-
-
--- composite type = could create senators and representatives as politicians type (would have to change/drop tables)
--- deletes a table & makes check constraints personal
+-----------------------------------------------------------COMPOSITE TYPE
 CREATE TYPE politician_type AS (
 	name varchar(50),
 	DOB date,
-	net_worth real, 
+	net_worth real, -- add check constraint here?
 	incumbent_status boolean, 
 	party_affiliation varchar(30), 
-	years_in_office integer
+	years_in_office integer -- check constraint unnecessary b/c of date check below
 ) 
 
 CREATE TABLE senators1 OF politician_type (
-	test real,
+	CHECK (DATE_PART('year', '1983-01-03'::date) - DATE_PART('year', DOB::date) >=0),
 	PRIMARY KEY (name, DOB)
 )
 
 CREATE TABLE representatives1 OF politician_type (
-	DOB date CHECK (DATE_PART('year', '1988-01-03'::date) - DATE_PART('year', DOB::date) >=0)
-	PRIMARY_KEY (name, DOB)
+	CHECK (DATE_PART('year', '1988-01-03'::date) - DATE_PART('year', DOB::date) >=0),
+	PRIMARY KEY (name, DOB)
 )
 
+-- adding 10 tuples of data
+INSERT INTO senators1 VALUES ('Harry Reid', '1939-12-02', 4638027., TRUE, 'Democrat', 27); 
+INSERT INTO senators1 VALUES ('Marco Rubio', ' 1971-05-28', 371006, TRUE, 'Republican', 3);
+INSERT INTO senators1 VALUES ('Ted Cruz', '1970-12-22', 3013518, TRUE, 'Republican', 1);
+INSERT INTO senators1 VALUES ('Chuck Schumer', '1950-11-23', 779008, TRUE, 'Democrat', 15);
+INSERT INTO senators1 VALUES ('Bernie Sanders', '1941-09-08', 436013, TRUE, 'Independent', 7);
+INSERT INTO senators1 VALUES ('Rand Paul', '1963-01-07', 1193018, TRUE, 'Republican', 3);
+INSERT INTO senators1 VALUES ('Mitch McConnell', '1942-02-20', 22164529, TRUE, 'Republican', 29);
+INSERT INTO senators1 VALUES ('Barbara Boxer', '1940-11-11', 3189004, TRUE, 'Democrat', 21);
+INSERT INTO senators1 VALUES ('Elizabeth Warren', '1949-06-22',  7484514, TRUE, 'Democrat', 1);
+INSERT INTO senators1 VALUES ('John McCain', '1936-08-29', 19642067, TRUE, 'Republican', 27);
+INSERT INTO senators1 VALUES ('Dean Heller', '1960-05-10', 4740517, TRUE, 'Republican', 3);
+INSERT INTO senators1 VALUES ('Dianne Feinstein', '1933-06-22', 94202571, TRUE, 'Democrat', 22);
+INSERT INTO senators1 VALUES ('Patrick Leahy', '1940-03-31', 257004, TRUE, 'Democrat', 39);
+INSERT INTO senators1 VALUES ('Bill Nelson', '1942-09-29', 3474012, TRUE, 'Democrat', 13);
+INSERT INTO senators1 VALUES ('John Cornyn', '1952-02-02', 538008, TRUE, 'Republican', 12);
+INSERT INTO senators1 VALUES ('Kirsten Gillibrand', '1966-12-09', 231503, TRUE, 'Democrat', 5);
+INSERT INTO senators1 VALUES ('Ed Markey', '1946-07-11', 2182513, TRUE, 'Democrat', 1);
+INSERT INTO senators1 VALUES ('Jeff Flake', '1962-12-31', 283001, TRUE, 'Republican', 1);
+INSERT INTO senators1 VALUES ('Bob Menendez', '1954-01-01', 348502, TRUE, 'Democrat', 8);
+INSERT INTO senators1 VALUES ('Cory Booker', '1969-04-27', 563002, TRUE, 'Democrat', 1);
+INSERT INTO senators1 VALUES ('Kay Hagan', '1953-05-26', 29007831, TRUE, 'Democrat', 5);
+INSERT INTO senators1 VALUES ('Richard Burr', '1955-11-30', 2636270, TRUE, 'Republican', 9);
+INSERT INTO senators1 VALUES ('Mary Landrieu', '1955-11-23', 1588507, TRUE, 'Democrat', 18);
+INSERT INTO senators1 VALUES ('David Vitter', '1961-05-03', 1570522, TRUE, 'Republican', 10);
+
+INSERT INTO representatives1 VALUES ('John Boehner', '1949-11-17', 4092054, TRUE, 'Republican', 23);
+INSERT INTO representatives1 VALUES ('Nancy Pelosi', '1940-03-26', 101272023, TRUE, 'Democrat', 27);
+INSERT INTO representatives1 VALUES ('Eric Cantor', '1963-06-06', 13073557, TRUE, 'Republican', 11);
+INSERT INTO representatives1 VALUES ('Paul Ryan', '1970-01-29', 5067051, TRUE, 'Republican', 15);
+INSERT INTO representatives1 VALUES ('Kevin McCarthy', '1965-01-26', 306504, TRUE, 'Republican', 7);
+INSERT INTO representatives1 VALUES ('Tulsi Gabbard', '1981-04-12', 183504, TRUE, 'Democrat', 1);
+INSERT INTO representatives1 VALUES ('Steny Hoyer', '1939-06-14', 33502, TRUE, 'Democrat', 33);
+INSERT INTO representatives1 VALUES ('James Clyburn', '1940-07-21', 476011, TRUE, 'Democrat', 17);
+INSERT INTO representatives1 VALUES ('Steve Scalise', '1965-10-06', -20999, TRUE, 'Republican', 6);
+INSERT INTO representatives1 VALUES ('Cathy McMorris Rodgers', '1969-05-22', 1263509, TRUE, 'Republican', 1);
+
+-- querying
+-- show all names and party affiliation of senators & representatives who are worth at least $1 million
+SELECT s.name, s.party_affiliation, s.net_worth INTO TEMP t1
+FROM senators1 s
+WHERE s.net_worth >= 1000000
+
+SELECT r.name, r.party_affiliation, r.net_worth INTO TEMP t2
+FROM representatives1 r
+WHERE r.net_worth >= 1000000
+
+-- make sure temps are deleted
+-- is there a way to add these values (above) into one table?
+-- below does not work, because is comparing the values, rather than adding columns
+SELECT *
+FROM t1 CROSS JOIN t2
+
+
 -----------------------------------------------------------ARRAY TYPE ATTRIBUTE
+-- setup
 ALTER TABLE pacs ADD COLUMN top_recipients text[]
 ALTER TABLE pacs ADD COLUMN quarterly_money integer[]
 ALTER TABLE pacs DROP COLUMN top_recipients 
@@ -88,9 +136,8 @@ FROM pacs p
 WHERE p.top_recipients && ARRAY['John Boehner']
 
 -----------------------------------------------------------TEXT TYPE ATTRIBUTE
--- needed to do once
+-- setup
 ALTER TABLE legislation ADD COLUMN summary tsvector
-
 ALTER TABLE legislation 
 	ALTER COLUMN summary SET DATA TYPE text
 
@@ -183,9 +230,9 @@ UPDATE legislation
 DELETE FROM legislation
 	wHERE name = 'S.Res. 28 - A resolution to provide sufficient time for legislation to be read.'
 
--- note: the remaining 12 summaries will respond to every tsquery because their values are empty
 
 -- querying
+-- finding legislation that has a summary which contains the tsquery
 SELECT legislation.name
 FROM legislation
 WHERE to_tsvector('english', summary) @@ to_tsquery('english', 'violence')

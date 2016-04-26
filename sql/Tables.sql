@@ -1,17 +1,4 @@
 
------------------------------------------------------- Part2
-
---TRIGGER
-
---ARRAY TYPE
-
---TEXT TYPE
--- full text search
--- paragraph or more of data
-
-
------------------------------------------------------- Part1
-
 CREATE TABLE politicians (
 	name varchar(50),
 	-- also make sure that DOB is within a reasonable time frame b/c we're not doing historical data
