@@ -57,19 +57,18 @@ INSERT INTO representatives1 VALUES ('Cathy McMorris Rodgers', '1969-05-22', 126
 
 -- querying
 -- show all names and party affiliation of senators & representatives who are worth at least $1 million
-SELECT s.name, s.party_affiliation, s.net_worth INTO TEMP t1
-FROM senators1 s
-WHERE s.net_worth >= 1000000
-
-SELECT r.name, r.party_affiliation, r.net_worth INTO TEMP t2
-FROM representatives1 r
-WHERE r.net_worth >= 1000000
-
--- make sure temps are deleted
--- is there a way to add these values (above) into one table?
--- below does not work, because is comparing the values, rather than adding columns
+WITH 
+	t1 AS (SELECT s.name, s.party_affiliation, s.net_worth
+			FROM senators1 s
+			WHERE s.net_worth >= 1000000), 
+	t2 AS (SELECT r.name, r.party_affiliation, r.net_worth
+			FROM representatives1 r
+			WHERE r.net_worth >= 1000000)
 SELECT *
-FROM t1 CROSS JOIN t2
+FROM t1 
+UNION 
+SELECT *
+FROM t2
 
 
 -----------------------------------------------------------ARRAY TYPE ATTRIBUTE
