@@ -32,22 +32,18 @@ SELECT *
 FROM t1 
 UNION 
 SELECT *
-FROM t2
+FROM t2;
 
 -----------------------------------------------------------ARRAY TYPE ATTRIBUTE
 -- setup
 ALTER TABLE pacs ADD COLUMN top_recipients text[]
 
 -- querying
--- finding pacs whose top recipients are in the republican leadership of the house
-SELECT p.name as republican_leadership
+-- finding pacs whose top recipients are in leadership of either party of the house
+SELECT p.name as donated_to_leadership
 FROM pacs p
-WHERE p.top_recipients && ARRAY['John Boehner', 'Eric Cantor', 'Kevin McCarthy', 'Steve Scalise']
-
--- finding pacs whose top recipients are in the democratic leadership of the house
-SELECT p.name as democrat_leadership
-FROM pacs p
-WHERE p.top_recipients && ARRAY['Nancy Pelosi', 'Steny Hoyer', 'Jim Clyburn']
+WHERE p.top_recipients && (ARRAY['John Boehner', 'Eric Cantor', 'Kevin McCarthy', 'Steve Scalise'] ||
+	ARRAY['Nancy Pelosi', 'Steny Hoyer', 'Jim Clyburn']);
 
 -----------------------------------------------------------TEXT TYPE ATTRIBUTE
 -- setup
