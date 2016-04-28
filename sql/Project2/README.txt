@@ -48,8 +48,8 @@ Interesting Queries:
 
 	SELECT p.name as donated_to_leadership, p.budget
 	FROM pacs p
-	WHERE p.top_recipients && (ARRAY['John Boehner', 'Eric Cantor', 'Kevin McCarthy', 'Steve Scalise'] ||
-		ARRAY['Nancy Pelosi', 'Steny Hoyer', 'Jim Clyburn'])
+	WHERE p.top_recipients && (ARRAY['John Boehner', 'Eric Cantor', 'Kevin McCarthy', 'Steve Scalise'] 
+		|| ARRAY['Nancy Pelosi', 'Steny Hoyer', 'Jim Clyburn'])
 	ORDER BY p.budget;
 
 	Query3: This query gives the names of all pieces of legislation that have summaries which include either the words 'violence' or 'weapon'. Unfortunately, even though we had 29 summaries in our database, very few pieces of legislation addressed similar issues or had similar phrasing, so single tsqueries worked better than 'word1 & word2', as the latter often limited the output to either 1 or 0 rows. 
