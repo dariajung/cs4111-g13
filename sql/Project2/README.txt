@@ -24,11 +24,11 @@ Items Included:
 	3) Text Type Attribute
 	Each piece of legislation in the house has a title, but often that title is not substansive. In order to get more information about a bill, people usually refer to the abstract or introduction, conveniently located at the beginning of each bill listed in congress.gov. These summary paragraphs allow the user to see and understand the purpose of each bill in full detail, as written by the primary sponsors of each piece of legislation. 
 	What was created:
-	* text type attribute: "summary" in the table "legislation"
+	* text type attribute: text "summary" in the table "legislation"
 
 Interesting Queries:
 	
-	Query1: This query displays the name, party affiliation, and net worth of members either congressional house who have a net worth of $1 million or more, in increasing order.
+	Query1: This query displays the name, party affiliation, and net worth of members in either congressional house who have a net worth of $1 million or more, listed in order of increasing wealth.
 
 	WITH 
 		t1 AS (SELECT s.name, s.party_affiliation, s.net_worth
