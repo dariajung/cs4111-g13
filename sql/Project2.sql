@@ -1,4 +1,5 @@
 -----------------------------------------------------------COMPOSITE TYPE
+--setup
 CREATE TYPE politician_type AS (
 	name varchar(50),
 	DOB date,
@@ -32,7 +33,6 @@ FROM t1
 UNION 
 SELECT *
 FROM t2
-
 
 -----------------------------------------------------------ARRAY TYPE ATTRIBUTE
 -- setup
