@@ -32,7 +32,8 @@ SELECT *
 FROM t1 
 UNION 
 SELECT *
-FROM t2;
+FROM t2
+ORDER BY net_worth;
 
 -----------------------------------------------------------ARRAY TYPE ATTRIBUTE
 -- setup
@@ -40,10 +41,12 @@ ALTER TABLE pacs ADD COLUMN top_recipients text[]
 
 -- querying
 -- finding pacs whose top recipients are in leadership of either party of the house
-SELECT p.name as donated_to_leadership
+SELECT p.name as donated_to_leadership, p.budget
 FROM pacs p
 WHERE p.top_recipients && (ARRAY['John Boehner', 'Eric Cantor', 'Kevin McCarthy', 'Steve Scalise'] ||
-	ARRAY['Nancy Pelosi', 'Steny Hoyer', 'Jim Clyburn']);
+	ARRAY['Nancy Pelosi', 'Steny Hoyer', 'Jim Clyburn'])
+ORDER BY p.budget;
+
 
 -----------------------------------------------------------TEXT TYPE ATTRIBUTE
 -- setup
@@ -55,5 +58,6 @@ ALTER TABLE legislation
 -- finding legislation that has a summary which contains the either 'violence' or 'weapon'
 SELECT legislation.name
 FROM legislation
-WHERE to_tsvector('english', summary) @@ (to_tsquery('english', 'violence') || to_tsquery('english', 'weapon')) 
+WHERE to_tsvector('english', summary) @@ (to_tsquery('english', 'violence') 
+	|| to_tsquery('english', 'weapon'));
 

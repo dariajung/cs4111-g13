@@ -12,19 +12,19 @@ Items Included:
 
 	1) Composite Type
 	We created the composite type "politician_type" because we have a case of inheritance in our SQL schema where we have a table "politicians", from which "senators" and "representatives" inherit their traits. However, our original implementation was inefficient because the full set of attributes for each politician in our database would have to be inserted twice - first into "politicians" and then into either "senators" or "representatives". By creating a composite type we get the same entered politicians in two tables, rather than three, and lessen the data in the database by a full 50%.
-		What was created:
-		* composite type: type "politician_type"
-		* 2 tables of poliitican_type: table "senators1", table "representatives1"
+	What was created:
+	* composite type: type "politician_type"
+	* 2 tables of poliitican_type: table "senators1", table "representatives1"
 
 	2) Array Type Attribute
 	Each PAC in campaign finance donates to politicians, but often the top few recipients receive thousands of dollars more in donations. We thought that an average user would potentially want to know who each PAC's top recipients of money were. In this case, we limited the number of people in this text array to five, although some PACs had fewer than five recipients. Querying the names in this attribute allows the user to know how politicians rank based on PAC money offerings - including politicians who may not be in our "politicians" table (which is an added benefit to this text array attribute).
-		What was created:
-		* array type attribute: text[] "top_recipients" in the table "pacs"
+	What was created:
+	* array type attribute: text[] "top_recipients" in the table "pacs"
 
 	3) Text Type Attribute
 	Each piece of legislation in the house has a title, but often that title is not substansive. In order to get more information about a bill, people usually refer to the abstract or introduction, conveniently located at the beginning of each bill listed in congress.gov. These summary paragraphs allow the user to see and understand the purpose of each bill in full detail, as written by the primary sponsors of each piece of legislation. 
-		What was created:
-		* text type attribute: "summary" in the table "legislation"
+	What was created:
+	* text type attribute: "summary" in the table "legislation"
 
 Interesting Queries:
 	
