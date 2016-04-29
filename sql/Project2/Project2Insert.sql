@@ -1,24 +1,4 @@
 -----------------------------------------------------------COMPOSITE TYPE
-CREATE TYPE politician_type AS (
-	name varchar(50),
-	DOB date,
-	net_worth real, -- add check constraint here?
-	incumbent_status boolean, 
-	party_affiliation varchar(30), 
-	years_in_office integer -- check constraint unnecessary b/c of date check below
-) 
-
-CREATE TABLE senators1 OF politician_type (
-	CHECK (DATE_PART('year', '1983-01-03'::date) - DATE_PART('year', DOB::date) >=0),
-	PRIMARY KEY (name, DOB)
-)
-
-CREATE TABLE representatives1 OF politician_type (
-	CHECK (DATE_PART('year', '1988-01-03'::date) - DATE_PART('year', DOB::date) >=0),
-	PRIMARY KEY (name, DOB)
-)
-
--- adding 10 tuples of data
 INSERT INTO senators1 VALUES ('Harry Reid', '1939-12-02', 4638027., TRUE, 'Democrat', 27); 
 INSERT INTO senators1 VALUES ('Marco Rubio', ' 1971-05-28', 371006, TRUE, 'Republican', 3);
 INSERT INTO senators1 VALUES ('Ted Cruz', '1970-12-22', 3013518, TRUE, 'Republican', 1);
@@ -55,30 +35,7 @@ INSERT INTO representatives1 VALUES ('James Clyburn', '1940-07-21', 476011, TRUE
 INSERT INTO representatives1 VALUES ('Steve Scalise', '1965-10-06', -20999, TRUE, 'Republican', 6);
 INSERT INTO representatives1 VALUES ('Cathy McMorris Rodgers', '1969-05-22', 1263509, TRUE, 'Republican', 1);
 
--- querying
--- show all names and party affiliation of senators & representatives who are worth at least $1 million
-SELECT s.name, s.party_affiliation, s.net_worth INTO TEMP t1
-FROM senators1 s
-WHERE s.net_worth >= 1000000
-
-SELECT r.name, r.party_affiliation, r.net_worth INTO TEMP t2
-FROM representatives1 r
-WHERE r.net_worth >= 1000000
-
--- make sure temps are deleted
--- is there a way to add these values (above) into one table?
--- below does not work, because is comparing the values, rather than adding columns
-SELECT *
-FROM t1 CROSS JOIN t2
-
-
 -----------------------------------------------------------ARRAY TYPE ATTRIBUTE
--- setup
-ALTER TABLE pacs ADD COLUMN top_recipients text[]
-ALTER TABLE pacs ADD COLUMN quarterly_money integer[]
-ALTER TABLE pacs DROP COLUMN top_recipients 
-
--- adding 10 tuples of data
 -- goldman sachs
 UPDATE pacs
 	SET top_recipients = ARRAY['John Boehner', 'Ed Royce', 'Jeb Hensarling', 'Kevin McCarthy', 'Steve Scalise']
@@ -129,19 +86,203 @@ UPDATE pacs
 	SET top_recipients = ARRAY['Robert B. Alderholt', 'Andy Barr', 'Mike Conaway', 'Richard Burr', 'Ron Johnson']
 	WHERE committee_id = 'C00004275'
 
--- querying
--- finding pacs which have overlapping top recipients
-SELECT p.name
-FROM pacs p
-WHERE p.top_recipients && ARRAY['John Boehner']
+UPDATE pacs
+	SET top_recipients = ARRAY['Michael Bennet', 'Richard Blumenthal', 'Tammy Duckworth', 'Russ Feingold', 'Jason Kander']
+	WHERE committee_id = 'C00327395';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Thad Cochran', 'Ed Markey', 'Brian Schatz', 'Cory Booker', 'Rodney Davis']
+	WHERE committee_id = 'C00010082';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Kay Hgan', 'Claire McCaskill', 'Robert Menendez', 'Kevin McCarthy', 'Shelley Berkley']
+	WHERE committee_id = 'C00385120';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Scott Brown', 'Deb Fischer', 'Dean Heller', 'Josh Mandel', 'Richard Mourdock']
+	WHERE committee_id = 'C00500025';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Ben Cardin', 'Kirsten Gillibrand', 'Robert Menendez', 'Debbie Stabenow']
+	WHERE committee_id = 'C00296624';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Rod Blum', 'Chuck Grassley']
+	WHERE committee_id = 'C00536540';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Ted Cruz', 'Dean Heller', 'Jeff Flake', 'Robert Pittenger', 'Joe Walsh']
+	WHERE committee_id = 'C00236489';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Diane Feinstein', 'Tammy Baldwin', 'Ben Nelson', 'Shelley Berkley', 'Kathleen Hochul']
+	WHERE committee_id = 'C00348607';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Diane Black', 'Charles Boustany', 'Francisco Canseco', 'Doug Collins', 'Michael Fitzpatrick']
+	WHERE committee_id = 'C00030718';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Todd Akin', 'Kelly Ayotte', 'Shelley Capito', 'Chuck Boustany', 'John Boehner']
+	WHERE committee_id = 'C00144766';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Peter DeFazio', 'Loretta Sanchez', 'Sherrod Brown', 'Sheldon Whitehouse', 'Tammy Baldwin']
+	WHERE committee_id = 'C00406553';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Bernie Sanders']
+	WHERE committee_id = 'C00411330';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Ben Quayle', 'John Sullivan', 'Greg Walden', 'Mark Amodei', 'Adam Kinzinger']
+	WHERE committee_id = 'C00109017';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Andy Barr', 'Charles Bass', 'Dan Benishek', 'Brian P Bilbray', 'Francisco Canseco']
+	WHERE committee_id = 'C00235655';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Charles Boustany', 'John Barrow', 'Charles Bass', 'Diane Black', 'Marsha Blackburn']
+	WHERE committee_id = 'C00089136';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Justin Bernier', 'Mike Pence', 'Diane Black', 'Mike Thompson', 'Peter Roskam']
+	WHERE committee_id = 'C00359588';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Raul Ruiz', 'Lois Capps', 'Tammy Baldwin', 'Barbara Boxer', 'Dianne Feinstein']
+	WHERE committee_id = 'C00342048';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Erik Paulsen', 'Raul Ruiz', 'Chris Coons', 'Amy Klobuchar', 'Kelly Ayotte']
+	WHERE committee_id = 'C00493940';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Ron Barber', 'Pete Gallego', 'Tammy Baldwin', 'Shelley Berkley', 'Kirsten Gillibrand']
+	WHERE committee_id = 'C00024521';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Charles Boustany', 'Mark Amodei', 'Scott Brown', 'George Allen', 'Jeff Flake']
+	WHERE committee_id = 'C00471607';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Shelley Berkley', 'Sherrod Brown', 'Claire McCaskill', 'Bill Nelson', 'Jon Tester']
+	WHERE committee_id = 'C00433219';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Charles Boustany', 'Timothy Bishop', 'John Boehner', 'Eric Cantor', 'James Clyburn']
+	WHERE committee_id = 'C00251876';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Paul Tonko', 'Mark Critz', 'Tim Holden', 'Mike McIntyre', 'Brad Sherman']
+	WHERE committee_id = 'C00110338';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Amy Klobuchar', 'Claire McCaskill', 'Ben Nelson', 'Debbie Stabenow', 'Jon Tester']
+	WHERE committee_id = 'C00375451';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Ben Cardin', 'Tim Kaine', 'Mark Warner', 'Robert Garagiola', 'Eleanor Norton']
+	WHERE committee_id = 'C00286922';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Ted Cruz', 'Francisco Canseco', 'Scott Brown', 'Dean Heller', 'John Barrasso']
+	WHERE committee_id = 'C00387464';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Tammy Baldwin', 'Claire McCaskill', 'Jon Tester', 'Kathleen Hochul', 'Dan Roberti']
+	WHERE committee_id = 'C00477067';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Tom Latham', 'Kevin McCarthy', 'David McKinley', 'Diane Black', 'Andy Harris']
+	WHERE committee_id = 'C00006080';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Mary Landrieu', 'Bill Keating', 'Mark Begich', 'Al Franken', 'Kay Hagan']
+	WHERE committee_id = 'C00564187';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Scott Brown', 'Dean Heller']
+	WHERE committee_id = 'C00432930';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Jim Moran', 'Ken Calvert', 'Silvestre Reyes', 'Steven Rothman', 'Roscoe Bartlett']
+	WHERE committee_id = 'C00078451';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Joseph Crowley', 'Gregory Meeks', 'Dina Titus', 'Nydia Velazquez', 'Dan Roberti']
+	WHERE committee_id = 'C00349233';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Raul Ruiz', 'Michael Burgess', 'Ruben Hinojosa', 'John Mica', 'Marc Veasey']
+	WHERE committee_id = 'C00415752';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Joe Walsh', 'Mark Amodei', 'Dan Benishek', 'Diane Black', 'Renee Ellmers']
+	WHERE committee_id = 'C00305805';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Thomas Massie', 'Larry Bucshon', 'Ed Whitfield', 'David McKinley', 'Andy Barr']
+	WHERE committee_id = 'C00330233';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['John Boehner', 'Kevin McCarthy', 'Dave Camp', 'Fred Upton', 'Henry Waxman']
+	WHERE committee_id = 'C00104901';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Sandy Adams', 'Mark Amodei', 'Dan Benishek', 'Richard Hudson', 'Chris Stewart']
+	WHERE committee_id = 'C00384701';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Roscoe Bartlett', 'Charles Bass', 'Dan Benishek', 'Judy Biggert', 'Brian Bilbray']
+	WHERE committee_id = 'C00377689';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Charles Boustany', 'Jason Altmire', 'Diane Black', 'John Boehner', 'Michael Burgess']
+	WHERE committee_id = 'C00040279';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Richard Hudson', 'Dan Benishek', 'Judy Biggert', 'Brian Bilbray', 'Tom Cotton']
+	WHERE committee_id = 'C00428052';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Spencer Bachus', 'Judy Biggert', 'Dave Camp', 'Francisco Canseco', 'Steny Hoyer']
+	WHERE committee_id = 'C00104299';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Mark Takai', 'Ron Barber', 'Joe Garcia', 'Nick Rahall', 'John Barrow']
+	WHERE committee_id = 'C00542993';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Ron Barber', 'Scott Ellington', 'Janice Hahn', 'Bill Adkins', 'Tony Cardenas']
+	WHERE committee_id = 'C00027342';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Ron Barber', 'Janice Hahn', 'Gabrielle Giffords', 'John Barrow', 'Michelle Grisham']
+	WHERE committee_id = 'C00271338';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Ron Barber', 'Ami Bera', 'Suzanne Bonamici', 'Shelley Adler', 'Sanford Bishop']
+	WHERE committee_id = 'C00399196';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['John Barrow', 'Dave Camp', 'James Clyburn', 'Steny Hoyer', 'Fred Upton']
+	WHERE committee_id = 'C00095869';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Vicky Hartzler', 'Nan Hayworth', 'Timothy Johnson', 'Bill Johnson', 'Mike Coffman']
+	WHERE committee_id = 'C00469429';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Ted Cruz', 'Thomas Massie', 'Justin Amash', 'Kurt Bills', 'Jeff Landry']
+	WHERE committee_id = 'C00493924';
+
+UPDATE pacs
+	SET top_recipients = ARRAY['Pete Aguilar', 'Brad Ashford', 'Ami Bera', 'Emily Cain', 'Raul Ruiz']
+	WHERE committee_id = 'C00344234';
 
 -----------------------------------------------------------TEXT TYPE ATTRIBUTE
--- setup
-ALTER TABLE legislation ADD COLUMN summary tsvector
-ALTER TABLE legislation 
-	ALTER COLUMN summary SET DATA TYPE text
-
--- adding 10 tuples of data
 -- note: any quotation marks within the text need to be doubly normalized to '' for them to be interpreted correctly
 UPDATE legislation
 	SET summary = 'Clean and Fair Elections Act - Expresses the sense of the Senate with respect to congressional attention to elections and voting, including concerning: structuring election administration and campaign finance systems so that the interests of the American public are the first priority; greater transparency and an end to anonymous political spending by shadow groups and special interests; disclosure of campaign contributions in a searchable, public online database, safeguarding the right to vote, including by prohibiting deceptive and misleading efforts to prevent voters from exercising the franchise; streamlining voting procedures; passage of legislation that includes expanded absentee voting, mandatory early voting periods, and voter registration reforms; ensuring that local election officials have working voting systems that are accessible, secure, and easy to use; state plans to reduce lines at polling places and provide additional flexibility in the event of a natural disaster or other emergency; and enforcement of the guarantees of the Fourteenth and Fifteenth Amendments to the Constitution and the Voting Rights Act of 1965 so that all Americans are able to vote and have their votes count without discrimination.'
@@ -229,10 +370,3 @@ UPDATE legislation
 
 DELETE FROM legislation
 	wHERE name = 'S.Res. 28 - A resolution to provide sufficient time for legislation to be read.'
-
-
--- querying
--- finding legislation that has a summary which contains the tsquery
-SELECT legislation.name
-FROM legislation
-WHERE to_tsvector('english', summary) @@ to_tsquery('english', 'violence')
