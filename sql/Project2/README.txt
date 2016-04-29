@@ -11,7 +11,7 @@ Items Included:
 	Explain carefully your rationale behind your modifications to the schema and how these modifications fit within your overall project. 
 
 	1) Composite Type
-	We created the composite type "politician_type" because we have a case of inheritance in our SQL schema where we have a table "politicians", from which "senators" and "representatives" inherit their traits. However, our original implementation was inefficient because the full set of attributes for each politician in our database would have to be inserted twice - first into "politicians" and then into either "senators" or "representatives". By creating a composite type we get the same entered politicians in two tables, rather than three, and lessen the data in the database by a full 50%.
+	We created the composite type "politician_type" because we have a case of inheritance in our SQL schema where we have a table "politicians", from which "senators" and "representatives" inherit their traits. However, our original implementation was inefficient because the full set of attributes for each politician in our database would have to be inserted twice - first into "politicians" and then into either "senators" or "representatives". By creating a composite type we get the same entered politicians in two tables, rather than three, lessen the data in the database by a full 50%, and have fewer check constraints.
 	What was created:
 	* composite type: type "politician_type"
 	* 2 tables of poliitican_type: table "senators1", table "representatives1"

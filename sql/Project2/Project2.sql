@@ -3,7 +3,7 @@
 CREATE TYPE politician_type AS (
 	name varchar(50),
 	DOB date,
-	net_worth real, -- add check constraint here?
+	net_worth real,
 	incumbent_status boolean, 
 	party_affiliation varchar(30), 
 	years_in_office integer -- check constraint unnecessary b/c of date check below
@@ -11,11 +11,13 @@ CREATE TYPE politician_type AS (
 
 CREATE TABLE senators1 OF politician_type (
 	CHECK (DATE_PART('year', '1983-01-03'::date) - DATE_PART('year', DOB::date) >=0),
+	CHECK (net_worth < 370000000),
 	PRIMARY KEY (name, DOB)
 )
 
 CREATE TABLE representatives1 OF politician_type (
 	CHECK (DATE_PART('year', '1988-01-03'::date) - DATE_PART('year', DOB::date) >=0),
+	CHECK (net_worth < 110000000),
 	PRIMARY KEY (name, DOB)
 )
 
