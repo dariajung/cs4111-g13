@@ -27,7 +27,7 @@ Items Included:
 
 Interesting Queries:
 	
-	Query1: This query displays the average net worth of members in either congressional house who have a net worth of $1 million or more, per political party.
+	Query1: This query displays the average net worth of members in either the House or Senate who have a net worth of $1 million or more, per political party.
 
 	WITH t3 AS 
 	(
@@ -49,7 +49,7 @@ Interesting Queries:
 	FROM t3
 	GROUP BY party_affiliation;
 
-	Query2: This query finds out which industries have pacs top whose top recipients are either democratic or republican leadership in the house, and lists them in increasing spending power. The Democrats and Republicans are listed in separate arrays as a means of differentiating them (as the search user probably would).
+	Query2: This query finds out which industries have pacs whose top recipients are either democratic or republican leadership in the house, and lists them in increasing spending power. The Democrats and Republicans are listed in separate arrays as a means of differentiating them (as the search user probably would).
 
 	WITH t1 AS 
 		(SELECT p.committee_id, p.name as donated_to_leadership, p.budget
